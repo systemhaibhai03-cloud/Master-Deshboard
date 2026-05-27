@@ -410,7 +410,7 @@ nav::-webkit-scrollbar{display:none}
 </div>
 <script>
 var PID='a8fadbe6-5e9c-48f9-94b5-fa1d1310652b';
-var PURL='https://getpantry.cloud/apiv1/pantry/'+PID+'/basket/vtp_users_v1';
+var PURL='https://getpantry.cloud/apiv1/pantry/'+PID+'/basket/vtp_users';
 var DASH=[
   {id:'account-dashboard',name:'Account Dashboard',ico:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Management Portal — Outstanding, Bills, BG, Deposits, Invoices, Stock',grad:'linear-gradient(135deg,#3b82f6,#06b6d4)'},
   {id:'leave-management',name:'Leave Management',ico:'📅',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Employee Leave Management — Apply, Track and Approve Leaves',grad:'linear-gradient(135deg,#22c55e,#10b981)'},
@@ -472,8 +472,14 @@ function loadDash(d){
   q('ifldr').style.display='flex';q('iflt').textContent='Loading '+d.name+'...';
   var ce=cEdit(curUser,d.id);
   var iframe=q('dif'),ov=q('voo'),badge=q('vob');
-  if(ce){iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation');ov.classList.remove('on');badge.style.display='none';}
-  else{iframe.setAttribute('sandbox','allow-scripts allow-same-origin');ov.classList.add('on');badge.style.display='inline-flex';}
+  if(ce){
+    iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation');
+    ov.classList.remove('on');badge.style.display='none';
+  } else {
+    iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-top-navigation');
+    ov.classList.remove('on');
+    badge.style.display='inline-flex';
+  }
   iframe.onload=function(){q('ifldr').style.display='none';};
   iframe.src=d.url;q('ifw').classList.add('on');
 }
@@ -647,7 +653,7 @@ window.addEventListener('load',async function(){
   q('drov').addEventListener('click',closeDr);
   q('denidbtn').addEventListener('click',function(){navigate('home');});
   q('refbtn').addEventListener('click',function(){if(curDash){q('ifldr').style.display='flex';q('dif').src=curDash.url;}});
-  q('fsbtn').addEventListener('click',function(){if(!curDash)return;q('fsic').textContent=curDash.ico;q('fstx').textContent=curDash.name;q('fsext').href=curDash.url;q('fsif').setAttribute('sandbox',cEdit(curUser,curDash.id)?'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation':'allow-scripts allow-same-origin');q('fsif').src=curDash.url;q('fsw').classList.add('on');});
+  q('fsbtn').addEventListener('click',function(){if(!curDash)return;q('fsic').textContent=curDash.ico;q('fstx').textContent=curDash.name;q('fsext').href=curDash.url;q('fsif').setAttribute('sandbox',cEdit(curUser,curDash.id)?'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation':'allow-scripts allow-same-origin allow-popups allow-top-navigation');q('fsif').src=curDash.url;q('fsw').classList.add('on');});
   q('fscls').addEventListener('click',function(){q('fsw').classList.remove('on');q('fsif').src='';});
   q('fsref').addEventListener('click',function(){if(curDash)q('fsif').src=curDash.url;});
   q('voo').addEventListener('click',function(){var m=q('vom');m.classList.add('on');setTimeout(function(){m.classList.remove('on');},2500);});
