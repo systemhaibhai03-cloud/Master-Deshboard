@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vishal Technopower – Master Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f4f6fb;
+  --white:#ffffff;
+  --gray-50:#f8fafc;
+  --gray-100:#f1f5f9;
+  --gray-200:#e2e8f0;
+  --gray-300:#cbd5e1;
+  --gray-400:#94a3b8;
+  --gray-500:#64748b;
+  --gray-600:#475569;
+  --gray-700:#334155;
+  --gray-800:#1e293b;
+  --gray-900:#0f172a;
+  --blue-50:#eff6ff;
+  --blue-100:#dbeafe;
+  --blue-400:#60a5fa;
+  --blue-500:#3b82f6;
+  --blue-600:#2563eb;
+  --blue-700:#1d4ed8;
+  --indigo-500:#6366f1;
+  --indigo-600:#4f46e5;
+  --amber-400:#fbbf24;
+  --amber-500:#f59e0b;
+  --amber-50:#fffbeb;
+  --amber-100:#fef3c7;
+  --amber-700:#b45309;
+  --green-50:#f0fdf4;
+  --green-100:#dcfce7;
+  --green-400:#4ade80;
+  --green-500:#22c55e;
+  --green-600:#16a34a;
+  --green-700:#15803d;
+  --orange-50:#fff7ed;
+  --orange-400:#fb923c;
+  --orange-500:#f97316;
+  --red-50:#fef2f2;
+  --red-200:#fecaca;
+  --red-400:#f87171;
+  --red-500:#ef4444;
+  --red-600:#dc2626;
+  --purple-50:#faf5ff;
+  --purple-400:#c084fc;
+  --purple-500:#a855f7;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.08);
+  --shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06);
+  --shadow-lg:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
+  --shadow-xl:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
+  --radius:12px;
+  --radius-lg:16px;
+  --radius-xl:20px;
+  --sidebar-w:272px;
+  --sidebar-collapsed:72px;
+  --transition:.2s ease;
+}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--gray-900);-webkit-font-smoothing:antialiased}
+button{cursor:pointer;font-family:inherit;border:none;background:none;outline:none}
+input{font-family:inherit;outline:none}
+a{text-decoration:none;color:inherit}
+
+/* ===== LOADING ===== */
+#loading-screen{position:fixed;inset:0;background:var(--white);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px}
+.spin{width:44px;height:44px;border:3px solid var(--blue-100);border-top-color:var(--blue-500);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== LOGIN ===== */
+#login-screen{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#e0e7ff 0%,#f0f9ff 50%,#fef9ee 100%);z-index:100}
+#login-screen.active{display:flex}
+.login-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;pointer-events:none}
+.blob1{width:400px;height:400px;background:radial-gradient(circle,var(--blue-400),var(--indigo-500));top:-100px;right:-100px}
+.blob2{width:350px;height:350px;background:radial-gradient(circle,var(--amber-400),var(--orange-400));bottom:-80px;left:-80px}
+.login-card{background:var(--white);border-radius:24px;box-shadow:var(--shadow-xl),0 0 0 1px rgba(0,0,0,.04);padding:40px;width:100%;max-width:420px;position:relative;z-index:1}
+.login-logo{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--blue-500),var(--indigo-600));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(99,102,241,.35)}
+.login-logo svg{width:32px;height:32px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.login-title{text-align:center;font-size:22px;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+.login-sub{text-align:center;font-size:13px;color:var(--gray-400);margin-bottom:28px}
+.field-label{display:block;font-size:13px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+.field-wrap{position:relative;margin-bottom:16px}
+.field-input{width:100%;padding:12px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-size:14px;color:var(--gray-900);background:var(--gray-50);transition:var(--transition)}
+.field-input:focus{border-color:var(--blue-400);background:var(--white);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+.field-input::placeholder{color:var(--gray-400)}
+.eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);display:flex;align-items:center;padding:4px;border-radius:6px;transition:var(--transition)}
+.eye-btn:hover{color:var(--gray-600)}
+.eye-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.remember-row{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.remember-check{width:16px;height:16px;accent-color:var(--blue-500);cursor:pointer}
+.remember-label{font-size:13px;color:var(--gray-600);cursor:pointer;user-select:none}
+.login-btn{width:100%;padding:13px;border-radius:var(--radius);background:linear-gradient(135deg,var(--blue-500),var(--indigo-600));color:white;font-size:14px;font-weight:600;letter-spacing:.01em;box-shadow:0 4px 14px rgba(99,102,241,.4);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.login-btn:hover:not(:disabled){box-shadow:0 6px 20px rgba(99,102,241,.5);transform:translateY(-1px)}
+.login-btn:active:not(:disabled){transform:translateY(0)}
+.login-btn:disabled{opacity:.65}
+.login-btn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.login-error{background:var(--red-50);border:1px solid var(--red-200);color:var(--red-600);border-radius:var(--radius);padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:6px;margin-top:14px}
+
+/* ===== APP SHELL ===== */
+#app{display:none;height:100vh;overflow:hidden}
+#app.active{display:flex}
+
+/* ===== SIDEBAR ===== */
+#sidebar{width:var(--sidebar-w);min-width:var(--sidebar-w);height:100vh;background:var(--white);border-right:1px solid var(--gray-200);display:flex;flex-direction:column;transition:width .25s ease,min-width .25s ease;position:relative;flex-shrink:0;box-shadow:2px 0 8px rgba(0,0,0,.04)}
+#sidebar.collapsed{width:var(--sidebar-collapsed);min-width:var(--sidebar-collapsed)}
+.sidebar-head{display:flex;align-items:center;gap:12px;padding:20px 16px;border-bottom:1px solid var(--gray-100);overflow:hidden}
+.sidebar-logo{width:40px;height:40px;min-width:40px;border-radius:12px;background:linear-gradient(135deg,var(--blue-500),var(--indigo-600));display:flex;align-items:center;justify-content:center;color:white;font-size:17px;font-weight:800;box-shadow:0 4px 12px rgba(99,102,241,.3);letter-spacing:-.5px}
+.sidebar-brand{overflow:hidden;white-space:nowrap}
+.sidebar-brand h1{font-size:13px;font-weight:700;color:var(--gray-900)}
+.sidebar-brand p{font-size:11px;color:var(--gray-400);margin-top:1px}
+.sidebar-toggle{position:absolute;right:-12px;top:72px;width:24px;height:24px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-400);box-shadow:var(--shadow-sm);z-index:10;transition:var(--transition)}
+.sidebar-toggle:hover{color:var(--blue-600);border-color:var(--blue-300)}
+.sidebar-toggle svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+#sidebar.collapsed .sidebar-toggle svg{transform:rotate(180deg)}
+nav{flex:1;overflow-y:auto;padding:12px 8px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nav-label{font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.08em;padding:12px 10px 4px;white-space:nowrap;overflow:hidden}
+#sidebar.collapsed .nav-label{opacity:0}
+.nav-sep{height:1px;background:var(--gray-100);margin:8px 8px}
+.nav-btn{width:100%;display:flex;align-items:center;gap:12px;padding:10px 10px;border-radius:10px;font-size:13.5px;font-weight:500;color:var(--gray-600);transition:all .15s;white-space:nowrap;overflow:hidden;position:relative}
+.nav-btn:hover{background:var(--gray-50);color:var(--gray-900)}
+.nav-btn.active{background:var(--blue-50);color:var(--blue-700);font-weight:600}
+.nav-btn.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--blue-500);border-radius:2px}
+.nav-icon{width:34px;height:34px;min-width:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;transition:var(--transition)}
+.nav-btn.active .nav-icon{background:var(--blue-100)}
+.nav-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;min-width:18px}
+.nav-text{overflow:hidden;text-overflow:ellipsis}
+#sidebar.collapsed .nav-text{display:none}
+#sidebar.collapsed .nav-label{padding:4px 0}
+.sidebar-foot{border-top:1px solid var(--gray-100);padding:10px 8px}
+.user-chip{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;overflow:hidden;margin-bottom:2px}
+.user-av{width:34px;height:34px;min-width:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue-400),var(--indigo-500));display:flex;align-items:center;justify-content:center;color:white;font-size:13px;font-weight:700}
+.user-info{overflow:hidden}
+.user-name{font-size:13px;font-weight:600;color:var(--gray-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-role{font-size:11px;color:var(--gray-400);text-transform:capitalize}
+#sidebar.collapsed .user-info{display:none}
+.logout-btn{width:100%;display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;font-size:13px;font-weight:500;color:var(--red-500);transition:all .15s;overflow:hidden}
+.logout-btn:hover{background:var(--red-50)}
+.logout-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;min-width:18px}
+#sidebar.collapsed .logout-btn span{display:none}
+
+/* ===== MOBILE NAV ===== */
+.mobile-bar{display:none;position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid var(--gray-100);padding:12px 16px;align-items:center;justify-content:space-between}
+.mobile-bar button svg{width:20px;height:20px;stroke:var(--gray-700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mobile-title{font-size:14px;font-weight:700;color:var(--gray-900)}
+.mobile-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--blue-400),var(--indigo-500));display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700}
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;opacity:0;transition:opacity .25s}
+.drawer-overlay.open{display:block;opacity:1}
+.drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--white);z-index:201;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:var(--shadow-xl)}
+.drawer.open{transform:translateX(0)}
+
+/* ===== MAIN ===== */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.page{flex:1;overflow-y:auto;display:none}
+.page.active{display:block}
+#page-iframe-wrap{flex:1;display:none;flex-direction:column;overflow:hidden}
+#page-iframe-wrap.active{display:flex}
+.iframe-toolbar{background:var(--white);border-bottom:1px solid var(--gray-100);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
+.iframe-info{display:flex;align-items:center;gap:12px}
+.iframe-icon{font-size:24px}
+.iframe-title{font-size:16px;font-weight:700;color:var(--gray-900)}
+.iframe-desc{font-size:12px;color:var(--gray-400);margin-top:1px}
+.icon-btn{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gray-400);transition:var(--transition)}
+.icon-btn:hover{background:var(--blue-50);color:var(--blue-600)}
+.icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.iframe-area{flex:1;position:relative;background:var(--gray-50)}
+.iframe-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);z-index:5;flex-direction:column;gap:12px}
+.iframe-loader p{font-size:13px;color:var(--gray-500)}
+#dash-iframe{width:100%;height:100%;border:none;display:block}
+.fullscreen-wrap{position:fixed;inset:0;z-index:500;background:var(--white);display:none;flex-direction:column}
+.fullscreen-wrap.open{display:flex}
+.fs-bar{background:var(--white);border-bottom:1px solid var(--gray-200);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fs-title{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--gray-800)}
+#fs-iframe{flex:1;border:none}
+
+/* ===== HOME PAGE ===== */
+.home-wrap{padding:32px 32px 48px;max-width:1100px}
+.home-greeting{font-size:26px;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+.home-sub{font-size:14px;color:var(--gray-400);margin-bottom:28px}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:30px}
+.stat-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow-sm)}
+.stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px}
+.stat-val{font-size:22px;font-weight:700;color:var(--gray-900)}
+.stat-lbl{font-size:11px;color:var(--gray-400);margin-top:2px}
+.section-title{font-size:16px;font-weight:700;color:var(--gray-800);margin-bottom:14px}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.dash-card{background:var(--white);border:1.5px solid var(--gray-100);border-radius:var(--radius-xl);padding:22px;box-shadow:var(--shadow-sm);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.dash-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--gray-200)}
+.dash-card-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.dash-card-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.dash-card-name{font-size:16px;font-weight:700;color:var(--gray-900);line-height:1.3;margin-bottom:4px}
+.dash-card-desc{font-size:12px;color:var(--gray-400);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dash-card-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--gray-100)}
+.dash-card-url{font-size:11px;color:var(--gray-300);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px}
+.dash-card-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.open-tab-btn{font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:3px;padding:5px 8px;border-radius:7px;transition:var(--transition)}
+.open-tab-btn:hover{background:var(--gray-50);color:var(--blue-600)}
+.open-tab-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.open-btn{font-size:12px;font-weight:600;color:white;padding:6px 14px;border-radius:8px;box-shadow:var(--shadow-sm);transition:var(--transition)}
+.open-btn:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.no-dash{text-align:center;padding:60px 20px;background:var(--white);border-radius:var(--radius-xl);border:1px solid var(--gray-100)}
+.no-dash p:first-child{font-size:40px;margin-bottom:12px}
+.no-dash h3{font-size:17px;font-weight:600;color:var(--gray-700);margin-bottom:6px}
+.no-dash p:last-child{font-size:13px;color:var(--gray-400)}
+
+/* ===== USER MANAGEMENT ===== */
+.um-wrap{padding:28px 28px 48px;max-width:1200px}
+.um-head{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
+.um-headinfo h1{font-size:22px;font-weight:700;color:var(--gray-900)}
+.um-headinfo p{font-size:13px;color:var(--gray-400);margin-top:3px}
+.add-btn{display:flex;align-items:center;gap:7px;padding:10px 18px;border-radius:var(--radius);background:linear-gradient(135deg,var(--blue-500),var(--indigo-600));color:white;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(99,102,241,.3);transition:all .2s}
+.add-btn:hover{box-shadow:0 6px 18px rgba(99,102,241,.4);transform:translateY(-1px)}
+.add-btn svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.um-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;align-items:start}
+@media(max-width:900px){.um-grid{grid-template-columns:1fr}}
+.search-wrap{position:relative;margin-bottom:14px}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--gray-400);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.search-input{width:100%;padding:10px 12px 10px 36px;border:1.5px solid var(--gray-200);border-radius:var(--radius);font-size:13.5px;color:var(--gray-900);background:var(--white);transition:var(--transition)}
+.search-input:focus{border-color:var(--blue-400);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.user-cards{display:flex;flex-direction:column;gap:12px}
+.user-card{background:var(--white);border:1.5px solid var(--gray-100);border-radius:var(--radius-lg);padding:18px;transition:all .15s;box-shadow:var(--shadow-sm)}
+.user-card:hover{border-color:var(--gray-200);box-shadow:var(--shadow)}
+.user-card.editing{border-color:var(--blue-300);box-shadow:0 0 0 3px rgba(59,130,246,.08)}
+.uc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.uc-left{display:flex;align-items:center;gap:12px}
+.uc-av{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:700;flex-shrink:0}
+.av-admin{background:linear-gradient(135deg,var(--amber-400),var(--orange-500))}
+.av-manager{background:linear-gradient(135deg,var(--blue-400),var(--indigo-500))}
+.uc-name{font-size:15px;font-weight:600;color:var(--gray-900)}
+.uc-meta{display:flex;align-items:center;gap:8px;margin-top:3px}
+.uc-username{font-size:12px;color:var(--gray-400);font-family:'JetBrains Mono',monospace}
+.role-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
+.role-badge svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.badge-admin{background:var(--amber-50);color:var(--amber-700)}
+.badge-manager{background:var(--blue-50);color:var(--blue-700)}
+.uc-actions{display:flex;align-items:center;gap:2px}
+.uc-btn{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gray-400);transition:var(--transition)}
+.uc-btn:hover.edit-c{background:var(--blue-50);color:var(--blue-600)}
+.uc-btn:hover.del-c{background:var(--red-50);color:var(--red-500)}
+.uc-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.uc-perms{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.perm-tag{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;padding:4px 10px;border-radius:6px;font-weight:500}
+.perm-on{background:var(--green-50);color:var(--green-700);border:1px solid var(--green-100)}
+.perm-off{background:var(--gray-50);color:var(--gray-300);border:1px solid var(--gray-100);text-decoration:line-through}
+.uc-pass{display:flex;align-items:center;gap:6px;margin-top:10px}
+.uc-pass span:first-child{font-size:11.5px;color:var(--gray-400)}
+.uc-pass-val{font-size:12px;color:var(--gray-600);font-family:'JetBrains Mono',monospace}
+.uc-eye{color:var(--gray-400);display:flex;align-items:center;transition:var(--transition)}
+.uc-eye:hover{color:var(--gray-700)}
+.uc-eye svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.empty-state{text-align:center;padding:48px 20px;background:var(--white);border-radius:var(--radius-xl);border:1px solid var(--gray-100)}
+.empty-state p:first-child{font-size:36px;margin-bottom:10px}
+.empty-state h3{font-size:15px;font-weight:600;color:var(--gray-500)}
+/* Form Panel */
+.form-panel{background:var(--white);border:1.5px solid var(--gray-100);border-radius:var(--radius-xl);padding:22px;box-shadow:var(--shadow-sm);position:sticky;top:16px}
+.form-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.form-head h3{font-size:16px;font-weight:700;color:var(--gray-900)}
+.close-btn{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--gray-400);transition:var(--transition)}
+.close-btn:hover{background:var(--gray-100);color:var(--gray-700)}
+.close-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.f-group{margin-bottom:14px}
+.f-label{display:block;font-size:12.5px;font-weight:600;color:var(--gray-700);margin-bottom:5px}
+.f-input{width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:13.5px;color:var(--gray-900);background:var(--gray-50);transition:var(--transition)}
+.f-input:focus{border-color:var(--blue-400);background:var(--white);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.f-input::placeholder{color:var(--gray-400)}
+.role-toggle{display:flex;gap:8px}
+.role-opt{flex:1;padding:9px 6px;border-radius:10px;border:1.5px solid var(--gray-200);background:var(--gray-50);font-size:12.5px;font-weight:600;color:var(--gray-500);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px}
+.role-opt svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.role-opt.active-manager{background:var(--blue-50);border-color:var(--blue-300);color:var(--blue-700)}
+.role-opt.active-admin{background:var(--amber-50);border-color:var(--amber-300);color:var(--amber-700)}
+.dash-select-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.dash-select-head .f-label{margin-bottom:0}
+.ds-links{display:flex;gap:8px}
+.ds-link{font-size:11px;font-weight:600;color:var(--blue-500);cursor:pointer;transition:var(--transition)}
+.ds-link:hover{color:var(--blue-700)}
+.ds-link.gray{color:var(--gray-400)}
+.ds-link.gray:hover{color:var(--gray-600)}
+.dash-options{display:flex;flex-direction:column;gap:6px}
+.dash-opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;border:1.5px solid var(--gray-100);background:var(--gray-50);cursor:pointer;transition:all .15s;text-align:left}
+.dash-opt:hover{border-color:var(--gray-200);background:var(--white)}
+.dash-opt.checked{background:var(--blue-50);border-color:var(--blue-200)}
+.chk-box{width:18px;height:18px;border-radius:5px;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.dash-opt.checked .chk-box{background:var(--blue-500);border-color:var(--blue-500)}
+.chk-box svg{width:11px;height:11px;stroke:white;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.dash-opt.checked .chk-box svg{opacity:1}
+.dash-opt-name{font-size:13px;font-weight:500;color:var(--gray-700)}
+.dash-opt.checked .dash-opt-name{color:var(--blue-800)}
+.admin-note{background:var(--amber-50);border:1px solid var(--amber-100);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--amber-700);line-height:1.5}
+.f-error{background:var(--red-50);border:1px solid var(--red-200);color:var(--red-600);border-radius:8px;padding:8px 12px;font-size:12.5px}
+.save-btn{width:100%;padding:11px;border-radius:10px;background:linear-gradient(135deg,var(--blue-500),var(--indigo-600));color:white;font-size:13.5px;font-weight:600;box-shadow:0 4px 12px rgba(99,102,241,.3);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:4px}
+.save-btn:hover{box-shadow:0 6px 18px rgba(99,102,241,.4);transform:translateY(-1px)}
+.save-btn svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.form-hint{text-align:center;padding:40px 16px;color:var(--gray-400);font-size:13px;background:var(--white);border:1.5px solid var(--gray-100);border-radius:var(--radius-xl)}
+.form-hint p:first-child{font-size:32px;margin-bottom:10px}
+.form-hint h3{font-size:14px;font-weight:600;color:var(--gray-600);margin-bottom:4px}
+
+/* ===== SETTINGS ===== */
+.settings-wrap{padding:28px;max-width:900px}
+.settings-wrap h1{font-size:22px;font-weight:700;margin-bottom:4px}
+.settings-wrap>p{font-size:13px;color:var(--gray-400);margin-bottom:24px}
+.settings-card{background:var(--white);border:1px solid var(--gray-100);border-radius:var(--radius-xl);padding:22px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+.settings-card h2{font-size:15px;font-weight:700;color:var(--gray-800);display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.settings-card h2 svg{width:17px;height:17px;stroke:var(--blue-500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dash-link-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--gray-50);border-radius:10px;margin-bottom:8px}
+.dash-link-row:last-child{margin-bottom:0}
+.dlr-name{font-size:13px;font-weight:600;color:var(--gray-800);display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.dlr-url{font-size:11px;color:var(--gray-400);font-family:'JetBrains Mono',monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px}
+.dlr-open{font-size:11.5px;font-weight:600;color:var(--blue-600);display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:7px;transition:var(--transition);flex-shrink:0}
+.dlr-open:hover{background:var(--blue-50)}
+.dlr-open svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sys-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:600px){.sys-grid{grid-template-columns:1fr}}
+.sys-cell{background:var(--gray-50);border-radius:10px;padding:14px}
+.sys-cell-label{font-size:10px;font-weight:700;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.sys-cell-val{font-size:13px;font-weight:600;color:var(--gray-800)}
+.how-note{background:var(--blue-50);border:1px solid var(--blue-100);border-radius:10px;padding:14px;margin-top:16px}
+.how-note h3{font-size:13px;font-weight:700;color:var(--blue-800);margin-bottom:8px}
+.how-note ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.how-note li{font-size:12px;color:var(--blue-700);display:flex;gap:6px}
+.how-note li::before{content:'•';color:var(--blue-400)}
+
+/* ===== ACCESS DENIED ===== */
+.access-denied{flex:1;display:flex;align-items:center;justify-content:center;padding:32px}
+.access-denied-inner{text-align:center}
+.access-denied-inner p:first-child{font-size:52px;margin-bottom:14px}
+.access-denied-inner h2{font-size:20px;font-weight:700;color:var(--gray-800);margin-bottom:6px}
+.access-denied-inner p{font-size:14px;color:var(--gray-400);margin-bottom:20px}
+.home-link{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:var(--blue-500);color:white;border-radius:var(--radius);font-size:14px;font-weight:600;transition:var(--transition)}
+.home-link:hover{background:var(--blue-600)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  #sidebar{display:none}
+  .mobile-bar{display:flex}
+  .home-wrap,.um-wrap,.settings-wrap{padding:16px 16px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading-screen">
+  <div class="spin"></div>
+  <p style="font-size:13px;color:var(--gray-400)">Loading…</p>
+</div>
+
+<!-- Login -->
+<div id="login-screen">
+  <div class="login-blob blob1"></div>
+  <div class="login-blob blob2"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="login-title">Vishal Technopower</div>
+    <div class="login-sub">Master Dashboard Portal</div>
+
+    <label class="field-label">Username</label>
+    <div class="field-wrap">
+      <input class="field-input" id="login-username" type="text" placeholder="Enter username" autocomplete="username" />
+    </div>
+
+    <label class="field-label">Password</label>
+    <div class="field-wrap">
+      <input class="field-input" id="login-password" type="password" placeholder="Enter password" autocomplete="current-password" style="padding-right:44px" />
+      <button class="eye-btn" id="eye-toggle" onclick="toggleLoginEye()">
+        <svg id="eye-icon" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+
+    <div class="remember-row">
+      <input class="remember-check" type="checkbox" id="remember-me" />
+      <label class="remember-label" for="remember-me">Remember me on this device</label>
+    </div>
+
+    <button class="login-btn" id="login-btn" onclick="doLogin()">
+      <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      Sign In
+    </button>
+    <div class="login-error" id="login-error" style="display:none">
+      <span>⚠️</span><span id="login-error-msg"></span>
+    </div>
+  </div>
+</div>
+
+<!-- App Shell -->
+<div id="app">
+  <!-- Sidebar (desktop) -->
+  <aside id="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-logo">V</div>
+      <div class="sidebar-brand">
+        <h1>Vishal Technopower</h1>
+        <p>Master Dashboard</p>
+      </div>
+    </div>
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <nav id="sidebar-nav"></nav>
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <div class="user-av" id="sidebar-av"></div>
+        <div class="user-info">
+          <div class="user-name" id="sidebar-name"></div>
+          <div class="user-role" id="sidebar-role"></div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Drawer overlay (mobile) -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <div class="sidebar-head" style="border-bottom:1px solid var(--gray-100)">
+      <div class="sidebar-logo">V</div>
+      <div class="sidebar-brand">
+        <h1>Vishal Technopower</h1>
+        <p>Master Dashboard</p>
+      </div>
+    </div>
+    <nav id="drawer-nav" style="flex:1;overflow-y:auto;padding:12px 8px"></nav>
+    <div class="sidebar-foot">
+      <div class="user-chip">
+        <div class="user-av" id="drawer-av"></div>
+        <div class="user-info">
+          <div class="user-name" id="drawer-name"></div>
+          <div class="user-role" id="drawer-role"></div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Logout</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div id="main">
+    <!-- Mobile bar -->
+    <div class="mobile-bar">
+      <button onclick="openDrawer()">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="mobile-title">VTP Dashboard</span>
+      <div class="mobile-av" id="mobile-av"></div>
+    </div>
+
+    <!-- Home page -->
+    <div class="page" id="page-home" style="overflow-y:auto">
+      <div class="home-wrap">
+        <div class="home-greeting" id="home-greeting"></div>
+        <div class="home-sub">Welcome to your Master Dashboard. Access all your portals from one place.</div>
+        <div class="stats-row" id="stats-row"></div>
+        <div class="section-title">Your Dashboards</div>
+        <div class="dash-grid" id="dash-grid"></div>
+      </div>
+    </div>
+
+    <!-- Iframe page -->
+    <div id="page-iframe-wrap">
+      <div class="iframe-toolbar">
+        <div class="iframe-info">
+          <span class="iframe-icon" id="if-icon"></span>
+          <div>
+            <div class="iframe-title" id="if-title"></div>
+            <div class="iframe-desc" id="if-desc"></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px">
+          <button class="icon-btn" title="Refresh" onclick="refreshIframe()">
+            <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </button>
+          <a class="icon-btn" id="if-external" target="_blank" rel="noopener noreferrer" title="Open in new tab">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <button class="icon-btn" title="Fullscreen" onclick="openFullscreen()">
+            <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="iframe-area">
+        <div class="iframe-loader" id="iframe-loader">
+          <div class="spin"></div>
+          <p id="iframe-loader-txt">Loading…</p>
+        </div>
+        <iframe id="dash-iframe" allow="clipboard-read; clipboard-write" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"></iframe>
+      </div>
+    </div>
+
+    <!-- User Management page -->
+    <div class="page" id="page-users" style="overflow-y:auto">
+      <div class="um-wrap">
+        <div class="um-head">
+          <div class="um-headinfo">
+            <h1>👥 User Management</h1>
+            <p>Add, edit or remove users. Assign dashboard access for each user.</p>
+          </div>
+          <button class="add-btn" onclick="startAdd()">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add New User
+          </button>
+        </div>
+        <div class="um-grid">
+          <div>
+            <div class="search-wrap">
+              <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input class="search-input" id="user-search" placeholder="Search users…" oninput="renderUserList()" />
+            </div>
+            <div class="user-cards" id="user-cards"></div>
+          </div>
+          <div id="form-panel-wrap"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings page -->
+    <div class="page" id="page-settings" style="overflow-y:auto">
+      <div class="settings-wrap">
+        <h1>⚙️ Settings</h1>
+        <p>Dashboard configuration and system information.</p>
+        <div class="settings-card">
+          <h2>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Dashboard Links
+          </h2>
+          <div id="settings-links"></div>
+        </div>
+        <div class="settings-card">
+          <h2>
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            System Information
+          </h2>
+          <div class="sys-grid">
+            <div class="sys-cell"><div class="sys-cell-label">Application</div><div class="sys-cell-val">VTP Master Dashboard</div></div>
+            <div class="sys-cell"><div class="sys-cell-label">Version</div><div class="sys-cell-val">2.0.0</div></div>
+            <div class="sys-cell"><div class="sys-cell-label">Total Dashboards</div><div class="sys-cell-val" id="total-dash-count"></div></div>
+            <div class="sys-cell"><div class="sys-cell-label">Storage</div><div class="sys-cell-val">Browser LocalStorage</div></div>
+          </div>
+          <div class="how-note" style="margin-top:16px">
+            <h3>💡 How it works</h3>
+            <ul>
+              <li>Admin can see all dashboards and manage users</li>
+              <li>Manager can view AND interact with assigned dashboards</li>
+              <li>Remember Me keeps you logged in on the same device</li>
+              <li>Admin can add / edit / remove users at any time</li>
+              <li>Each user gets custom dashboard access permissions</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Access Denied -->
+    <div id="page-denied" style="display:none;flex:1;align-items:center;justify-content:center;padding:32px">
+      <div style="text-align:center">
+        <p style="font-size:52px;margin-bottom:14px">🔒</p>
+        <h2 style="font-size:20px;font-weight:700;color:var(--gray-800);margin-bottom:6px">Access Denied</h2>
+        <p style="font-size:14px;color:var(--gray-400);margin-bottom:20px">You don't have permission to view this dashboard.</p>
+        <button onclick="navigate('home')" style="display:inline-flex;align-items:center;gap:7px;padding:10px 20px;background:var(--blue-500);color:white;border-radius:var(--radius);font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:inherit">Go Home</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fullscreen viewer -->
+<div class="fullscreen-wrap" id="fullscreen-wrap">
+  <div class="fs-bar">
+    <div class="fs-title">
+      <span id="fs-icon"></span>
+      <span id="fs-title-text"></span>
+    </div>
+    <div style="display:flex;align-items:center;gap:4px">
+      <button class="icon-btn" onclick="refreshFullscreen()" title="Refresh">
+        <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      </button>
+      <a class="icon-btn" id="fs-external" target="_blank" rel="noopener" title="Open in tab">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <button class="icon-btn" onclick="closeFullscreen()" title="Exit fullscreen">
+        <svg viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 0 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg>
+      </button>
+    </div>
+  </div>
+  <iframe id="fs-iframe" allow="clipboard-read; clipboard-write" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation" style="flex:1;border:none"></iframe>
+</div>
+
+<script>
+// ===================== DATA =====================
+const DASHBOARDS = [
+  {id:'account-dashboard',name:'Account Dashboard',icon:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Management Portal — Outstanding, Bills, BG, Deposits, Invoices, Stock, LD/SD Aging, Revenue',color:'from-blue-500 to-cyan-400',grad:'linear-gradient(135deg,#3b82f6,#06b6d4)',bg:'#eff6ff'},
+  {id:'leave-management',name:'Leave Management',icon:'📅',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Employee Leave Management System — Apply, Track & Approve Leaves',grad:'linear-gradient(135deg,#22c55e,#10b981)',bg:'#f0fdf4'},
+  {id:'expense-management',name:'Expense Management',icon:'💰',url:'https://script.google.com/a/macros/vishaltechnopower.com/s/AKfycbw_nWSnFVvG2wdCMLpyOzVUR_npJ3PiPKDQpGDZpPFNSUgAW_XoNWwY4jzAJwowBlJElw/exec',desc:'Expense Tracking & Approval — Submit and manage company expenses',grad:'linear-gradient(135deg,#f97316,#f59e0b)',bg:'#fff7ed'},
+  {id:'vendor-payment',name:'Vendor Payment',icon:'🏦',url:'https://vishaltechnopowers.is-a.dev/venderdatabase/',desc:'Vendor Payment Management — Add vendors, manage payments & entries',grad:'linear-gradient(135deg,#a855f7,#ec4899)',bg:'#faf5ff'},
+];
+
+const STORAGE = {users:'vtp_users',session:'vtp_session',remember:'vtp_remember'};
+
+// Default admin — credentials hidden from UI
+const DEFAULT_ADMIN = {
+  id:'admin-001',username:'solar',password:'panel@902',
+  displayName:'Admin',role:'admin',
+  allowedDashboards:DASHBOARDS.map(d=>d.id),
+  createdAt:new Date().toISOString()
+};
+
+// ===================== STORE =====================
+function getUsers(){
+  const raw=localStorage.getItem(STORAGE.users);
+  if(!raw){const i=[DEFAULT_ADMIN];localStorage.setItem(STORAGE.users,JSON.stringify(i));return i;}
+  return JSON.parse(raw);
+}
+function saveUsers(u){localStorage.setItem(STORAGE.users,JSON.stringify(u));}
+function addUserStore(u){const users=getUsers();users.push(u);saveUsers(users);}
+function updateUserStore(upd){const users=getUsers();const i=users.findIndex(u=>u.id===upd.id);if(i>-1){users[i]=upd;saveUsers(users);}}
+function deleteUserStore(id){saveUsers(getUsers().filter(u=>u.id!==id));}
+
+function login(username,password){
+  const found=getUsers().find(u=>u.username===username&&u.password===password);
+  return found||null;
+}
+function getCurrentUser(){
+  // Check remember-me first
+  const rem=localStorage.getItem(STORAGE.remember);
+  if(rem){const stored=JSON.parse(rem);const fresh=getUsers().find(u=>u.id===stored.id);if(fresh){return fresh;}}
+  // Check session
+  const ses=sessionStorage.getItem(STORAGE.session);
+  if(ses){const stored=JSON.parse(ses);const fresh=getUsers().find(u=>u.id===stored.id);if(fresh){return fresh;}}
+  return null;
+}
+function saveSession(user,remember){
+  if(remember){localStorage.setItem(STORAGE.remember,JSON.stringify(user));sessionStorage.removeItem(STORAGE.session);}
+  else{sessionStorage.setItem(STORAGE.session,JSON.stringify(user));localStorage.removeItem(STORAGE.remember);}
+}
+function clearSession(){localStorage.removeItem(STORAGE.remember);sessionStorage.removeItem(STORAGE.session);}
+
+// ===================== STATE =====================
+let currentUser=null;
+let activePage='home';
+let sidebarCollapsed=false;
+let formState={editing:null,isAdding:false,username:'',password:'',displayName:'',role:'manager',dashboards:[]};
+let showPass={};
+let currentDashboard=null;
+let iframeKey=0;
+
+// ===================== HELPERS =====================
+const $=id=>document.getElementById(id);
+function greeting(){const h=new Date().getHours();return h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';}
+function initial(name){return(name||'U').charAt(0).toUpperCase();}
+
+// ===================== NAVIGATION =====================
+function navigate(page){
+  activePage=page;
+  // Hide all
+  ['page-home','page-users','page-settings'].forEach(id=>{$('page-'+id.replace('page-',''))&&($('page-'+id.replace('page-','')).style.display='');});
+  ['page-home','page-users','page-settings'].forEach(id=>$(id)&&$(id).classList.remove('active'));
+  $('page-iframe-wrap').classList.remove('active');
+  $('page-denied').style.display='none';
+
+  const dash=DASHBOARDS.find(d=>d.id===page);
+  if(dash){
+    const hasAccess=currentUser.role==='admin'||currentUser.allowedDashboards.includes(dash.id);
+    if(hasAccess){loadDashboard(dash);}
+    else{$('page-denied').style.display='flex';}
+  } else if(page==='home'){
+    $('page-home').classList.add('active');
+  } else if(page==='admin-users'&&currentUser.role==='admin'){
+    $('page-users').classList.add('active');
+    renderUserList();
+  } else if(page==='admin-settings'&&currentUser.role==='admin'){
+    $('page-settings').classList.add('active');
+  } else {
+    navigate('home');return;
+  }
+  buildNav();
+  closeDrawer();
+}
+
+function loadDashboard(dash){
+  currentDashboard=dash;
+  $('if-icon').textContent=dash.icon;
+  $('if-title').textContent=dash.name;
+  $('if-desc').textContent=dash.desc;
+  $('if-external').href=dash.url;
+  $('iframe-loader').style.display='flex';
+  $('iframe-loader-txt').textContent='Loading '+dash.name+'…';
+  iframeKey++;
+  const iframe=$('dash-iframe');
+  iframe.onload=()=>{$('iframe-loader').style.display='none';};
+  iframe.src=dash.url;
+  $('page-iframe-wrap').classList.add('active');
+}
+function refreshIframe(){
+  if(currentDashboard){$('iframe-loader').style.display='flex';$('dash-iframe').src=currentDashboard.url;}
+}
+function openFullscreen(){
+  if(!currentDashboard)return;
+  $('fs-icon').textContent=currentDashboard.icon;
+  $('fs-title-text').textContent=currentDashboard.name;
+  $('fs-external').href=currentDashboard.url;
+  $('fs-iframe').src=currentDashboard.url;
+  $('fullscreen-wrap').classList.add('open');
+}
+function closeFullscreen(){$('fullscreen-wrap').classList.remove('open');$('fs-iframe').src='';}
+function refreshFullscreen(){if(currentDashboard)$('fs-iframe').src=currentDashboard.url;}
+
+// ===================== SIDEBAR =====================
+function toggleSidebar(){
+  sidebarCollapsed=!sidebarCollapsed;
+  $('sidebar').classList.toggle('collapsed',sidebarCollapsed);
+}
+function buildNav(){
+  const allowed=DASHBOARDS.filter(d=>currentUser.role==='admin'||currentUser.allowedDashboards.includes(d.id));
+  const navHtml=(containerId)=>{
+    let h=`<button class="nav-btn${activePage==='home'?' active':''}" onclick="navigate('home')">
+      <span class="nav-icon"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+      <span class="nav-text">Home</span></button>`;
+    h+=`<div class="nav-label">Dashboards</div>`;
+    allowed.forEach(d=>{
+      h+=`<button class="nav-btn${activePage===d.id?' active':''}" onclick="navigate('${d.id}')">
+        <span class="nav-icon">${d.icon}</span>
+        <span class="nav-text">${d.name}</span></button>`;
+    });
+    if(currentUser.role==='admin'){
+      h+=`<div class="nav-sep"></div><div class="nav-label">Admin</div>`;
+      h+=`<button class="nav-btn${activePage==='admin-users'?' active':''}" onclick="navigate('admin-users')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <span class="nav-text">User Management</span></button>`;
+      h+=`<button class="nav-btn${activePage==='admin-settings'?' active':''}" onclick="navigate('admin-settings')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <span class="nav-text">Settings</span></button>`;
+    }
+    return h;
+  };
+  $('sidebar-nav').innerHTML=navHtml('sidebar-nav');
+  $('drawer-nav').innerHTML=navHtml('drawer-nav');
+}
+
+// ===================== HOME RENDER =====================
+function renderHome(){
+  const allowed=DASHBOARDS.filter(d=>currentUser.role==='admin'||currentUser.allowedDashboards.includes(d.id));
+  $('home-greeting').textContent=`${greeting()}, ${currentUser.displayName}! 👋`;
+  $('stats-row').innerHTML=`
+    <div class="stat-card"><div class="stat-icon" style="background:#eff6ff">📊</div><div class="stat-val">${allowed.length}</div><div class="stat-lbl">Active Dashboards</div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#f0fdf4">✓</div><div class="stat-val" style="text-transform:capitalize">${currentUser.role}</div><div class="stat-lbl">Your Role</div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#fffbeb">🕐</div><div class="stat-val" id="clock-val"></div><div class="stat-lbl">Current Time</div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#faf5ff">📅</div><div class="stat-val">${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div><div class="stat-lbl">Today's Date</div></div>`;
+  updateClock();
+  if(allowed.length===0){
+    $('dash-grid').innerHTML=`<div class="no-dash"><p>🔒</p><h3>No Dashboards Assigned</h3><p>Contact your admin to get dashboard access.</p></div>`;
+    return;
+  }
+  $('dash-grid').innerHTML=allowed.map(d=>`
+    <div class="dash-card" onclick="navigate('${d.id}')">
+      <div class="dash-card-head">
+        <div class="dash-card-icon" style="background:${d.grad}">${d.icon}</div>
+        <div>
+          <div class="dash-card-name">${d.name}</div>
+          <div class="dash-card-desc">${d.desc}</div>
+        </div>
+      </div>
+      <div class="dash-card-foot">
+        <span class="dash-card-url">${d.url}</span>
+        <div class="dash-card-actions">
+          <a class="open-tab-btn" href="${d.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            New tab
+          </a>
+          <button class="open-btn" style="background:${d.grad}" onclick="event.stopPropagation();navigate('${d.id}')">Open →</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function updateClock(){const v=$('clock-val');if(v)v.textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}
+setInterval(updateClock,30000);
+
+// ===================== USER MANAGEMENT =====================
+function renderUserList(){
+  const search=($('user-search')||{value:''}).value.toLowerCase();
+  const users=getUsers().filter(u=>u.displayName.toLowerCase().includes(search)||u.username.toLowerCase().includes(search)||u.role.toLowerCase().includes(search));
+  if(users.length===0){
+    $('user-cards').innerHTML=`<div class="empty-state"><p>🔍</p><h3>No users found</h3></div>`;
+    return;
+  }
+  $('user-cards').innerHTML=users.map(u=>{
+    const isEditing=formState.editing&&formState.editing.id===u.id;
+    return `<div class="user-card${isEditing?' editing':''}">
+      <div class="uc-top">
+        <div class="uc-left">
+          <div class="uc-av ${u.role==='admin'?'av-admin':'av-manager'}">${initial(u.displayName)}</div>
+          <div>
+            <div class="uc-name">${u.displayName}</div>
+            <div class="uc-meta">
+              <span class="uc-username">@${u.username}</span>
+              <span class="role-badge ${u.role==='admin'?'badge-admin':'badge-manager'}">
+                <svg viewBox="0 0 24 24">${u.role==='admin'?'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>':'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="white"/>'}' </svg>
+                ${u.role}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="uc-actions">
+          <button class="uc-btn edit-c" onclick="startEdit('${u.id}')" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          ${u.id!=='admin-001'?`<button class="uc-btn del-c" onclick="deleteUser('${u.id}')" title="Delete"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>`:''}
+        </div>
+      </div>
+      <div class="uc-perms">${DASHBOARDS.map(d=>{const on=u.role==='admin'||u.allowedDashboards.includes(d.id);return`<span class="perm-tag ${on?'perm-on':'perm-off'}">${d.icon} ${d.name}</span>`}).join('')}</div>
+      <div class="uc-pass">
+        <span>Password:</span>
+        <span class="uc-pass-val">${showPass[u.id]?u.password:'••••••••'}</span>
+        <button class="uc-eye" onclick="togglePass('${u.id}')">
+          <svg viewBox="0 0 24 24">${showPass[u.id]?'<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>':'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'}
+          </svg>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+  renderFormPanel();
+}
+function togglePass(id){showPass[id]=!showPass[id];renderUserList();}
+
+function renderFormPanel(){
+  const w=$('form-panel-wrap');
+  if(!formState.isAdding&&!formState.editing){
+    w.innerHTML=`<div class="form-hint"><p>👆</p><h3>Select a user to edit</h3><p>Or click "Add New User" to create one</p></div>`;
+    return;
+  }
+  const isEdit=!!formState.editing;
+  w.innerHTML=`<div class="form-panel">
+    <div class="form-head">
+      <h3>${isEdit?'✏️ Edit User':'➕ Add New User'}</h3>
+      <button class="close-btn" onclick="resetForm()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="f-group">
+      <label class="f-label">Display Name</label>
+      <input class="f-input" id="f-displayname" placeholder="e.g. Rajesh Kumar" value="${formState.displayName}" oninput="formState.displayName=this.value" />
+    </div>
+    <div class="f-group">
+      <label class="f-label">Username</label>
+      <input class="f-input" id="f-username" placeholder="e.g. rajesh" value="${formState.username}" oninput="formState.username=this.value" />
+    </div>
+    <div class="f-group">
+      <label class="f-label">Password</label>
+      <input class="f-input" id="f-password" placeholder="Enter password" value="${formState.password}" oninput="formState.password=this.value" />
+    </div>
+    <div class="f-group">
+      <label class="f-label">Role</label>
+      <div class="role-toggle">
+        <button class="role-opt${formState.role==='manager'?' active-manager':''}" onclick="setRole('manager')">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Manager
+        </button>
+        <button class="role-opt${formState.role==='admin'?' active-admin':''}" onclick="setRole('admin')">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4" stroke="currentColor"/></svg>Admin
+        </button>
+      </div>
+    </div>
+    ${formState.role==='manager'?`
+    <div class="f-group">
+      <div class="dash-select-head">
+        <label class="f-label">Dashboard Access</label>
+        <div class="ds-links">
+          <span class="ds-link" onclick="selectAll()">Select All</span>
+          <span>·</span>
+          <span class="ds-link gray" onclick="clearAll()">Clear</span>
+        </div>
+      </div>
+      <div class="dash-options">${DASHBOARDS.map(d=>`
+        <button class="dash-opt${formState.dashboards.includes(d.id)?' checked':''}" onclick="toggleDash('${d.id}')">
+          <div class="chk-box"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <span>${d.icon}</span>
+          <span class="dash-opt-name">${d.name}</span>
+        </button>`).join('')}
+      </div>
+    </div>`:`
+    <div class="admin-note">⚡ Admin users have access to <strong>all dashboards</strong> and user management.</div>`}
+    <div class="f-error" id="f-error" style="display:none"></div>
+    <button class="save-btn" onclick="saveUser()" style="margin-top:14px">
+      <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      ${isEdit?'Update User':'Create User'}
+    </button>
+  </div>`;
+}
+function setRole(r){formState.role=r;renderFormPanel();}
+function toggleDash(id){formState.dashboards=formState.dashboards.includes(id)?formState.dashboards.filter(d=>d!==id):[...formState.dashboards,id];renderFormPanel();}
+function selectAll(){formState.dashboards=DASHBOARDS.map(d=>d.id);renderFormPanel();}
+function clearAll(){formState.dashboards=[];renderFormPanel();}
+
+function startAdd(){formState={editing:null,isAdding:true,username:'',password:'',displayName:'',role:'manager',dashboards:[]};renderUserList();}
+function startEdit(id){
+  const u=getUsers().find(u=>u.id===id);
+  if(!u)return;
+  formState={editing:u,isAdding:false,username:u.username,password:u.password,displayName:u.displayName,role:u.role,dashboards:[...u.allowedDashboards]};
+  renderUserList();
+}
+function resetForm(){formState={editing:null,isAdding:false,username:'',password:'',displayName:'',role:'manager',dashboards:[]};renderUserList();}
+
+function saveUser(){
+  const errEl=$('f-error');
+  if(!formState.displayName.trim()||!formState.username.trim()||!formState.password.trim()){
+    errEl.textContent='⚠️ All fields are required';errEl.style.display='block';return;
+  }
+  const all=getUsers();
+  const dup=all.find(u=>u.username.toLowerCase()===formState.username.toLowerCase()&&u.id!==(formState.editing&&formState.editing.id));
+  if(dup){errEl.textContent='⚠️ Username already exists';errEl.style.display='block';return;}
+  const dashes=formState.role==='admin'?DASHBOARDS.map(d=>d.id):formState.dashboards;
+  if(formState.editing){
+    updateUserStore({...formState.editing,username:formState.username,password:formState.password,displayName:formState.displayName,role:formState.role,allowedDashboards:dashes});
+  } else {
+    addUserStore({id:'user-'+Date.now(),username:formState.username,password:formState.password,displayName:formState.displayName,role:formState.role,allowedDashboards:dashes,createdAt:new Date().toISOString()});
+  }
+  resetForm();
+}
+
+function deleteUser(id){
+  if(id==='admin-001'){alert('Cannot delete the default admin!');return;}
+  if(confirm('Are you sure you want to delete this user?')){
+    deleteUserStore(id);
+    if(formState.editing&&formState.editing.id===id)resetForm();
+    else renderUserList();
+  }
+}
+
+// ===================== SETTINGS RENDER =====================
+function renderSettings(){
+  $('total-dash-count').textContent=DASHBOARDS.length;
+  $('settings-links').innerHTML=DASHBOARDS.map(d=>`
+    <div class="dash-link-row">
+      <div>
+        <div class="dlr-name">${d.icon} ${d.name}</div>
+        <div class="dlr-url">${d.url}</div>
+      </div>
+      <a class="dlr-open" href="${d.url}" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Open
+      </a>
+    </div>`).join('');
+}
+
+// ===================== AUTH =====================
+function doLogin(){
+  const u=$('login-username').value.trim();
+  const p=$('login-password').value;
+  const rem=$('remember-me').checked;
+  if(!u||!p){showLoginError('Please enter username and password.');return;}
+  const btn=$('login-btn');
+  btn.disabled=true;btn.innerHTML=`<div class="spin" style="width:18px;height:18px;border-width:2px;border-color:rgba(255,255,255,.3);border-top-color:white"></div>`;
+  setTimeout(()=>{
+    const user=login(u,p);
+    if(user){
+      saveSession(user,rem);
+      currentUser=user;
+      startApp();
+    } else {
+      showLoginError('Invalid username or password.');
+      btn.disabled=false;
+      btn.innerHTML=`<svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Sign In`;
+    }
+  },500);
+}
+function showLoginError(msg){$('login-error-msg').textContent=msg;$('login-error').style.display='flex';}
+function doLogout(){clearSession();currentUser=null;showLogin();}
+function toggleLoginEye(){
+  const inp=$('login-password');
+  const icon=$('eye-icon');
+  if(inp.type==='password'){inp.type='text';icon.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';}
+  else{inp.type='password';icon.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';}
+}
+
+// ===================== APP BOOT =====================
+function showLogin(){
+  $('loading-screen').style.display='none';
+  $('login-screen').classList.add('active');
+  $('app').classList.remove('active');
+  $('login-username').value='';$('login-password').value='';
+  $('login-error').style.display='none';
+  $('remember-me').checked=false;
+}
+function startApp(){
+  $('loading-screen').style.display='none';
+  $('login-screen').classList.remove('active');
+  $('app').classList.add('active');
+  // Sidebar user info
+  $('sidebar-av').textContent=initial(currentUser.displayName);
+  $('sidebar-name').textContent=currentUser.displayName;
+  $('sidebar-role').textContent=currentUser.role;
+  $('drawer-av').textContent=initial(currentUser.displayName);
+  $('drawer-name').textContent=currentUser.displayName;
+  $('drawer-role').textContent=currentUser.role;
+  $('mobile-av').textContent=initial(currentUser.displayName);
+  renderHome();
+  renderSettings();
+  navigate('home');
+  // Enter on login
+  $('login-password').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();},{ once:true });
+}
+function openDrawer(){$('drawer').classList.add('open');$('drawer-overlay').classList.add('open');}
+function closeDrawer(){$('drawer').classList.remove('open');$('drawer-overlay').classList.remove('open');}
+
+// Boot
+window.addEventListener('load',()=>{
+  // Ensure default admin is fresh
+  const users=getUsers();
+  const adminIdx=users.findIndex(u=>u.id==='admin-001');
+  if(adminIdx>-1&&(users[adminIdx].username!=='solar'||users[adminIdx].password!=='panel@902')){
+    users[adminIdx].username='solar';users[adminIdx].password='panel@902';
+    saveUsers(users);
+  }
+  const saved=getCurrentUser();
+  if(saved){currentUser=saved;startApp();}
+  else{showLogin();}
+  // Enter key on login
+  $('login-password').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+  $('login-username').addEventListener('keydown',e=>{if(e.key==='Enter')$('login-password').focus();});
+});
+</script>
+</body>
+</html>
