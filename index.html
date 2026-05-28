@@ -1,818 +1,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Vishal Technopower - Master Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Vishal Technopower — Master Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#f4f6fb;--w:#fff;--g50:#f8fafc;--g100:#f1f5f9;--g200:#e2e8f0;--g300:#cbd5e1;
-  --g400:#94a3b8;--g500:#64748b;--g600:#475569;--g700:#334155;--g800:#1e293b;--g900:#0f172a;
-  --b50:#eff6ff;--b100:#dbeafe;--b400:#60a5fa;--b500:#3b82f6;--b600:#2563eb;
-  --i500:#6366f1;--i600:#4f46e5;
-  --a50:#fffbeb;--a100:#fef3c7;--a400:#fbbf24;--a700:#b45309;
-  --gr50:#f0fdf4;--gr100:#dcfce7;--gr700:#15803d;
-  --o400:#fb923c;--o500:#f97316;
-  --r50:#fef2f2;--r200:#fecaca;--r500:#ef4444;--r600:#dc2626;
-  --t50:#f0fdfa;--t100:#ccfbf1;--t600:#0d9488;
-  --ss:0 1px 2px rgba(0,0,0,.06),0 1px 3px rgba(0,0,0,.08);
-  --sm:0 4px 6px -1px rgba(0,0,0,.1);
-  --sl:0 10px 15px -3px rgba(0,0,0,.1);
-  --sx:0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04);
-  --r:12px;--rl:16px;--rx:20px;--sw:272px;--sc:72px;--tr:.2s ease;
-}
-html,body{height:100%;font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--g900);-webkit-font-smoothing:antialiased}
-button{cursor:pointer;font-family:inherit;border:none;background:none;outline:none}
-input{font-family:inherit;outline:none}a{text-decoration:none;color:inherit}
-.spin{width:40px;height:40px;border:3px solid var(--b100);border-top-color:var(--b500);border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-#ls{position:fixed;inset:0;background:var(--w);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px}
-#ls p{font-size:13px;color:var(--g400)}
-#login{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#e0e7ff,#f0f9ff,#fef9ee);z-index:100}
-#login.on{display:flex}
-.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;pointer-events:none}
-.b1{width:400px;height:400px;background:radial-gradient(circle,var(--b400),var(--i500));top:-100px;right:-100px}
-.b2{width:350px;height:350px;background:radial-gradient(circle,var(--a400),var(--o400));bottom:-80px;left:-80px}
-.lcard{background:var(--w);border-radius:24px;box-shadow:var(--sx),0 0 0 1px rgba(0,0,0,.04);padding:40px;width:100%;max-width:420px;position:relative;z-index:1}
-.llogo{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--b500),var(--i600));display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(99,102,241,.35)}
-.llogo svg{width:32px;height:32px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ltit{text-align:center;font-size:22px;font-weight:700;color:var(--g900);margin-bottom:4px}
-.lsub{text-align:center;font-size:13px;color:var(--g400);margin-bottom:28px}
-.flbl{display:block;font-size:13px;font-weight:600;color:var(--g700);margin-bottom:6px}
-.fwr{position:relative;margin-bottom:16px}
-.fin{width:100%;padding:12px 16px;border:1.5px solid var(--g200);border-radius:var(--r);font-size:14px;color:var(--g900);background:var(--g50);transition:var(--tr)}
-.fin:focus{border-color:var(--b400);background:var(--w);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
-.fin::placeholder{color:var(--g400)}
-.eyeb{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--g400);display:flex;align-items:center;padding:4px;border-radius:6px}
-.eyeb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.remr{display:flex;align-items:center;gap:8px;margin-bottom:20px}
-.remc{width:16px;height:16px;accent-color:var(--b500);cursor:pointer}
-.reml{font-size:13px;color:var(--g600);cursor:pointer;user-select:none}
-.lbtn{width:100%;padding:13px;border-radius:var(--r);background:linear-gradient(135deg,var(--b500),var(--i600));color:white;font-size:14px;font-weight:600;box-shadow:0 4px 14px rgba(99,102,241,.4);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
-.lbtn:hover:not(:disabled){box-shadow:0 6px 20px rgba(99,102,241,.5);transform:translateY(-1px)}
-.lbtn:disabled{opacity:.65}
-.lbtn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.lerr{background:var(--r50);border:1px solid var(--r200);color:var(--r600);border-radius:var(--r);padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:6px;margin-top:14px}
-#app{display:none;height:100vh;overflow:hidden}
-#app.on{display:flex}
-#sb{width:var(--sw);min-width:var(--sw);height:100vh;background:var(--w);border-right:1px solid var(--g200);display:flex;flex-direction:column;transition:width .25s ease,min-width .25s ease;position:relative;flex-shrink:0;box-shadow:2px 0 8px rgba(0,0,0,.04)}
-#sb.col{width:var(--sc);min-width:var(--sc)}
-.sbh{display:flex;align-items:center;gap:12px;padding:20px 16px;border-bottom:1px solid var(--g100);overflow:hidden}
-.sblogo{width:40px;height:40px;min-width:40px;border-radius:12px;background:linear-gradient(135deg,var(--b500),var(--i600));display:flex;align-items:center;justify-content:center;color:white;font-size:17px;font-weight:800;box-shadow:0 4px 12px rgba(99,102,241,.3)}
-.sbbr{overflow:hidden;white-space:nowrap}
-.sbbr h1{font-size:13px;font-weight:700;color:var(--g900)}
-.sbbr p{font-size:11px;color:var(--g400);margin-top:1px}
-.sbtog{position:absolute;right:-12px;top:72px;width:24px;height:24px;background:var(--w);border:1.5px solid var(--g200);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--g400);box-shadow:var(--ss);z-index:10}
-.sbtog svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
-#sb.col .sbtog svg{transform:rotate(180deg)}
-nav{flex:1;overflow-y:auto;padding:12px 8px;scrollbar-width:none}
-nav::-webkit-scrollbar{display:none}
-.nlbl{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.08em;padding:12px 10px 4px;white-space:nowrap;overflow:hidden}
-#sb.col .nlbl{opacity:0;padding:4px 0}
-.nsep{height:1px;background:var(--g100);margin:8px}
-.nb{width:100%;display:flex;align-items:center;gap:12px;padding:10px;border-radius:10px;font-size:13.5px;font-weight:500;color:var(--g600);transition:all .15s;white-space:nowrap;overflow:hidden;position:relative;cursor:pointer}
-.nb:hover{background:var(--g50);color:var(--g900)}
-.nb.act{background:var(--b50);color:var(--b600);font-weight:600}
-.nb.act::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--b500);border-radius:2px}
-.nico{width:34px;height:34px;min-width:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px}
-.nb.act .nico{background:var(--b100)}
-.nb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;min-width:18px}
-.ntxt{overflow:hidden;text-overflow:ellipsis}
-#sb.col .ntxt{display:none}
-.sbf{border-top:1px solid var(--g100);padding:10px 8px}
-.uchip{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;overflow:hidden;margin-bottom:2px}
-.uav{width:34px;height:34px;min-width:34px;border-radius:50%;background:linear-gradient(135deg,var(--b400),var(--i500));display:flex;align-items:center;justify-content:center;color:white;font-size:13px;font-weight:700}
-.uinf{overflow:hidden}
-.uname{font-size:13px;font-weight:600;color:var(--g900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.urole{font-size:11px;color:var(--g400);text-transform:capitalize}
-#sb.col .uinf{display:none}
-.lgout{width:100%;display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;font-size:13px;font-weight:500;color:var(--r500);transition:all .15s;overflow:hidden}
-.lgout:hover{background:var(--r50)}
-.lgout svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;min-width:18px}
-#sb.col .lgout span{display:none}
-.mobbar{display:none;position:sticky;top:0;z-index:50;background:var(--w);border-bottom:1px solid var(--g100);padding:12px 16px;align-items:center;justify-content:space-between}
-.mobbar button svg{width:20px;height:20px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.mobt{font-size:14px;font-weight:700;color:var(--g900)}
-.mobav{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--b400),var(--i500));display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700}
-.drov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;opacity:0;transition:opacity .25s}
-.drov.on{display:block;opacity:1}
-.drawer{position:fixed;left:0;top:0;bottom:0;width:280px;background:var(--w);z-index:201;transform:translateX(-100%);transition:transform .28s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:var(--sx)}
-.drawer.on{transform:translateX(0)}
-#main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.page{flex:1;overflow-y:auto;display:none}
-.page.on{display:block}
-#ifw{flex:1;display:none;flex-direction:column;overflow:hidden}
-#ifw.on{display:flex}
-.iftb{background:var(--w);border-bottom:1px solid var(--g100);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
-.ifin{display:flex;align-items:center;gap:12px}
-.ific{font-size:24px}
-.ifti{font-size:16px;font-weight:700;color:var(--g900)}
-.ifde{font-size:12px;color:var(--g400);margin-top:1px}
-.vob{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--a50);color:var(--a700);border:1px solid var(--a100)}
-.vob svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.icb{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--g400);transition:var(--tr)}
-.icb:hover{background:var(--b50);color:var(--b600)}
-.icb svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.ifar{flex:1;position:relative;background:var(--g50)}
-.ifldr{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.9);z-index:5;flex-direction:column;gap:12px}
-.ifldr p{font-size:13px;color:var(--g500)}
-#dif{width:100%;height:100%;border:none;display:block}
-#voo{position:absolute;inset:0;z-index:4;cursor:not-allowed;display:none}
-#voo.on{display:block}
-.vom{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.72);color:white;font-size:12px;font-weight:600;padding:8px 16px;border-radius:20px;white-space:nowrap;opacity:0;transition:opacity .3s;pointer-events:none}
-.vom.on{opacity:1}
-.fsw{position:fixed;inset:0;z-index:500;background:var(--w);display:none;flex-direction:column}
-.fsw.on{display:flex}
-.fsb{background:var(--w);border-bottom:1px solid var(--g200);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.fst{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--g800)}
-#fsif{flex:1;border:none}
-.hw{padding:32px 32px 48px;max-width:1100px}
-.hgr{font-size:26px;font-weight:700;color:var(--g900);margin-bottom:4px}
-.hsu{font-size:14px;color:var(--g400);margin-bottom:28px}
-.str{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:30px}
-.stc{background:var(--w);border:1px solid var(--g100);border-radius:var(--rl);padding:18px;box-shadow:var(--ss)}
-.sti{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px}
-.stv{font-size:22px;font-weight:700;color:var(--g900)}
-.stl{font-size:11px;color:var(--g400);margin-top:2px}
-.seti{font-size:16px;font-weight:700;color:var(--g800);margin-bottom:14px}
-.dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.dc{background:var(--w);border:1.5px solid var(--g100);border-radius:var(--rx);padding:22px;box-shadow:var(--ss);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.dc:hover{box-shadow:var(--sl);transform:translateY(-2px);border-color:var(--g200)}
-.dch{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
-.dci{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
-.dcn{font-size:16px;font-weight:700;color:var(--g900);line-height:1.3;margin-bottom:4px}
-.dcd{font-size:12px;color:var(--g400);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.dcf{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--g100)}
-.dcu{font-size:11px;color:var(--g300);font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
-.dca{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.pp{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;position:absolute;top:14px;right:14px}
-.pp svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.pe{background:var(--gr50);color:var(--gr700);border:1px solid var(--gr100)}
-.pv{background:var(--a50);color:var(--a700);border:1px solid var(--a100)}
-.otb{font-size:11px;color:var(--g400);display:flex;align-items:center;gap:3px;padding:5px 8px;border-radius:7px;transition:var(--tr)}
-.otb:hover{background:var(--g50);color:var(--b600)}
-.otb svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.opb{font-size:12px;font-weight:600;color:white;padding:6px 14px;border-radius:8px;box-shadow:var(--ss);transition:var(--tr);border:none;cursor:pointer;font-family:inherit}
-.opb:hover{box-shadow:var(--sm);transform:translateY(-1px)}
-.umw{padding:28px 28px 48px;max-width:1200px}
-.umh{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:22px}
-.umhi h1{font-size:22px;font-weight:700;color:var(--g900)}
-.umhi p{font-size:13px;color:var(--g400);margin-top:3px}
-.addb{display:flex;align-items:center;gap:7px;padding:10px 18px;border-radius:var(--r);background:linear-gradient(135deg,var(--b500),var(--i600));color:white;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(99,102,241,.3);transition:all .2s}
-.addb:hover{box-shadow:0 6px 18px rgba(99,102,241,.4);transform:translateY(-1px)}
-.addb svg{width:16px;height:16px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.umg{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
-.sw{position:relative;margin-bottom:14px}
-.si{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--g400);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.sin{width:100%;padding:10px 12px 10px 36px;border:1.5px solid var(--g200);border-radius:var(--r);font-size:13.5px;color:var(--g900);background:var(--w);transition:var(--tr)}
-.sin:focus{border-color:var(--b400);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
-.ucs{display:flex;flex-direction:column;gap:12px}
-.uc{background:var(--w);border:1.5px solid var(--g100);border-radius:var(--rl);padding:18px;transition:all .15s;box-shadow:var(--ss)}
-.uc:hover{border-color:var(--g200);box-shadow:var(--sm)}
-.uc.ed{border-color:var(--b400);box-shadow:0 0 0 3px rgba(59,130,246,.08)}
-.uct{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.ucl{display:flex;align-items:center;gap:12px}
-.ucav{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;font-weight:700;flex-shrink:0}
-.aav{background:linear-gradient(135deg,var(--a400),var(--o500))}
-.mav{background:linear-gradient(135deg,var(--b400),var(--i500))}
-.ucn{font-size:15px;font-weight:600;color:var(--g900)}
-.ucm{display:flex;align-items:center;gap:8px;margin-top:3px}
-.ucun{font-size:12px;color:var(--g400);font-family:"JetBrains Mono",monospace}
-.rb{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px}
-.ra{background:var(--a50);color:var(--a700)}
-.rm{background:var(--b50);color:var(--b600)}
-.uca{display:flex;align-items:center;gap:2px}
-.ucb{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--g400);transition:var(--tr)}
-.ucb.ec:hover{background:var(--b50);color:var(--b600)}
-.ucb.dc:hover{background:var(--r50);color:var(--r500)}
-.ucb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.pt{margin-top:14px;border:1px solid var(--g100);border-radius:10px;overflow:hidden}
-.pth{display:grid;grid-template-columns:1fr 60px 60px;background:var(--g50);padding:6px 12px;font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em;gap:4px}
-.pth span:not(:first-child){text-align:center}
-.pr{display:grid;grid-template-columns:1fr 60px 60px;padding:8px 12px;border-top:1px solid var(--g100);align-items:center;gap:4px}
-.pdn{font-size:12.5px;color:var(--g700);font-weight:500;display:flex;align-items:center;gap:6px}
-.pc{display:flex;justify-content:center}
-.pd{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.pd.og{background:var(--gr100)}.pd.ot{background:var(--t100)}.pd.of{background:var(--g100)}
-.pd svg{width:11px;height:11px;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.pd.og svg{stroke:var(--gr700)}.pd.ot svg{stroke:var(--t600)}.pd.of svg{stroke:var(--g300)}
-.ucp{display:flex;align-items:center;gap:6px;margin-top:10px}
-.ucp span:first-child{font-size:11.5px;color:var(--g400)}
-.ucpv{font-size:12px;color:var(--g600);font-family:"JetBrains Mono",monospace}
-.uce{color:var(--g400);display:flex;align-items:center}
-.uce:hover{color:var(--g700)}
-.uce svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.emp{text-align:center;padding:48px 20px;background:var(--w);border-radius:var(--rx);border:1px solid var(--g100)}
-.fp{background:var(--w);border:1.5px solid var(--g100);border-radius:var(--rx);padding:22px;box-shadow:var(--ss);position:sticky;top:16px}
-.fph{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.fph h3{font-size:16px;font-weight:700;color:var(--g900)}
-.clb{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--g400)}
-.clb:hover{background:var(--g100);color:var(--g700)}
-.clb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.fg{margin-bottom:14px}
-.fl{display:block;font-size:12.5px;font-weight:600;color:var(--g700);margin-bottom:5px}
-.fi{width:100%;padding:10px 12px;border:1.5px solid var(--g200);border-radius:10px;font-size:13.5px;color:var(--g900);background:var(--g50);transition:var(--tr)}
-.fi:focus{border-color:var(--b400);background:var(--w);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
-.fi::placeholder{color:var(--g400)}
-.rt{display:flex;gap:8px}
-.ro{flex:1;padding:9px 6px;border-radius:10px;border:1.5px solid var(--g200);background:var(--g50);font-size:12.5px;font-weight:600;color:var(--g500);transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px}
-.ro svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.ro.am{background:var(--b50);border-color:var(--b400);color:var(--b600)}
-.ro.aa{background:var(--a50);border-color:var(--a400);color:var(--a700)}
-.dpt{border:1.5px solid var(--g100);border-radius:10px;overflow:hidden}
-.dpth{display:grid;grid-template-columns:1fr 72px 72px;background:var(--g50);padding:7px 12px;font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em;gap:4px}
-.dpth span:not(:first-child){text-align:center}
-.dptr{display:grid;grid-template-columns:1fr 72px 72px;padding:9px 12px;border-top:1px solid var(--g100);align-items:center;gap:4px}
-.dptn{font-size:12.5px;color:var(--g700);font-weight:500;display:flex;align-items:center;gap:6px}
-.dptc{display:flex;justify-content:center}
-.tb{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1.5px solid;transition:all .15s;cursor:pointer}
-.tb.von{background:var(--a50);border-color:var(--a400);color:var(--a700)}
-.tb.vof{background:var(--g50);border-color:var(--g200);color:var(--g300)}
-.tb.eon{background:var(--t50);border-color:var(--t100);color:var(--t600)}
-.tb.eof{background:var(--g50);border-color:var(--g200);color:var(--g300)}
-.tb svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.qar{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:6px 12px;border-bottom:1px solid var(--g100)}
-.ql{font-size:11px;font-weight:600;cursor:pointer;padding:3px 6px;border-radius:5px;transition:var(--tr)}
-.ql.v{color:var(--a700);background:var(--a50)}.ql.v:hover{background:var(--a100)}
-.ql.e{color:var(--t600);background:var(--t50)}.ql.e:hover{background:var(--t100)}
-.ql.c{color:var(--g500);background:var(--g100)}.ql.c:hover{background:var(--g200)}
-.leg{display:flex;gap:12px;padding:6px 12px;background:var(--g50);border-top:1px solid var(--g100);font-size:10.5px;color:var(--g500)}
-.an{background:var(--a50);border:1px solid var(--a100);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--a700);line-height:1.5}
-.fe{background:var(--r50);border:1px solid var(--r200);color:var(--r600);border-radius:8px;padding:8px 12px;font-size:12.5px}
-.svb{width:100%;padding:11px;border-radius:10px;background:linear-gradient(135deg,var(--b500),var(--i600));color:white;font-size:13.5px;font-weight:600;box-shadow:0 4px 12px rgba(99,102,241,.3);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:4px}
-.svb:hover{box-shadow:0 6px 18px rgba(99,102,241,.4);transform:translateY(-1px)}
-.svb svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.fh{text-align:center;padding:40px 16px;color:var(--g400);font-size:13px;background:var(--w);border:1.5px solid var(--g100);border-radius:var(--rx)}
-.syb{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:var(--gr50);color:var(--gr700);border:1px solid var(--gr100)}
-.syb.sy{background:var(--b50);color:var(--b600);border-color:var(--b100)}
-.syb.er{background:var(--r50);color:var(--r600);border-color:var(--r200)}
-.setw{padding:28px;max-width:900px}
-.setw h1{font-size:22px;font-weight:700;margin-bottom:4px}
-.setw > p{font-size:13px;color:var(--g400);margin-bottom:24px}
-.setc{background:var(--w);border:1px solid var(--g100);border-radius:var(--rx);padding:22px;margin-bottom:16px;box-shadow:var(--ss)}
-.setc h2{font-size:15px;font-weight:700;color:var(--g800);display:flex;align-items:center;gap:8px;margin-bottom:16px}
-.setc h2 svg{width:17px;height:17px;stroke:var(--b500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.dlr{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--g50);border-radius:10px;margin-bottom:8px}
-.dln{font-size:13px;font-weight:600;color:var(--g800);margin-bottom:2px}
-.dlu{font-size:11px;color:var(--g400);font-family:"JetBrains Mono",monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px}
-.dlo{font-size:11.5px;font-weight:600;color:var(--b600);display:flex;align-items:center;gap:4px;padding:6px 10px;border-radius:7px;transition:var(--tr);flex-shrink:0}
-.dlo:hover{background:var(--b50)}
-.dlo svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.sc{background:var(--g50);border-radius:10px;padding:14px}
-.scl{font-size:10px;font-weight:700;color:var(--g400);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.scv{font-size:13px;font-weight:600;color:var(--g800)}
-.hn{background:var(--b50);border:1px solid var(--b100);border-radius:10px;padding:14px;margin-top:16px}
-.hn h3{font-size:13px;font-weight:700;color:#1e40af;margin-bottom:8px}
-.hn ul{list-style:none;display:flex;flex-direction:column;gap:5px}
-.hn li{font-size:12px;color:#1d4ed8;display:flex;gap:6px}
-@media(max-width:900px){.umg{grid-template-columns:1fr}}
-@media(max-width:768px){#sb{display:none}.mobbar{display:flex}.hw,.umw,.setw{padding:16px 16px 40px}.sg{grid-template-columns:1fr}}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:hidden}
+
+/* ===== SPLASH ===== */
+#splash{position:fixed;inset:0;z-index:99999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s}
+#splash.hide{opacity:0;pointer-events:none}
+.sp-icon{width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;margin-bottom:20px;animation:spPop .6s cubic-bezier(.34,1.56,.64,1) both;box-shadow:0 8px 30px rgba(37,99,235,.25)}
+@keyframes spPop{from{opacity:0;transform:scale(.3) rotate(-20deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+.sp-icon svg{width:36px;height:36px}
+.sp-t{font-size:20px;font-weight:800;color:#1e293b;animation:spFade .4s .3s both}
+.sp-s{font-size:11px;color:#94a3b8;letter-spacing:3px;text-transform:uppercase;margin-top:4px;animation:spFade .4s .5s both}
+@keyframes spFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sp-bar{width:160px;height:3px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin-top:28px;animation:spFade .3s .6s both}
+.sp-bar-fill{height:100%;width:0;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:3px;animation:spGrow 1.8s .8s ease forwards}
+@keyframes spGrow{to{width:100%}}
+
+/* ===== LOGIN ===== */
+#loginScreen{position:fixed;inset:0;z-index:9000;display:none;background:#f4f6fa}
+#loginScreen.show{display:flex}
+.login-wrap{display:flex;width:100%;min-height:100vh}
+.login-left{flex:1;background:linear-gradient(135deg,#2563eb,#4f46e5,#7c3aed);display:none;flex-direction:column;justify-content:center;align-items:center;padding:60px;position:relative;overflow:hidden}
+@media(min-width:768px){.login-left{display:flex}}
+.login-left::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23fff' fill-opacity='.08'/%3E%3C/svg%3E");animation:patDrift 40s linear infinite}
+@keyframes patDrift{to{background-position:600px 600px}}
+.ll-orb{position:absolute;border-radius:50%;background:rgba(255,255,255,.06);animation:orbDrift 20s ease-in-out infinite}
+.ll-orb:nth-child(1){width:300px;height:300px;top:-80px;left:-80px;animation-duration:25s}
+.ll-orb:nth-child(2){width:200px;height:200px;bottom:-60px;right:-40px;animation-duration:18s;animation-delay:3s}
+@keyframes orbDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+.ll-logo{width:72px;height:72px;background:rgba(255,255,255,.15);border-radius:20px;display:flex;align-items:center;justify-content:center;margin-bottom:28px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);position:relative;z-index:1}
+.ll-logo svg{width:36px;height:36px}
+.ll-title{font-size:28px;font-weight:900;color:#fff;text-align:center;position:relative;z-index:1}
+.ll-sub{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:3px;text-transform:uppercase;margin-top:6px;position:relative;z-index:1}
+.ll-features{margin-top:40px;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+.ll-feat{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.6);font-size:13px;font-weight:500}
+.ll-feat span{width:32px;height:32px;background:rgba(255,255,255,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+
+.login-right{flex:1;display:flex;align-items:center;justify-content:center;padding:30px;background:#f4f6fa}
+.login-card{width:100%;max-width:400px}
+.lc-head{text-align:center;margin-bottom:28px}
+.lc-head h1{font-size:22px;font-weight:800;color:#1e293b}
+.lc-head p{font-size:13px;color:#94a3b8;margin-top:4px}
+.lc-group{margin-bottom:16px}
+.lc-group label{display:block;font-size:11px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.lc-input{width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;font-size:14px;color:#1e293b;outline:none;transition:border .2s;background:#fff;font-family:inherit}
+.lc-input:focus{border-color:#2563eb}
+.lc-btn{width:100%;padding:14px;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;transition:transform .15s;font-family:inherit;margin-top:4px}
+.lc-btn:hover{transform:translateY(-1px)}
+.lc-btn:active{transform:scale(.98)}
+.lc-err{display:none;padding:10px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;color:#dc2626;font-size:12px;margin-bottom:14px;font-weight:600}
+.lc-err.show{display:block}
+.lc-foot{text-align:center;margin-top:20px;font-size:11px;color:#94a3b8}
+.lc-foot b{color:#2563eb}
+
+/* ===== MAIN APP ===== */
+#mainApp{display:none}
+
+/* Sidebar */
+.sidebar{position:fixed;left:0;top:0;width:260px;height:100%;background:#fff;z-index:500;overflow-y:auto;border-right:1px solid #e2e8f0;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column}
+.sidebar.open{transform:translateX(0)}
+@media(min-width:1024px){.sidebar{transform:translateX(0)!important}}
+.sb-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:490}
+.sb-ov.show{display:block}
+
+.sb-head{padding:18px 20px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:12px}
+.sb-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-logo svg{width:18px;height:18px}
+.sb-brand{font-size:13px;font-weight:800;color:#1e293b;line-height:1.2}
+.sb-brand small{font-size:9px;color:#94a3b8;font-weight:600;display:block;letter-spacing:1px;text-transform:uppercase}
+
+.sb-user{padding:16px 20px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:10px}
+.sb-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.sb-info h4{font-size:13px;font-weight:700;color:#1e293b}
+.sb-info p{font-size:10px;color:#94a3b8}
+
+.sb-nav{flex:1;padding:8px 0}
+.sb-lbl{padding:10px 20px 4px;font-size:9px;font-weight:800;color:#cbd5e1;text-transform:uppercase;letter-spacing:1.5px}
+.nav-i{padding:9px 20px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:500;color:#64748b;transition:all .2s;border-left:3px solid transparent}
+.nav-i:hover{background:#f8fafc;color:#1e293b}
+.nav-i.act{background:#eff6ff;color:#2563eb;font-weight:700;border-left-color:#2563eb}
+.nav-i .ni{width:28px;height:28px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.nav-i.act .ni{background:#dbeafe}
+.nav-i .nb{margin-left:auto;padding:2px 8px;border-radius:8px;font-size:9px;font-weight:700;background:#fef3c7;color:#d97706}
+
+.sb-foot{padding:14px 20px;border-top:1px solid #f1f5f9}
+.sb-foot a{font-size:11px;color:#94a3b8;cursor:pointer;display:flex;align-items:center;gap:6px;padding:4px 0;text-decoration:none;transition:color .2s}
+.sb-foot a:hover{color:#dc2626}
+
+/* Main area */
+.main-area{margin-left:0;min-height:100vh}
+@media(min-width:1024px){.main-area{margin-left:260px}}
+
+.topbar{background:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:400}
+.tb-left{display:flex;align-items:center;gap:10px}
+.tb-menu{width:36px;height:36px;border-radius:10px;background:#f1f5f9;border:none;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
+@media(min-width:1024px){.tb-menu{display:none}}
+.tb-left h2{font-size:15px;font-weight:800}
+.tb-left p{font-size:10px;color:#94a3b8}
+.tb-av{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:transform .2s}
+.tb-av:hover{transform:scale(1.08)}
+
+.content{padding:20px}
+@media(min-width:1024px){.content{padding:24px}}
+
+/* ===== HOME CARDS ===== */
+.dcard{background:#fff;border-radius:16px;padding:22px;border:1px solid #e2e8f0;transition:all .25s;cursor:pointer;position:relative;overflow:hidden}
+.dcard:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.dcard .dbar{position:absolute;top:0;left:0;right:0;height:3px}
+.dcard.c1 .dbar{background:linear-gradient(90deg,#2563eb,#3b82f6)}
+.dcard.c2 .dbar{background:linear-gradient(90deg,#059669,#10b981)}
+.dcard.c3 .dbar{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.dcard.c4 .dbar{background:linear-gradient(90deg,#7c3aed,#8b5cf6)}
+
+/* ===== FULL SCREEN DASHBOARD VIEW ===== */
+#dashView{position:fixed;inset:0;z-index:8000;background:#fff;display:none;flex-direction:column}
+#dashView.show{display:flex}
+.dv-bar{height:44px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0}
+.dv-back{padding:6px 14px;border-radius:8px;border:1px solid #e2e8f0;background:#f8fafc;font-size:12px;font-weight:700;color:#64748b;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s;font-family:inherit}
+.dv-back:hover{background:#eff6ff;color:#2563eb;border-color:#bfdbfe}
+.dv-title{font-size:13px;font-weight:700;color:#1e293b;flex:1}
+.dv-newtab{padding:6px 12px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;font-size:11px;font-weight:600;color:#64748b;cursor:pointer;text-decoration:none;transition:all .15s;font-family:inherit}
+.dv-newtab:hover{background:#f0fdf4;color:#059669;border-color:#bbf7d0}
+.dv-edit-badge{padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700}
+.dv-frame-wrap{position:relative;flex:1;overflow:hidden}
+.dv-frame{border:none;width:100%;height:100%}
+/* View-only overlay — blocks ALL clicks, allows scroll */
+.dv-overlay{position:absolute;inset:0;z-index:10;display:none;cursor:default}
+.dv-overlay.on{display:block}
+.dv-overlay-tag{position:absolute;bottom:16px;right:16px;background:rgba(37,99,235,.92);color:#fff;padding:8px 18px;border-radius:10px;font-size:12px;font-weight:800;letter-spacing:.5px;box-shadow:0 4px 16px rgba(37,99,235,.3);display:flex;align-items:center;gap:6px;z-index:11;user-select:none;pointer-events:none}
+
+/* ===== MODAL ===== */
+.mo-bg{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:9500;display:none;align-items:center;justify-content:center;padding:16px}
+.mo-bg.show{display:flex}
+.mo-box{background:#fff;border-radius:20px;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.12);animation:moPop .3s both}
+@keyframes moPop{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);z-index:99999;padding:12px 24px;border-radius:12px;font-size:13px;font-weight:700;color:#fff;transition:transform .3s ease;box-shadow:0 6px 20px rgba(0,0,0,.15);font-family:inherit}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.ok{background:#059669}.toast.err{background:#dc2626}.toast.inf{background:#2563eb}
+
+/* ===== USER TABLE ===== */
+.utbl{width:100%;border-collapse:collapse}
+.utbl th{background:#f8fafc;padding:10px 12px;text-align:left;font-size:10px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #e2e8f0}
+.utbl td{padding:10px 12px;font-size:12px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+.utbl tr:hover td{background:#f8fafc}
+
+.pchip{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:8px;font-size:9px;font-weight:700;margin:1px;background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+.pchip.edit{background:#fef3c7;color:#d97706;border-color:#fcd34d}
+.pchip .rx{cursor:pointer;color:#dc2626;margin-left:2px;font-size:10px}
+
+.tgl{position:relative;width:36px;height:20px;cursor:pointer}
+.tgl input{opacity:0;width:0;height:0}
+.tgl span{position:absolute;inset:0;background:#cbd5e1;border-radius:20px;transition:.25s}
+.tgl span::before{content:'';position:absolute;width:16px;height:16px;left:2px;bottom:2px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.tgl input:checked+span{background:#059669}
+.tgl input:checked+span::before{transform:translateX(16px)}
+
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#ddd;border-radius:5px}
+.fade-in{animation:fadeIn .4s both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
-<div id="ls"><div class="spin"></div><p id="ltxt">Connecting to cloud...</p></div>
-<div id="login">
-  <div class="blob b1"></div><div class="blob b2"></div>
-  <div class="lcard">
-    <div class="llogo"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <div class="ltit">Vishal Technopower</div>
-    <div class="lsub">Master Dashboard Portal</div>
-    <label class="flbl">Username</label>
-    <div class="fwr"><input class="fin" id="lu" type="text" placeholder="Enter username" autocomplete="username"/></div>
-    <label class="flbl">Password</label>
-    <div class="fwr">
-      <input class="fin" id="lp" type="password" placeholder="Enter password" autocomplete="current-password" style="padding-right:44px"/>
-      <button class="eyeb" id="eyeb"><svg id="eyeico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sp-icon"><svg viewBox="0 0 64 64" fill="none"><path d="M20 32l8 8 16-16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="sp-t">Vishal Technopower</div>
+  <div class="sp-s">Master Dashboard</div>
+  <div class="sp-bar"><div class="sp-bar-fill"></div></div>
+</div>
+
+<!-- GITHUB TOKEN SETUP (one-time) -->
+<div id="tokenScreen" style="position:fixed;inset:0;background:linear-gradient(135deg,#e0e7ff,#f0f9ff);display:none;align-items:center;justify-content:center;z-index:99998;padding:20px">
+  <div style="background:#fff;border-radius:20px;padding:36px;width:100%;max-width:420px;box-shadow:0 20px 40px rgba(0,0,0,.12)">
+    <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#4f46e5);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
     </div>
-    <div class="remr"><input class="remc" type="checkbox" id="rem"/><label class="reml" for="rem">Remember me on this device</label></div>
-    <button class="lbtn" id="lbtn">
-      <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Sign In
-    </button>
-    <div class="lerr" id="lerr" style="display:none"><span>&#9888;</span><span id="lerrmsg"></span></div>
+    <h2 style="text-align:center;font-size:18px;font-weight:800;color:#1e293b;margin-bottom:6px">One-time Setup</h2>
+    <p style="text-align:center;font-size:12px;color:#94a3b8;margin-bottom:20px">Enter your GitHub token to enable cloud sync across all devices</p>
+    <label style="display:block;font-size:11px;font-weight:700;color:#64748b;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px">GitHub Token (ghp_...)</label>
+    <input id="tkInput" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:100%;padding:12px 14px;border:2px solid #e2e8f0;border-radius:12px;font-size:13px;font-family:monospace;outline:none;margin-bottom:14px;color:#1e293b;background:#f8fafc" onkeydown="if(event.key==='Enter')saveToken()">
+    <button onclick="saveToken()" style="width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Save & Continue →</button>
+    <p style="text-align:center;font-size:10px;color:#cbd5e1;margin-top:10px">Stored only in this browser · Never shared externally</p>
   </div>
 </div>
 
-<!-- Token Setup Screen -->
-<div id="tokenscreen" style="position:fixed;inset:0;background:linear-gradient(135deg,#e0e7ff,#f0f9ff);display:none;align-items:center;justify-content:center;z-index:200;padding:20px">
-  <div style="background:white;border-radius:24px;padding:36px;width:100%;max-width:440px;box-shadow:0 20px 25px -5px rgba(0,0,0,.1)">
-    <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#3b82f6,#4f46e5);display:flex;align-items:center;justify-content:center;margin:0 auto 18px">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-    </div>
-    <h2 style="text-align:center;font-size:20px;font-weight:700;color:#0f172a;margin-bottom:6px">One-time Setup</h2>
-    <p style="text-align:center;font-size:13px;color:#94a3b8;margin-bottom:24px">Enter your GitHub token once — it will be saved securely in this browser only</p>
-    <label style="display:block;font-size:13px;font-weight:600;color:#334155;margin-bottom:6px">GitHub Token (ghp_...)</label>
-    <input id="tokeninput" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width:100%;padding:12px 16px;border:1.5px solid #e2e8f0;border-radius:12px;font-size:14px;color:#0f172a;background:#f8fafc;font-family:monospace;outline:none;margin-bottom:16px"/>
-    <button id="tokensavebtn" style="width:100%;padding:13px;border-radius:12px;background:linear-gradient(135deg,#3b82f6,#4f46e5);color:white;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:inherit">Save & Continue</button>
-    <p style="text-align:center;font-size:11px;color:#94a3b8;margin-top:12px">Token is stored only in your browser — never sent anywhere except GitHub API</p>
-  </div>
-</div>
-<div id="app">
-  <aside id="sb">
-    <div class="sbh"><div class="sblogo">V</div><div class="sbbr"><h1>Vishal Technopower</h1><p>Master Dashboard</p></div></div>
-    <button class="sbtog" id="sbtog"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-    <nav id="snav"></nav>
-    <div class="sbf">
-      <div class="uchip"><div class="uav" id="sbav"></div><div class="uinf"><div class="uname" id="sbname"></div><div class="urole" id="sbrole"></div></div></div>
-      <button class="lgout" id="lgout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Logout</span></button>
-    </div>
-  </aside>
-  <div class="drov" id="drov"></div>
-  <div class="drawer" id="drawer">
-    <div class="sbh" style="border-bottom:1px solid var(--g100)"><div class="sblogo">V</div><div class="sbbr"><h1>Vishal Technopower</h1><p>Master Dashboard</p></div></div>
-    <nav id="dnav" style="flex:1;overflow-y:auto;padding:12px 8px"></nav>
-    <div class="sbf">
-      <div class="uchip"><div class="uav" id="drav"></div><div class="uinf"><div class="uname" id="drname"></div><div class="urole" id="drrole"></div></div></div>
-      <button class="lgout" id="dlgout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Logout</span></button>
-    </div>
-  </div>
-  <div id="main">
-    <div class="mobbar">
-      <button id="mobmenu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <span class="mobt">VTP Dashboard</span>
-      <div class="mobav" id="mobav"></div>
-    </div>
-    <div class="page" id="page-home" style="overflow-y:auto">
-      <div class="hw">
-        <div class="hgr" id="hgr"></div>
-        <div class="hsu">Welcome to your Master Dashboard. Access all your portals from one place.</div>
-        <div class="str" id="str"></div>
-        <div class="seti">Your Dashboards</div>
-        <div class="dg" id="dg"></div>
+<!-- Sync Banner -->
+<div id="syncBanner" style="position:fixed;bottom:24px;right:24px;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:99990;display:none;align-items:center;gap:8px;font-family:inherit;transition:opacity .4s"></div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-left">
+      <div class="ll-orb"></div>
+      <div class="ll-orb"></div>
+      <div class="ll-logo"><svg viewBox="0 0 64 64" fill="none"><path d="M20 32l8 8 16-16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="ll-title">Vishal Technopower</div>
+      <div class="ll-sub">Master Control Panel</div>
+      <div class="ll-features">
+        <div class="ll-feat"><span>📊</span> Account & Revenue Dashboard</div>
+        <div class="ll-feat"><span>📋</span> Leave Management System</div>
+        <div class="ll-feat"><span>💰</span> Expense Management</div>
+        <div class="ll-feat"><span>🏢</span> Vendor Payment System</div>
       </div>
     </div>
-    <div id="ifw">
-      <div class="iftb">
-        <div class="ifin">
-          <span class="ific" id="ific"></span>
-          <div><div class="ifti" id="ifti"></div><div class="ifde" id="ifde"></div></div>
-          <span class="vob" id="vob" style="display:none"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>View Only</span>
+    <div class="login-right">
+      <div class="login-card">
+        <div class="lc-head">
+          <h1>Sign In</h1>
+          <p>Access your dashboards</p>
         </div>
-        <div style="display:flex;align-items:center;gap:4px">
-          <button class="icb" id="refbtn"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
-          <a class="icb" id="extbtn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-          <button class="icb" id="fsbtn"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+        <div id="loginErr" class="lc-err"></div>
+        <div class="lc-group">
+          <label>Username</label>
+          <input id="inUser" type="text" class="lc-input" placeholder="Enter username" autocomplete="off">
         </div>
-      </div>
-      <div class="ifar">
-        <div class="ifldr" id="ifldr"><div class="spin"></div><p id="iflt">Loading...</p></div>
-        <div id="voo"></div>
-        <div class="vom" id="vom">View Only - Cannot interact with this dashboard</div>
-        <iframe id="dif" allow="clipboard-read; clipboard-write"></iframe>
-      </div>
-    </div>
-    <div class="page" id="page-users" style="overflow-y:auto">
-      <div class="umw">
-        <div class="umh">
-          <div class="umhi"><h1>User Management</h1><p>Changes sync across all devices. <span class="syb" id="syb">Synced</span></p></div>
-          <button class="addb" id="addbtn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Add New User</button>
+        <div class="lc-group">
+          <label>Password</label>
+          <input id="inPass" type="password" class="lc-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
         </div>
-        <div class="umg">
-          <div>
-            <div class="sw"><svg class="si" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input class="sin" id="usearch" placeholder="Search users..."/></div>
-            <div class="ucs" id="ucs"></div>
-          </div>
-          <div id="fpw"></div>
-        </div>
-      </div>
-    </div>
-    <div class="page" id="page-settings" style="overflow-y:auto">
-      <div class="setw">
-        <h1>Settings</h1><p>Dashboard configuration and system information.</p>
-        <div class="setc">
-          <h2><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Dashboard Links</h2>
-          <div id="setlinks"></div>
-        </div>
-        <div class="setc">
-          <h2><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>System Info</h2>
-          <div class="sg">
-            <div class="sc"><div class="scl">Application</div><div class="scv">VTP Master Dashboard</div></div>
-            <div class="sc"><div class="scl">Version</div><div class="scv">3.0 Cloud</div></div>
-            <div class="sc"><div class="scl">Dashboards</div><div class="scv" id="dcount"></div></div>
-            <div class="sc"><div class="scl">Storage</div><div class="scv">Pantry Cloud</div></div>
-          </div>
-          <div class="hn" style="margin-top:16px"><h3>Permissions Guide</h3><ul>
-            <li>Admin = full access to all dashboards + user management</li>
-            <li>View ON = User can see the dashboard (read-only)</li>
-            <li>Edit ON = User can fully interact (forms, buttons, data entry)</li>
-            <li>Users sync across ALL devices automatically</li>
-          </ul></div>
-        </div>
-      </div>
-    </div>
-    <div id="page-denied" style="display:none;flex:1;align-items:center;justify-content:center;padding:32px">
-      <div style="text-align:center">
-        <p style="font-size:52px;margin-bottom:14px">&#128274;</p>
-        <h2 style="font-size:20px;font-weight:700;color:var(--g800);margin-bottom:6px">Access Denied</h2>
-        <p style="font-size:14px;color:var(--g400);margin-bottom:20px">You do not have permission to view this.</p>
-        <button id="denidbtn" style="display:inline-flex;align-items:center;padding:10px 20px;background:var(--b500);color:white;border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:inherit">Go Home</button>
+        <button class="lc-btn" onclick="doLogin()">Sign In →</button>
+        <div class="lc-foot">Default: <b>admin</b> / <b>admin123</b></div>
       </div>
     </div>
   </div>
 </div>
-<div class="fsw" id="fsw">
-  <div class="fsb">
-    <div class="fst"><span id="fsic"></span><span id="fstx"></span></div>
-    <div style="display:flex;align-items:center;gap:4px">
-      <button class="icb" id="fsref"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></button>
-      <a class="icb" id="fsext" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-      <button class="icb" id="fscls"><svg viewBox="0 0 24 24"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 0 2-2h3M3 16h3a2 2 0 0 0 2 2v3"/></svg></button>
+
+<!-- MAIN APP -->
+<div id="mainApp">
+  <div class="sb-ov" id="sbOv" onclick="togSb()"></div>
+  <div class="sidebar" id="sb">
+    <div class="sb-head">
+      <div class="sb-logo"><svg viewBox="0 0 64 64" fill="none"><path d="M20 32l8 8 16-16" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg></div>
+      <div class="sb-brand">Vishal Technopower<small>Master Panel</small></div>
+    </div>
+    <div class="sb-user">
+      <div class="sb-av" id="sbAv">A</div>
+      <div class="sb-info"><h4 id="sbNm">Admin</h4><p id="sbRl">Administrator</p></div>
+    </div>
+    <div style="padding:4px 20px 2px;display:flex;align-items:center;gap:5px">
+      <span id="syncDot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#10b981;flex-shrink:0"></span>
+      <span id="syncTxt" style="font-size:10px;color:#94a3b8">Synced</span>
+    </div>
+    <div class="sb-nav" id="navBox">
+      <div class="sb-lbl">Menu</div>
+      <div class="nav-i act" onclick="goHome()" data-nav="home"><div class="ni">🏠</div>Home</div>
+      <div class="sb-lbl">Dashboards</div>
+      <div class="nav-i" onclick="openDash('account_dashboard')" data-nav="account_dashboard" data-perm="account_dashboard"><div class="ni">📊</div>Account Dashboard</div>
+      <div class="nav-i" onclick="openDash('leave_management')" data-nav="leave_management" data-perm="leave_management"><div class="ni">📋</div>Leave Management</div>
+      <div class="nav-i" onclick="openDash('expense_management')" data-nav="expense_management" data-perm="expense_management"><div class="ni">💰</div>Expense Management</div>
+      <div class="nav-i" onclick="openDash('vendor_payment')" data-nav="vendor_payment" data-perm="vendor_payment"><div class="ni">🏢</div>Vendor Payment</div>
+      <div class="sb-lbl">System</div>
+      <div class="nav-i" onclick="goAdmin()" data-nav="admin" data-perm="admin_panel"><div class="ni">⚙️</div>Admin Panel<span class="nb">Admin</span></div>
+    </div>
+    <div class="sb-foot">
+      <a onclick="doLogout()">🚪 Sign Out</a>
+      <a onclick="resetToken()" style="margin-top:2px;color:#cbd5e1;font-size:10px">🔑 Reset GitHub Token</a>
     </div>
   </div>
-  <iframe id="fsif" allow="clipboard-read; clipboard-write" style="flex:1;border:none"></iframe>
+
+  <div class="main-area" id="mainArea">
+    <div class="topbar" id="topbar">
+      <div class="tb-left">
+        <button class="tb-menu" onclick="togSb()">☰</button>
+        <div><h2 id="pgT">Dashboard</h2><p id="pgS">Home</p></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:11px;color:#94a3b8" id="topDt"></span>
+        <div class="tb-av" id="topAv" onclick="doLogout()" title="Sign Out">A</div>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
 </div>
+
+<!-- FULL SCREEN DASHBOARD VIEW -->
+<div id="dashView">
+  <div class="dv-bar">
+    <button class="dv-back" onclick="closeDash()">← Home</button>
+    <div class="dv-title" id="dvTitle"></div>
+    <span class="dv-edit-badge" id="dvBadge"></span>
+    <a class="dv-newtab" id="dvNewTab" href="#" target="_blank">↗ New Tab</a>
+  </div>
+
+  <!-- View-only search + filter toolbar -->
+  <div id="voToolbar" style="display:none;align-items:center;gap:8px;padding:7px 12px;background:#fffbeb;border-bottom:1px solid #fde68a;flex-shrink:0">
+    <span style="font-size:12px;font-weight:800;color:#92400e;white-space:nowrap">🔍 Search:</span>
+    <input id="voSearch" placeholder="Type to search in dashboard..." oninput="doVoSearch(this.value)"
+      style="flex:1;padding:6px 10px;border:1.5px solid #fcd34d;border-radius:8px;font-size:12px;font-family:inherit;outline:none;color:#1e293b;background:#fff">
+    <select id="voFilter" onchange="doVoFilter(this.value)"
+      style="padding:6px 10px;border:1.5px solid #fcd34d;border-radius:8px;font-size:11px;font-weight:700;background:#fff;color:#92400e;font-family:inherit;outline:none;cursor:pointer">
+      <option value="">All Sections</option>
+    </select>
+    <button id="voClear" onclick="clearVoSearch()" style="display:none;padding:5px 10px;border-radius:7px;border:none;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">✕ Clear</button>
+  </div>
+
+  <!-- Quick section tabs (view-only) -->
+  <div id="voTabs" style="display:none;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;flex-shrink:0"></div>
+
+  <div class="dv-frame-wrap">
+    <div class="dv-overlay" id="dvOverlay">
+      <div class="dv-overlay-tag">🔒 VIEW ONLY — Editing Blocked</div>
+    </div>
+    <iframe class="dv-frame" id="dvFrame" sandbox="allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation allow-storage-access-by-user-activation"></iframe>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="mo-bg" id="moBg"><div class="mo-box" id="moBox"></div></div>
+
+<!-- TOAST -->
+<div class="toast" id="toastEl"></div>
+
 <script>
-var GH_OWNER='systemhaibhai03-cloud';
-var GH_REPO='systemhaibhai03-cloud.github.io';
-var GH_FILE='users.json';
-var GH_TOKEN=localStorage.getItem('vtp_ghtoken')||'';
-var GH_API='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_FILE;
-var DASH=[
-  {id:'account-dashboard',name:'Account Dashboard',ico:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Management Portal — Outstanding, Bills, BG, Deposits, Invoices, Stock',grad:'linear-gradient(135deg,#3b82f6,#06b6d4)'},
-  {id:'leave-management',name:'Leave Management',ico:'📅',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Employee Leave Management — Apply, Track and Approve Leaves',grad:'linear-gradient(135deg,#22c55e,#10b981)'},
-  {id:'expense-management',name:'Expense Management',ico:'💰',url:'https://script.google.com/a/macros/vishaltechnopower.com/s/AKfycbw_nWSnFVvG2wdCMLpyOzVUR_npJ3PiPKDQpGDZpPFNSUgAW_XoNWwY4jzAJwowBlJElw/exec',desc:'Expense Tracking and Approval — Submit and manage expenses',grad:'linear-gradient(135deg,#f97316,#f59e0b)'},
-  {id:'vendor-payment',name:'Vendor Payment',ico:'🏦',url:'https://vishaltechnopowers.is-a.dev/venderdatabase/',desc:'Vendor Payment Management — Add vendors, manage payments',grad:'linear-gradient(135deg,#a855f7,#ec4899)'}
+// ===== CONFIG =====
+const DASH={
+  account_dashboard:{name:'Account Dashboard',icon:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Outstanding, Bills, BG, Deposits, Invoices, Stock, LD/SD Aging, Revenue',clr:'c1',
+    tabs:['Dashboard','Outstanding','Bill Details','BG Report','Deposits','Invoices','Stock Sheet','LD Aging','Pending Bills','SD Aging','Revenue','Pantry Sync']},
+  leave_management:{name:'Leave Management',icon:'📋',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Apply Leave, HOD Approval, Manager Approval, History',clr:'c2',
+    tabs:['Apply Leave','My Leaves','Pending Approvals','Leave History']},
+  expense_management:{name:'Expense Management',icon:'💰',url:'https://script.google.com/a/macros/vishaltechnopower.com/s/AKfycbw_nWSnFVvG2wdCMLpyOzVUR_npJ3PiPKDQpGDZpPFNSUgAW_XoNWwY4jzAJwowBlJElw/exec',desc:'Submit Expenses, Approvals, Reports, Payments',clr:'c3',
+    tabs:['Submit Expense','My Expenses','Approvals','Reports']},
+  vendor_payment:{name:'Vendor Payment',icon:'🏢',url:'https://vishaltechnopowers.is-a.dev/venderdatabase/',desc:'Vendor Database, Payment Entries, Bank Details',clr:'c4',
+    tabs:['Vendors','Payments','Bank Details']}
+};
+const DKEYS=['account_dashboard','leave_management','expense_management','vendor_payment'];
+const ALL_P=['account_dashboard','leave_management','expense_management','vendor_payment','admin_panel'];
+const P_LBL={account_dashboard:'📊 Account',leave_management:'📋 Leave',expense_management:'💰 Expense',vendor_payment:'🏢 Vendor',admin_panel:'⚙️ Admin'};
+
+const DEFAULT_USERS=[
+  {id:1,username:'admin',password:'admin123',name:'Administrator',role:'Admin',perms:{account_dashboard:'edit',leave_management:'edit',expense_management:'edit',vendor_payment:'edit',admin_panel:'edit'},active:true},
+  {id:2,username:'manager',password:'manager123',name:'Project Manager',role:'Project Manager',perms:{account_dashboard:'edit',leave_management:'view',expense_management:'view'},active:true},
+  {id:3,username:'accounts',password:'accounts123',name:'Accounts Team',role:'Accounts',perms:{account_dashboard:'view',vendor_payment:'edit'},active:true}
 ];
-var DEFADMIN={id:'admin-001',username:'solar',password:'panel@902',displayName:'Admin',role:'admin',allowedDashboards:DASH.map(function(d){return{id:d.id,view:true,edit:true};}),createdAt:new Date().toISOString()};
-var allUsers=[],curUser=null,curDash=null,curPage='home',sbCol=false;
-var fs={editing:null,adding:false,dn:'',un:'',pw:'',role:'manager',dp:newDP()};
-var showPw={};
-function newDP(){return DASH.map(function(d){return{id:d.id,view:false,edit:false};});}
-function q(id){return document.getElementById(id);}
-function ini(n){return ((n||'U').charAt(0)).toUpperCase();}
-function greet(){var h=new Date().getHours();return h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';}
-function cView(u,id){if(u.role==='admin')return true;var p=(u.allowedDashboards||[]).find(function(x){return x.id===id;});return !!(p&&p.view);}
-function cEdit(u,id){if(u.role==='admin')return true;var p=(u.allowedDashboards||[]).find(function(x){return x.id===id;});return !!(p&&p.view&&p.edit);}
 
-async function fetchU(){
+let CU=null;
+let allUsers=[];
+let autoSyncTimer=null;
+let lastEtag='';
+
+// ===== GITHUB CONFIG =====
+const GH_OWNER='systemhaibhai03-cloud';
+const GH_REPO='systemhaibhai03-cloud.github.io';
+const GH_FILE='vtp_users_v2.json';
+const GH_API=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
+let GH_TOKEN=localStorage.getItem('vtp_ghtoken')||'';
+
+// ===== GITHUB SYNC =====
+async function ghFetch(useEtag=true){
   try{
-    var r=await fetch(GH_API,{
-      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
-    });
-    if(!r.ok){await pushU([DEFADMIN]);return[DEFADMIN];}
-    var d=await r.json();
-    var raw=atob(d.content.replace(/\n/g,''));
-    var parsed=JSON.parse(raw);
-    var us=parsed.users||[DEFADMIN];
-    var ai=us.findIndex(function(u){return u.id==='admin-001';});
-    if(ai>-1){us[ai].username='solar';us[ai].password='panel@902';}
-    else us.unshift(DEFADMIN);
-    return us;
-  }catch(e){console.warn('Fetch error:',e);return allUsers.length?allUsers:[DEFADMIN];}
+    const headers={'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'};
+    if(useEtag&&lastEtag) headers['If-None-Match']=lastEtag;
+    const r=await fetch(GH_API,{headers});
+    if(r.status===304) return null;
+    if(!r.ok){
+      if(r.status===404){await ghPush(DEFAULT_USERS);return[...DEFAULT_USERS];}
+      return null;
+    }
+    const etag=r.headers.get('ETag');if(etag) lastEtag=etag;
+    const d=await r.json();
+    return JSON.parse(atob(d.content.replace(/\n/g,''))).users||[...DEFAULT_USERS];
+  }catch(e){console.warn('[GH] fetch error',e);return null;}
 }
-async function pushU(us){
-  setSyb('sy');
+async function ghPush(users){
+  setSyncState('syncing');
   try{
-    var r1=await fetch(GH_API,{
-      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
-    });
-    var sha='';
-    if(r1.ok){var d1=await r1.json();sha=d1.sha;}
-    var newContent=JSON.stringify({users:us},null,2);
-    var encoded=btoa(unescape(encodeURIComponent(newContent)));
-    var body={message:'Update users',content:encoded};
+    const r1=await fetch(GH_API,{headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}});
+    let sha='';if(r1.ok){const d1=await r1.json();sha=d1.sha;}
+    const body={message:'Update users',content:btoa(unescape(encodeURIComponent(JSON.stringify({users},null,2))))};
     if(sha) body.sha=sha;
-    var r2=await fetch(GH_API,{
-      method:'PUT',
-      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:JSON.stringify(body)
-    });
-    if(!r2.ok){
-      var txt=await r2.text();
-      console.error('Push error:',r2.status,txt);
-      setSyb('er');
-      return;
-    }
-    allUsers=us;
-    setSyb('ok');
-  }catch(e){
-    setSyb('er');
-    console.error('Push error:',e);
-  }
+    const r2=await fetch(GH_API,{method:'PUT',headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!r2.ok){setSyncState('err');return false;}
+    allUsers=users;setSyncState('ok');return true;
+  }catch(e){setSyncState('err');return false;}
 }
-function setSyb(s){var b=q('syb');if(!b)return;if(s==='ok'){b.textContent='Synced';b.className='syb';}else if(s==='sy'){b.textContent='Syncing...';b.className='syb sy';}else{b.textContent='Sync Error';b.className='syb er';}}
-
-var RK='vtp_r3',SK='vtp_s3';
-function saveSes(uid,rem){if(rem){localStorage.setItem(RK,uid);sessionStorage.removeItem(SK);}else{sessionStorage.setItem(SK,uid);localStorage.removeItem(RK);}}
-function getUID(){return localStorage.getItem(RK)||sessionStorage.getItem(SK)||null;}
-function clearSes(){localStorage.removeItem(RK);sessionStorage.removeItem(SK);}
-
-function navigate(page){
-  curPage=page;
-  ['page-home','page-users','page-settings'].forEach(function(id){var el=q(id);if(el)el.classList.remove('on');});
-  q('ifw').classList.remove('on');
-  q('page-denied').style.display='none';
-  var d=DASH.find(function(x){return x.id===page;});
-  if(d){if(cView(curUser,d.id))loadDash(d);else q('page-denied').style.display='flex';}
-  else if(page==='home'){q('page-home').classList.add('on');}
-  else if(page==='admin-users'&&curUser.role==='admin'){q('page-users').classList.add('on');renderUL();}
-  else if(page==='admin-settings'&&curUser.role==='admin'){q('page-settings').classList.add('on');}
-  else{navigate('home');return;}
-  buildNav();closeDr();
+function setSyncState(s){
+  const dot=document.getElementById('syncDot'),txt=document.getElementById('syncTxt');
+  if(!dot)return;
+  dot.style.background=s==='syncing'?'#f59e0b':s==='err'?'#ef4444':'#10b981';
+  dot.style.animation=s==='syncing'?'spPop .8s infinite alternate':'none';
+  txt.textContent=s==='syncing'?'Syncing...':s==='err'?'Sync Error':'Synced';
 }
 
-function loadDash(d){
-  curDash=d;
-  q('ific').textContent=d.ico;q('ifti').textContent=d.name;q('ifde').textContent=d.desc;q('extbtn').href=d.url;
-  q('ifldr').style.display='flex';q('iflt').textContent='Loading '+d.name+'...';
-  var ce=cEdit(curUser,d.id);
-  var iframe=q('dif'),badge=q('vob');
-  if(ce){
-    iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation');
-  } else {
-    iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-top-navigation allow-forms');
-  }
-  badge.style.display=ce?'none':'inline-flex';
-  iframe.onload=function(){q('ifldr').style.display='none';};
-  iframe.src=d.url;q('ifw').classList.add('on');
+// ===== AUTO SYNC (30s) =====
+async function autoSyncTick(){
+  if(!CU) return;
+  const fresh=await ghFetch(true);
+  if(!fresh) return;
+  if(JSON.stringify(allUsers)===JSON.stringify(fresh)) return;
+  allUsers=fresh;
+  const me=allUsers.find(u=>u.id===CU.id);
+  if(!me){showSyncBanner('⚠️ Your account was removed. Logging out...','#dc2626');setTimeout(doLogout,2500);return;}
+  CU=me;localStorage.setItem('vtp_s3',JSON.stringify(me));
+  updNav();
+  const ini=me.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('sbAv').textContent=ini;
+  document.getElementById('sbNm').textContent=me.name;
+  document.getElementById('sbRl').textContent=me.role;
+  if(!document.getElementById('dashView').classList.contains('show')) renderHome();
+  showSyncBanner('🔄 Synced from another device','#2563eb');
+}
+function startAutoSync(){if(autoSyncTimer)clearInterval(autoSyncTimer);autoSyncTimer=setInterval(autoSyncTick,30000);}
+function stopAutoSync(){if(autoSyncTimer){clearInterval(autoSyncTimer);autoSyncTimer=null;}}
+function showSyncBanner(msg,bg){
+  const b=document.getElementById('syncBanner');
+  b.style.cssText=`position:fixed;bottom:24px;right:24px;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:99990;display:flex;align-items:center;gap:8px;font-family:inherit;background:${bg}`;
+  b.textContent=msg;
+  setTimeout(()=>{b.style.display='none';},3500);
 }
 
-var IHOME='<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>';
-var IUS='<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
-var ISET='<svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
-
-function makeNavBtn(page,icon,label,active){
-  var btn=document.createElement('button');
-  btn.className='nb'+(active?' act':'');
-  btn.innerHTML='<span class="nico">'+icon+'</span><span class="ntxt">'+label+'</span>';
-  btn.addEventListener('click',function(){navigate(page);});
-  return btn;
+// ===== TOKEN =====
+function saveToken(){
+  const t=document.getElementById('tkInput').value.trim();
+  if(!t||!t.startsWith('ghp_')){alert('Enter a valid token starting with ghp_');return;}
+  localStorage.setItem('vtp_ghtoken',t);GH_TOKEN=t;
+  document.getElementById('tokenScreen').style.display='none';
+  bootApp();
 }
-function buildNav(){
-  var allowed=DASH.filter(function(d){return cView(curUser,d.id);});
-  function makeNav(el){
-    el.innerHTML='';
-    el.appendChild(makeNavBtn('home',IHOME,'Home',curPage==='home'));
-    var lbl=document.createElement('div');lbl.className='nlbl';lbl.textContent='Dashboards';el.appendChild(lbl);
-    allowed.forEach(function(d){
-      var ce=cEdit(curUser,d.id);
-      var label=d.name+(ce?'':' 👁');
-      el.appendChild(makeNavBtn(d.id,d.ico,label,curPage===d.id));
-    });
-    if(curUser.role==='admin'){
-      var sep=document.createElement('div');sep.className='nsep';el.appendChild(sep);
-      var albl=document.createElement('div');albl.className='nlbl';albl.textContent='Admin';el.appendChild(albl);
-      el.appendChild(makeNavBtn('admin-users',IUS,'User Management',curPage==='admin-users'));
-      el.appendChild(makeNavBtn('admin-settings',ISET,'Settings',curPage==='admin-settings'));
-    }
-  }
-  makeNav(q('snav'));makeNav(q('dnav'));
+function resetToken(){
+  if(!confirm('Reset GitHub token? You will need to enter it again.'))return;
+  localStorage.removeItem('vtp_ghtoken');location.reload();
 }
 
-function renderHome(){
-  var allowed=DASH.filter(function(d){return cView(curUser,d.id);});
-  q('hgr').textContent=greet()+', '+curUser.displayName+'!';
-  q('str').innerHTML='<div class="stc"><div class="sti" style="background:#eff6ff">📊</div><div class="stv">'+allowed.length+'</div><div class="stl">Accessible Dashboards</div></div>'
-    +'<div class="stc"><div class="sti" style="background:#f0fdf4">✓</div><div class="stv" style="text-transform:capitalize">'+curUser.role+'</div><div class="stl">Your Role</div></div>'
-    +'<div class="stc"><div class="sti" style="background:#fffbeb">🕐</div><div class="stv" id="clk">'+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'})+'</div><div class="stl">Current Time</div></div>'
-    +'<div class="stc"><div class="sti" style="background:#faf5ff">📅</div><div class="stv">'+new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short'})+'</div><div class="stl">Today</div></div>';
-  if(!allowed.length){q('dg').innerHTML='<div style="text-align:center;padding:60px 20px;background:var(--w);border-radius:var(--rx);border:1px solid var(--g100)"><p style="font-size:40px;margin-bottom:12px">🔒</p><h3 style="font-size:17px;font-weight:600;color:var(--g700)">No Dashboards Assigned</h3></div>';return;}
-  q('dg').innerHTML='';
-  allowed.forEach(function(d){
-    var ce=cEdit(curUser,d.id);
-    var card=document.createElement('div');
-    card.className='dc';
-    card.innerHTML='<span class="pp '+(ce?'pe':'pv')+'"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+(ce?'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>':'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>')+'</svg>'+(ce?'View+Edit':'View Only')+'</span>'
-      +'<div class="dch"><div class="dci" style="background:'+d.grad+'">'+d.ico+'</div><div><div class="dcn">'+d.name+'</div><div class="dcd">'+d.desc+'</div></div></div>'
-      +'<div class="dcf"><span class="dcu">'+d.url+'</span><div class="dca"><a class="otb" href="'+d.url+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>New tab</a><button class="opb" style="background:'+d.grad+'">Open</button></div></div>';
-    card.querySelector('.opb').addEventListener('click',function(e){e.stopPropagation();navigate(d.id);});
-    card.querySelector('.otb').addEventListener('click',function(e){e.stopPropagation();});
-    card.addEventListener('click',function(){navigate(d.id);});
-    q('dg').appendChild(card);
-  });
-}
-setInterval(function(){var v=q('clk');if(v)v.textContent=new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});},30000);
+// ===== HELPERS =====
+function getUsers(){return allUsers;}
+function nxtId(){return allUsers.length?Math.max(...allUsers.map(x=>x.id))+1:1}
+function hasPerm(key){return CU&&CU.perms&&CU.perms[key]}
+function canEdit(key){return CU&&CU.perms&&CU.perms[key]==='edit'}
+function permKeys(){return CU?Object.keys(CU.perms||[]):[]}
 
-function dot(on,cls){return '<div class="pd '+(on?cls:'of')+'"><svg viewBox="0 0 24 24">'+(on?'<polyline points="20 6 9 17 4 12"/>':'<line x1="5" y1="12" x2="19" y2="12"/>')+'</svg></div>';}
-
-function renderUL(){
-  var s=(q('usearch')||{value:''}).value.toLowerCase();
-  var us=allUsers.filter(function(u){return u.displayName.toLowerCase().includes(s)||u.username.toLowerCase().includes(s)||u.role.includes(s);});
-  var el=q('ucs');el.innerHTML='';
-  if(!us.length){el.innerHTML='<div class="emp"><p style="font-size:36px;margin-bottom:10px">🔍</p><h3 style="font-size:15px;font-weight:600;color:var(--g500)">No users found</h3></div>';renderFP();return;}
-  us.forEach(function(u){
-    var isE=fs.editing&&fs.editing.id===u.id;
-    var card=document.createElement('div');
-    card.className='uc'+(isE?' ed':'');
-    var ptbl='<div class="pt"><div class="pth"><span>Dashboard</span><span>👁 View</span><span>✏ Edit</span></div>'
-      +DASH.map(function(d){var p=u.role==='admin'?{view:true,edit:true}:((u.allowedDashboards||[]).find(function(x){return x.id===d.id;})||{view:false,edit:false});return '<div class="pr"><div class="pdn">'+d.ico+' '+d.name+'</div><div class="pc">'+dot(p.view,'og')+'</div><div class="pc">'+dot(!!(p.edit&&p.view),'ot')+'</div></div>';}).join('')+'</div>';
-    var pwVal=showPw[u.id]?u.password:'••••••••';
-    var eyeSvg=showPw[u.id]?'<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>':'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
-    card.innerHTML='<div class="uct"><div class="ucl"><div class="ucav '+(u.role==='admin'?'aav':'mav')+'">'+ini(u.displayName)+'</div><div><div class="ucn">'+u.displayName+'</div><div class="ucm"><span class="ucun">@'+u.username+'</span><span class="rb '+(u.role==='admin'?'ra':'rm')+'">'+u.role+'</span></div></div></div><div class="uca"><button class="ucb ec" data-uid="'+u.id+'"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>'+(u.id!=='admin-001'?'<button class="ucb dc" data-uid="'+u.id+'"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></button>':'')+'</div></div>'+ptbl+'<div class="ucp"><span>Password:</span><span class="ucpv">'+pwVal+'</span><button class="uce" data-uid="'+u.id+'"><svg viewBox="0 0 24 24">'+eyeSvg+'</svg></button></div>';
-    card.querySelector('.ec').addEventListener('click',function(){startEdit(this.getAttribute('data-uid'));});
-    var dc=card.querySelector('.dc');if(dc)dc.addEventListener('click',function(){delUser(this.getAttribute('data-uid'));});
-    card.querySelector('.uce').addEventListener('click',function(){var id=this.getAttribute('data-uid');showPw[id]=!showPw[id];renderUL();});
-    el.appendChild(card);
-  });
-  renderFP();
-}
-
-function renderFP(){
-  var w=q('fpw');
-  if(!fs.adding&&!fs.editing){w.innerHTML='<div class="fh"><p style="font-size:32px;margin-bottom:10px">👆</p><h3 style="font-size:14px;font-weight:600;color:var(--g600);margin-bottom:4px">Select a user to edit</h3><p>Or click Add New User</p></div>';return;}
-  var isE=!!fs.editing;
-  var panel=document.createElement('div');panel.className='fp';
-  var dpRows=DASH.map(function(d){
-    var p=fs.dp.find(function(x){return x.id===d.id;})||{view:false,edit:false};
-    var vico=p.view?'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>':'<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
-    return '<div class="dptr"><div class="dptn">'+d.ico+' '+d.name+'</div><div class="dptc"><button class="tb '+(p.view?'von':'vof')+' tvbtn" data-id="'+d.id+'"><svg viewBox="0 0 24 24">'+vico+'</svg></button></div><div class="dptc"><button class="tb '+(p.edit&&p.view?'eon':'eof')+' tebtn" data-id="'+d.id+'"'+(p.view?'':' style="opacity:.4"')+'><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button></div></div>';
-  }).join('');
-  var permSection=fs.role==='manager'?'<div class="fg"><label class="fl" style="margin-bottom:8px">Dashboard Permissions</label><div class="dpt"><div class="qar"><span style="font-size:11px;color:var(--g400);margin-right:auto">Quick:</span><span class="ql v avbtn">All View</span><span class="ql e aebtn">All Edit</span><span class="ql c clbtn">Clear</span></div><div class="dpth"><span>Dashboard</span><span>👁 View</span><span>✏ Edit</span></div>'+dpRows+'<div class="leg"><span>👁 View = See only</span><span>✏ Edit = Interact</span></div></div></div>':'<div class="an">Admin has full View+Edit access to all dashboards.</div>';
-  panel.innerHTML='<div class="fph"><h3>'+(isE?'Edit User':'Add New User')+'</h3><button class="clb closebtn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'
-    +'<div class="fg"><label class="fl">Display Name</label><input class="fi fdn-input" id="fdn" placeholder="e.g. Rajesh Kumar" value="'+escAttr(fs.dn)+'"/></div>'
-    +'<div class="fg"><label class="fl">Username</label><input class="fi fun-input" id="fun" placeholder="e.g. rajesh" value="'+escAttr(fs.un)+'"/></div>'
-    +'<div class="fg"><label class="fl">Password</label><input class="fi fpw-input" id="fpw2" placeholder="Enter password" value="'+escAttr(fs.pw)+'"/></div>'
-    +'<div class="fg"><label class="fl">Role</label><div class="rt"><button class="ro'+(fs.role==='manager'?' am':'')+' rmbtn"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Manager</button><button class="ro'+(fs.role==='admin'?' aa':'')+' rabtn"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>Admin</button></div></div>'
-    +permSection
-    +'<div class="fe" id="ferr" style="display:none;margin-top:10px"></div>'
-    +'<button class="svb savebtn"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>'+(isE?'Update User':'Create User')+'</button>';
-
-  // Bind all events within the panel using panel.querySelector (no global getElementById confusion)
-  panel.querySelector('.closebtn').addEventListener('click',resetF);
-  panel.querySelector('.rmbtn').addEventListener('click',function(){fs.role='manager';syncFsFromPanel(panel);renderFP();});
-  panel.querySelector('.rabtn').addEventListener('click',function(){fs.role='admin';syncFsFromPanel(panel);renderFP();});
-  panel.querySelectorAll('.tvbtn').forEach(function(b){b.addEventListener('click',function(){syncFsFromPanel(panel);togV(this.getAttribute('data-id'));});});
-  panel.querySelectorAll('.tebtn').forEach(function(b){b.addEventListener('click',function(){syncFsFromPanel(panel);togE(this.getAttribute('data-id'));});});
-  var avb=panel.querySelector('.avbtn');if(avb)avb.addEventListener('click',function(){syncFsFromPanel(panel);fs.dp.forEach(function(p){p.view=true;});renderFP();});
-  var aeb=panel.querySelector('.aebtn');if(aeb)aeb.addEventListener('click',function(){syncFsFromPanel(panel);fs.dp.forEach(function(p){p.view=true;p.edit=true;});renderFP();});
-  var clb2=panel.querySelector('.clbtn');if(clb2)clb2.addEventListener('click',function(){syncFsFromPanel(panel);fs.dp.forEach(function(p){p.view=false;p.edit=false;});renderFP();});
-
-  // Live-sync text inputs into fs state
-  panel.querySelector('.fdn-input').addEventListener('input',function(){fs.dn=this.value;});
-  panel.querySelector('.fun-input').addEventListener('input',function(){fs.un=this.value;});
-  panel.querySelector('.fpw-input').addEventListener('input',function(){fs.pw=this.value;});
-
-  panel.querySelector('.savebtn').addEventListener('click',function(){saveUser(panel);});
-  w.innerHTML='';w.appendChild(panel);
-}
-
-// Helper: sync text fields from current panel into fs before re-rendering
-function syncFsFromPanel(panel){
-  var dn=panel.querySelector('.fdn-input');
-  var un=panel.querySelector('.fun-input');
-  var pw=panel.querySelector('.fpw-input');
-  if(dn) fs.dn=dn.value;
-  if(un) fs.un=un.value;
-  if(pw) fs.pw=pw.value;
-}
-
-function escAttr(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-function togV(id){var p=fs.dp.find(function(x){return x.id===id;});if(!p)return;p.view=!p.view;if(!p.view)p.edit=false;renderFP();}
-function togE(id){var p=fs.dp.find(function(x){return x.id===id;});if(!p||!p.view)return;p.edit=!p.edit;renderFP();}
-function startAdd(){fs={editing:null,adding:true,dn:'',un:'',pw:'',role:'manager',dp:newDP()};renderUL();}
-function startEdit(id){var u=allUsers.find(function(x){return x.id===id;});if(!u)return;fs={editing:u,adding:false,dn:u.displayName,un:u.username,pw:u.password,role:u.role,dp:DASH.map(function(d){if(u.role==='admin')return{id:d.id,view:true,edit:true};var p=(u.allowedDashboards||[]).find(function(x){return x.id===d.id;})||{view:false,edit:false};return{id:d.id,view:!!p.view,edit:!!p.edit};})};renderUL();}
-function resetF(){fs={editing:null,adding:false,dn:'',un:'',pw:'',role:'manager',dp:newDP()};renderUL();}
-
-// FIX: saveUser now reads from fs state (kept in sync by input listeners + syncFsFromPanel)
-async function saveUser(panel){
-  var dn=(fs.dn||'').trim();
-  var un=(fs.un||'').trim();
-  var pw=(fs.pw||'').trim();
-  var ee=panel?panel.querySelector('#ferr'):null;
-  function showErr(msg){if(ee){ee.textContent=msg;ee.style.display='block';}}
-  if(!dn||!un||!pw){showErr('All fields are required.');return;}
-  var dup=allUsers.find(function(u){
-    return u.username.toLowerCase()===un.toLowerCase()&&u.id!==(fs.editing?fs.editing.id:null);
-  });
-  if(dup){showErr('Username already exists.');return;}
-  var dashes=fs.role==='admin'
-    ?DASH.map(function(d){return{id:d.id,view:true,edit:true};})
-    :JSON.parse(JSON.stringify(fs.dp));
-  if(fs.editing){
-    var i=allUsers.findIndex(function(u){return u.id===fs.editing.id;});
-    if(i>-1){
-      allUsers[i].displayName=dn;
-      allUsers[i].username=un;
-      allUsers[i].password=pw;
-      allUsers[i].role=fs.role;
-      allUsers[i].allowedDashboards=dashes;
-    }
-  } else {
-    allUsers.push({
-      id:'u'+Date.now(),
-      username:un,
-      password:pw,
-      displayName:dn,
-      role:fs.role,
-      allowedDashboards:dashes,
-      createdAt:new Date().toISOString()
-    });
-  }
-  await pushU(allUsers);
-  resetF();
-}
-
-async function delUser(id){
-  if(id==='admin-001'){alert('Cannot delete the default admin!');return;}
-  if(confirm('Delete this user?')){allUsers=allUsers.filter(function(u){return u.id!==id;});await pushU(allUsers);if(fs.editing&&fs.editing.id===id)resetF();else renderUL();}
-}
-function renderSet(){
-  q('dcount').textContent=DASH.length;
-  q('setlinks').innerHTML=DASH.map(function(d){return '<div class="dlr"><div><div class="dln">'+d.ico+' '+d.name+'</div><div class="dlu">'+d.url+'</div></div><a class="dlo" href="'+d.url+'" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Open</a></div>';}).join('');
-}
-
-// FIX: Attach all persistent UI listeners once, not inside bootApp's else branch
-function attachPersistentListeners(){
-  q('lbtn').addEventListener('click',doLogin);
-  q('lu').addEventListener('keydown',function(e){if(e.key==='Enter')q('lp').focus();});
-  q('lp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-  q('eyeb').addEventListener('click',function(){
-    var i=q('lp'),ico=q('eyeico');
-    if(i.type==='password'){i.type='text';ico.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';}
-    else{i.type='password';ico.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';}
-  });
-  q('sbtog').addEventListener('click',function(){sbCol=!sbCol;q('sb').classList.toggle('col',sbCol);});
-  // FIX: Logout buttons always attached here, work regardless of auto-login path
-  q('lgout').addEventListener('click',doLogout);
-  q('dlgout').addEventListener('click',doLogout);
-  q('addbtn').addEventListener('click',startAdd);
-  q('usearch').addEventListener('input',renderUL);
-  q('mobmenu').addEventListener('click',openDr);
-  q('drov').addEventListener('click',closeDr);
-  q('denidbtn').addEventListener('click',function(){navigate('home');});
-  q('refbtn').addEventListener('click',function(){if(curDash){q('ifldr').style.display='flex';q('dif').src=curDash.url;}});
-  q('fsbtn').addEventListener('click',function(){
-    if(!curDash)return;
-    q('fsic').textContent=curDash.ico;q('fstx').textContent=curDash.name;q('fsext').href=curDash.url;
-    q('fsif').setAttribute('sandbox',cEdit(curUser,curDash.id)?'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation':'allow-scripts allow-same-origin allow-popups allow-top-navigation');
-    q('fsif').src=curDash.url;q('fsw').classList.add('on');
-  });
-  q('fscls').addEventListener('click',function(){q('fsw').classList.remove('on');q('fsif').src='';});
-  q('fsref').addEventListener('click',function(){if(curDash)q('fsif').src=curDash.url;});
-  q('voo').addEventListener('click',function(){var m=q('vom');m.classList.add('on');setTimeout(function(){m.classList.remove('on');},2500);});
-}
-
+// ===== AUTH =====
 async function doLogin(){
-  var u=q('lu').value.trim(),p=q('lp').value,rem=q('rem').checked;
-  if(!u||!p){q('lerrmsg').textContent='Please enter username and password.';q('lerr').style.display='flex';return;}
-  var btn=q('lbtn');btn.disabled=true;btn.textContent='Checking...';
-  allUsers=await fetchU();
-  var user=allUsers.find(function(x){return x.username===u&&x.password===p;});
-  if(user){saveSes(user.id,rem);curUser=user;startApp();}
-  else{q('lerrmsg').textContent='Invalid username or password.';q('lerr').style.display='flex';btn.disabled=false;btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Sign In';}
+  const un=document.getElementById('inUser').value.trim(),pw=document.getElementById('inPass').value.trim();
+  const er=document.getElementById('loginErr');er.classList.remove('show');
+  if(!un||!pw){er.textContent='Enter username and password';er.classList.add('show');return;}
+  er.textContent='Checking...';er.classList.add('show');er.style.background='#eff6ff';er.style.borderColor='#bfdbfe';er.style.color='#2563eb';
+  const fresh=await ghFetch(false);
+  if(fresh) allUsers=fresh;
+  er.classList.remove('show');er.style.cssText='';
+  const u=allUsers.find(x=>x.username.toLowerCase()===un.toLowerCase()&&x.password===pw);
+  if(!u){er.textContent='Invalid credentials';er.classList.add('show');return;}
+  if(!u.active){er.textContent='Account deactivated';er.classList.add('show');return;}
+  CU=u;localStorage.setItem('vtp_s3',JSON.stringify(u));showApp();toast('Welcome, '+u.name+'!','ok');startAutoSync();
 }
 function doLogout(){
-  clearSes();curUser=null;curDash=null;
-  q('login').classList.add('on');q('app').classList.remove('on');
-  q('lu').value='';q('lp').value='';q('lerr').style.display='none';q('rem').checked=false;q('ls').style.display='none';
-  // Reset iframe to avoid stale content
-  q('dif').src='about:blank';q('fsif').src='about:blank';
-  q('ifw').classList.remove('on');
+  if(!confirm('Sign out?'))return;
+  stopAutoSync();CU=null;localStorage.removeItem('vtp_s3');
+  document.getElementById('mainApp').style.display='none';
+  document.getElementById('loginScreen').classList.add('show');
+  document.getElementById('inUser').value='';document.getElementById('inPass').value='';
 }
-function startApp(){
-  q('ls').style.display='none';
-  q('login').classList.remove('on');
-  q('app').classList.add('on');
-  q('sbav').textContent=ini(curUser.displayName);
-  q('sbname').textContent=curUser.displayName;
-  q('sbrole').textContent=curUser.role;
-  q('drav').textContent=ini(curUser.displayName);
-  q('drname').textContent=curUser.displayName;
-  q('drrole').textContent=curUser.role;
-  q('mobav').textContent=ini(curUser.displayName);
-  renderHome();renderSet();navigate('home');
+function checkSess(){
+  const s=localStorage.getItem('vtp_s3');
+  if(s){const u=JSON.parse(s),f=allUsers.find(x=>x.id===u.id&&x.active);
+    if(f){CU=f;localStorage.setItem('vtp_s3',JSON.stringify(f));showApp();startAutoSync();return;}}
+  document.getElementById('loginScreen').classList.add('show');
 }
-function openDr(){q('drawer').classList.add('on');q('drov').classList.add('on');}
-function closeDr(){q('drawer').classList.remove('on');q('drov').classList.remove('on');}
 
-window.addEventListener('load',async function(){
-  var savedToken=localStorage.getItem('vtp_ghtoken');
-  if(!savedToken){
-    q('ls').style.display='none';
-    q('tokenscreen').style.display='flex';
-    q('tokensavebtn').addEventListener('click',function(){
-      var t=q('tokeninput').value.trim();
-      if(!t||!t.startsWith('ghp_')){alert('Please enter a valid token starting with ghp_');return;}
-      localStorage.setItem('vtp_ghtoken',t);
-      GH_TOKEN=t;
-      q('tokenscreen').style.display='none';
-      bootApp();
-    });
-    q('tokeninput').addEventListener('keydown',function(e){if(e.key==='Enter')q('tokensavebtn').click();});
-    return;
+// ===== APP =====
+function showApp(){
+  document.getElementById('loginScreen').classList.remove('show');
+  document.getElementById('mainApp').style.display='block';
+  const ini=CU.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  document.getElementById('sbAv').textContent=ini;
+  document.getElementById('sbNm').textContent=CU.name;
+  document.getElementById('sbRl').textContent=CU.role;
+  document.getElementById('topAv').textContent=ini;
+  document.getElementById('topDt').textContent=new Date().toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  updNav();goHome();setSyncState('ok');
+}
+function updNav(){
+  document.querySelectorAll('.nav-i[data-perm]').forEach(n=>{
+    n.style.display=hasPerm(n.dataset.perm)?'flex':'none';
+  });
+}
+function setActiveNav(key){
+  document.querySelectorAll('.nav-i').forEach(n=>n.classList.remove('act'));
+  const a=document.querySelector(`.nav-i[data-nav="${key}"]`);if(a)a.classList.add('act');
+}
+function togSb(){document.getElementById('sb').classList.toggle('open');document.getElementById('sbOv').classList.toggle('show')}
+
+// ===== HOME =====
+function goHome(){
+  closeDash();setActiveNav('home');
+  document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('show');
+  document.getElementById('pgT').textContent='Dashboard';document.getElementById('pgS').textContent='Home';
+  renderHome();
+}
+function renderHome(){
+  let cards='';
+  DKEYS.forEach((k,i)=>{
+    if(!hasPerm(k))return;
+    const d=DASH[k],mode=CU.perms[k];
+    const modeClr=mode==='edit'?'background:#f0fdf4;color:#059669;border:1px solid #bbf7d0':'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe';
+    cards+=`<div class="dcard ${d.clr} fade-in" style="animation-delay:${i*.08}s" onclick="openDash('${k}')">
+      <div class="dbar"></div>
+      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
+        <div style="width:44px;height:44px;border-radius:12px;background:${k==='account_dashboard'?'#eff6ff':k==='leave_management'?'#f0fdf4':k==='expense_management'?'#fffbeb':'#f5f3ff'};display:flex;align-items:center;justify-content:center;font-size:22px">${d.icon}</div>
+        <span style="padding:3px 10px;border-radius:8px;font-size:10px;font-weight:700;${modeClr}">${mode==='edit'?'✏️ View + Edit':'👁 View Only'}</span>
+      </div>
+      <h3 style="font-size:15px;font-weight:800;margin-bottom:4px">${d.name}</h3>
+      <p style="font-size:11px;color:#94a3b8;line-height:1.5">${d.desc}</p>
+    </div>`;
+  });
+  const users=getUsers();
+  document.getElementById('content').innerHTML=`
+  <div style="background:linear-gradient(135deg,#2563eb,#4f46e5);border-radius:16px;padding:28px;color:#fff;margin-bottom:20px" class="fade-in">
+    <h2 style="font-size:20px;font-weight:800;margin-bottom:4px">Welcome, ${CU.name} 👋</h2>
+    <p style="font-size:13px;opacity:.7">Role: ${CU.role} · ${DKEYS.filter(k=>hasPerm(k)).length} dashboards</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:20px">${cards}</div>
+  ${hasPerm('admin_panel')?`
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" class="fade-in" >
+    <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
+      <div style="font-size:22px;font-weight:800;color:#2563eb">${users.length}</div>
+      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">USERS</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
+      <div style="font-size:22px;font-weight:800;color:#059669">${users.filter(u=>u.active).length}</div>
+      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">ACTIVE</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
+      <div style="font-size:22px;font-weight:800;color:#dc2626">${users.filter(u=>!u.active).length}</div>
+      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">INACTIVE</div>
+    </div>
+    <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
+      <div style="font-size:22px;font-weight:800;color:#7c3aed">4</div>
+      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">DASHBOARDS</div>
+    </div>
+  </div>`:''}`
+}
+
+// ===== OPEN DASHBOARD (FULL SCREEN) =====
+let _scrollTimer;
+const _overlay=()=>document.getElementById('dvOverlay');
+
+function openDash(key){
+  if(!hasPerm(key))return;
+  const d=DASH[key];if(!d)return;
+  const isEdit=canEdit(key);
+  document.getElementById('dvTitle').textContent=d.name;
+  document.getElementById('dvNewTab').href=d.url;
+  const badge=document.getElementById('dvBadge');
+  const overlay=_overlay();
+  const frame=document.getElementById('dvFrame');
+  const toolbar=document.getElementById('voToolbar');
+  const tabsEl=document.getElementById('voTabs');
+
+  if(isEdit){
+    badge.textContent='✏️ Edit Mode';
+    badge.style.cssText='padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:#f0fdf4;color:#059669;border:1px solid #bbf7d0';
+    overlay.classList.remove('on');
+    toolbar.style.display='none';tabsEl.style.display='none';
+    // Full sandbox — allows all tabs/navigation inside iframe
+    frame.setAttribute('sandbox','allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation allow-storage-access-by-user-activation');
+  } else {
+    badge.textContent='🔒 View Only';
+    badge.style.cssText='padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:#fef2f2;color:#dc2626;border:1px solid #fecaca';
+    overlay.classList.add('on');
+    // Allow full rendering + internal navigation so all tabs/data loads
+    frame.setAttribute('sandbox','allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation allow-storage-access-by-user-activation');
+    // Show search toolbar + tabs
+    toolbar.style.display='flex';
+    buildVoTabs(d);
+    tabsEl.style.display='flex';
+    clearVoSearch();
   }
-  GH_TOKEN=savedToken;
-  bootApp();
+  frame.src=d.url;
+  document.getElementById('dashView').classList.add('show');
+  setActiveNav(key);
+  document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('show');
+}
+
+// Build quick-nav tab buttons for view-only
+function buildVoTabs(d){
+  const tabsEl=document.getElementById('voTabs');
+  const filter=document.getElementById('voFilter');
+  const tabList=d.tabs||[];
+  filter.innerHTML='<option value="">All Sections</option>';
+  tabList.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;filter.appendChild(o);});
+  tabsEl.innerHTML='<span style="font-size:9px;font-weight:800;color:#64748b;white-space:nowrap;align-self:center;letter-spacing:.5px">JUMP TO:</span>';
+  tabList.forEach((t,i)=>{
+    const btn=document.createElement('button');
+    btn.textContent=t;
+    btn.style.cssText=`padding:4px 12px;border-radius:20px;border:1.5px solid ${i===0?'#2563eb':'#e2e8f0'};background:${i===0?'#2563eb':'#fff'};font-size:11px;font-weight:700;color:${i===0?'#fff':'#64748b'};cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap`;
+    btn.onclick=()=>{
+      tabsEl.querySelectorAll('button').forEach(b=>{b.style.background='#fff';b.style.borderColor='#e2e8f0';b.style.color='#64748b';});
+      btn.style.background='#2563eb';btn.style.borderColor='#2563eb';btn.style.color='#fff';
+      tryNavTab(t);
+    };
+    tabsEl.appendChild(btn);
+  });
+}
+
+// Try to navigate tab inside iframe
+function tryNavTab(tabName){
+  const frame=document.getElementById('dvFrame');
+  try{frame.contentWindow.postMessage({type:'VTP_NAV_TAB',tab:tabName},'*');}catch(e){}
+  try{
+    const doc=frame.contentDocument||frame.contentWindow.document;
+    const items=doc.querySelectorAll('.nav-i, [data-nav], nav a, .sidebar a, .tab-btn, li a');
+    for(const el of items){
+      if(el.textContent.trim().toLowerCase().includes(tabName.toLowerCase())){el.click();break;}
+    }
+  }catch(e){}
+}
+
+// View-only search
+function doVoSearch(v){
+  document.getElementById('voClear').style.display=v?'block':'none';
+  if(v) showSearchHint(v); else hideSearchHint();
+}
+function doVoFilter(v){
+  if(!v)return;
+  document.querySelectorAll('#voTabs button').forEach(b=>{
+    const active=b.textContent===v;
+    b.style.background=active?'#2563eb':'#fff';
+    b.style.borderColor=active?'#2563eb':'#e2e8f0';
+    b.style.color=active?'#fff':'#64748b';
+  });
+  tryNavTab(v);
+}
+function clearVoSearch(){
+  document.getElementById('voSearch').value='';
+  document.getElementById('voClear').style.display='none';
+  document.getElementById('voFilter').value='';
+  hideSearchHint();
+}
+let _hint=null;
+function showSearchHint(q){
+  if(!_hint){_hint=document.createElement('div');_hint.style.cssText='padding:6px 14px;background:#fffbeb;border-top:1px solid #fde68a;font-size:11px;color:#92400e;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0';document.getElementById('voToolbar').after(_hint);}
+  _hint.innerHTML=`<span>🔍 Searching "<b>${q}</b>" — open in new tab for full search</span><a href="${document.getElementById('dvNewTab').href}?q=${encodeURIComponent(q)}" target="_blank" style="padding:4px 10px;background:#d97706;color:#fff;border-radius:6px;font-size:10px;font-weight:700;text-decoration:none;white-space:nowrap">Open & Search ↗</a>`;
+}
+function hideSearchHint(){if(_hint)_hint.innerHTML='';}
+
+// Overlay scroll forwarding
+document.addEventListener('DOMContentLoaded',function(){
+  const ov=_overlay();if(!ov)return;
+  ov.addEventListener('wheel',function(){ov.style.pointerEvents='none';clearTimeout(_scrollTimer);_scrollTimer=setTimeout(function(){ov.style.pointerEvents='';},80);},{passive:true});
+  ov.addEventListener('touchmove',function(){ov.style.pointerEvents='none';clearTimeout(_scrollTimer);_scrollTimer=setTimeout(function(){ov.style.pointerEvents='';},200);},{passive:true});
 });
 
-async function bootApp(){
-  // FIX: Attach all listeners upfront — before checking session — so logout always works
-  attachPersistentListeners();
-
-  q('ls').style.display='flex';
-  q('ltxt').textContent='Loading users from cloud...';
-  allUsers=await fetchU();
-  var uid=getUID();
-  if(uid){
-    var found=allUsers.find(function(u){return u.id===uid;});
-    if(found){curUser=found;startApp();return;}
-  }
-  q('ls').style.display='none';
-  q('login').classList.add('on');
+function closeDash(){
+  document.getElementById('dashView').classList.remove('show');
+  document.getElementById('dvFrame').src='';
+  _overlay().classList.remove('on');
+  document.getElementById('voToolbar').style.display='none';
+  document.getElementById('voTabs').style.display='none';
+  setActiveNav('home');
+  document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('show');
 }
+
+// ===== ADMIN =====
+function goAdmin(){
+  closeDash();setActiveNav('admin');
+  document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('show');
+  document.getElementById('pgT').textContent='Admin Panel';document.getElementById('pgS').textContent='Users & Permissions';
+  renderAdmin();
+}
+function renderAdmin(){
+  if(!hasPerm('admin_panel')){document.getElementById('content').innerHTML='<div style="text-align:center;padding:60px"><div style="font-size:48px;margin-bottom:12px">🚫</div><h3 style="font-weight:800">Access Denied</h3></div>';return}
+  const users=getUsers();
+  let rows='';
+  users.forEach((u,idx)=>{
+    const ini=u.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    const isRoot=u.id===1;
+    let chips='';
+    Object.entries(u.perms||{}).forEach(([k,v])=>{
+      if(!P_LBL[k])return;
+      const isE=v==='edit';
+      chips+=`<span class="pchip${isE?' edit':''}">${P_LBL[k]} ${isE?'✏️':'👁'}${!isRoot?` <span class="rx" onclick="rmPerm(${u.id},'${k}')">×</span>`:''}</span>`;
+    });
+    const rc=u.role==='Admin'?'background:#fef2f2;color:#dc2626;border:1px solid #fecaca':u.role==='Project Manager'?'background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe':u.role==='Accounts'?'background:#f0fdf4;color:#059669;border:1px solid #bbf7d0':'background:#f8fafc;color:#64748b;border:1px solid #e2e8f0';
+    rows+=`<tr class="fade-in" style="animation-delay:${idx*.05}s">
+      <td><div style="display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0">${ini}</div><div><div style="font-weight:700;font-size:13px">${u.name}</div><div style="font-size:10px;color:#94a3b8">@${u.username}</div></div></div></td>
+      <td><span style="padding:3px 10px;border-radius:8px;font-size:10px;font-weight:700;${rc}">${u.role}</span></td>
+      <td><div style="display:flex;flex-wrap:wrap;gap:2px;max-width:300px">${chips||'<span style="font-size:10px;color:#cbd5e1">No permissions</span>'}</div></td>
+      <td><label class="tgl"><input type="checkbox" ${u.active?'checked':''} onchange="tglUser(${u.id})" ${isRoot?'disabled':''}><span></span></label></td>
+      <td><div style="display:flex;gap:4px">
+        <button onclick="editUser(${u.id})" style="padding:5px 10px;border-radius:8px;border:1px solid #bfdbfe;background:#eff6ff;color:#2563eb;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">✏️</button>
+        <button onclick="addPermUI(${u.id})" style="padding:5px 10px;border-radius:8px;border:1px solid #bbf7d0;background:#f0fdf4;color:#059669;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">➕</button>
+        ${!isRoot?`<button onclick="delUser(${u.id})" style="padding:5px 10px;border-radius:8px;border:1px solid #fecaca;background:#fef2f2;color:#dc2626;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">🗑️</button>`:''}
+      </div></td>
+    </tr>`;
+  });
+  document.getElementById('content').innerHTML=`
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px" class="fade-in">
+    <h3 style="font-size:16px;font-weight:800">👥 User Management <small style="font-size:10px;color:#94a3b8;font-weight:500">● GitHub Synced</small></h3>
+    <button onclick="addUserUI()" style="padding:8px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">➕ Add User</button>
+  </div>
+  <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;margin-bottom:20px" class="fade-in" >
+    <div style="overflow-x:auto"><table class="utbl"><thead><tr><th>User</th><th>Role</th><th>Permissions (View/Edit)</th><th>Active</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>
+  </div>
+  <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:14px;padding:18px" class="fade-in">
+    <h4 style="font-size:13px;font-weight:800;color:#92400e;margin-bottom:10px">🔑 Default Credentials</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px">
+      <div style="background:#fff;border-radius:10px;padding:10px;border:1px solid #fde68a"><div style="font-size:11px;font-weight:800;color:#d97706">Admin</div><div style="font-size:10px;color:#64748b;margin-top:4px">admin / admin123</div></div>
+      <div style="background:#fff;border-radius:10px;padding:10px;border:1px solid #fde68a"><div style="font-size:11px;font-weight:800;color:#d97706">Manager</div><div style="font-size:10px;color:#64748b;margin-top:4px">manager / manager123</div></div>
+      <div style="background:#fff;border-radius:10px;padding:10px;border:1px solid #fde68a"><div style="font-size:11px;font-weight:800;color:#d97706">Accounts</div><div style="font-size:10px;color:#64748b;margin-top:4px">accounts / accounts123</div></div>
+    </div>
+  </div>`;
+}
+
+// ===== CRUD =====
+function addUserUI(){
+  let chks='';ALL_P.forEach(p=>{
+    chks+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
+      <input type="checkbox" id="np_${p}" style="accent-color:#2563eb;width:16px;height:16px">
+      <span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span>
+      <select id="nm_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit">
+        <option value="view">👁 View</option><option value="edit">✏️ Edit</option>
+      </select></div>`;
+  });
+  showMo(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:16px;font-weight:800">➕ Add User</h3><button onclick="closeMo()" style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:none;cursor:pointer;font-size:14px;color:#94a3b8">✕</button></div>
+  <div style="display:grid;gap:14px">
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Full Name</label><input id="nu_nm" class="lc-input" placeholder="e.g. Rahul Sharma"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Username</label><input id="nu_un" class="lc-input" placeholder="e.g. rahul"></div>
+      <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Password</label><input id="nu_pw" class="lc-input" placeholder="e.g. pass123"></div>
+    </div>
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Role</label><select id="nu_rl" class="lc-input" style="background:#fff"><option>Employee</option><option>Project Manager</option><option>Accounts</option><option>HOD</option><option>Admin</option></select></div>
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase">Dashboard Access (View / Edit)</label><div style="display:grid;gap:6px">${chks}</div></div>
+    <button onclick="saveNewUser()" class="lc-btn">✅ Create User</button>
+  </div>`);
+}
+async function saveNewUser(){
+  const nm=document.getElementById('nu_nm').value.trim(),un=document.getElementById('nu_un').value.trim(),pw=document.getElementById('nu_pw').value.trim(),rl=document.getElementById('nu_rl').value;
+  if(!nm||!un||!pw){toast('Fill all fields','err');return}
+  if(allUsers.find(u=>u.username.toLowerCase()===un.toLowerCase())){toast('Username exists','err');return}
+  const perms={};ALL_P.forEach(p=>{if(document.getElementById('np_'+p).checked)perms[p]=document.getElementById('nm_'+p).value});
+  allUsers.push({id:nxtId(),username:un,password:pw,name:nm,role:rl,perms,active:true});
+  const ok=await ghPush(allUsers);
+  closeMo();toast(nm+(ok?' created!':' created (sync pending)'),'ok');renderAdmin();
+}
+function editUser(id){
+  const u=allUsers.find(x=>x.id===id);if(!u)return;
+  let chks='';ALL_P.forEach(p=>{
+    const has=u.perms&&u.perms[p];const mode=has||'view';
+    chks+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
+      <input type="checkbox" id="ep_${p}" ${has?'checked':''} style="accent-color:#2563eb;width:16px;height:16px">
+      <span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span>
+      <select id="em_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit">
+        <option value="view" ${mode==='view'?'selected':''}>👁 View</option><option value="edit" ${mode==='edit'?'selected':''}>✏️ Edit</option>
+      </select></div>`;
+  });
+  showMo(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:16px;font-weight:800">✏️ Edit — ${u.name}</h3><button onclick="closeMo()" style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:none;cursor:pointer;font-size:14px;color:#94a3b8">✕</button></div>
+  <div style="display:grid;gap:14px">
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Full Name</label><input id="eu_nm" value="${u.name}" class="lc-input"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Username</label><input id="eu_un" value="${u.username}" class="lc-input" ${u.id===1?'disabled':''}></div>
+      <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Password</label><input id="eu_pw" value="${u.password}" class="lc-input"></div>
+    </div>
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Role</label><select id="eu_rl" class="lc-input" style="background:#fff"><option ${u.role==='Employee'?'selected':''}>Employee</option><option ${u.role==='Project Manager'?'selected':''}>Project Manager</option><option ${u.role==='Accounts'?'selected':''}>Accounts</option><option ${u.role==='HOD'?'selected':''}>HOD</option><option ${u.role==='Admin'?'selected':''}>Admin</option></select></div>
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase">Dashboard Access (View / Edit)</label><div style="display:grid;gap:6px">${chks}</div></div>
+    <button onclick="saveEdit(${u.id})" class="lc-btn">💾 Save Changes</button>
+  </div>`);
+}
+async function saveEdit(id){
+  const idx=allUsers.findIndex(u=>u.id===id);if(idx===-1)return;
+  const nm=document.getElementById('eu_nm').value.trim(),un=document.getElementById('eu_un').value.trim(),pw=document.getElementById('eu_pw').value.trim(),rl=document.getElementById('eu_rl').value;
+  if(!nm||!un||!pw){toast('Fill all fields','err');return}
+  if(allUsers.find(u=>u.username.toLowerCase()===un.toLowerCase()&&u.id!==id)){toast('Username exists','err');return}
+  const perms={};ALL_P.forEach(p=>{if(document.getElementById('ep_'+p).checked)perms[p]=document.getElementById('em_'+p).value});
+  Object.assign(allUsers[idx],{name:nm,username:un,password:pw,role:rl,perms});
+  if(CU.id===id){CU=allUsers[idx];localStorage.setItem('vtp_s3',JSON.stringify(allUsers[idx]));updNav()}
+  await ghPush(allUsers);closeMo();toast('Updated!','ok');renderAdmin();
+}
+async function delUser(id){if(id===1||!confirm('Delete?'))return;allUsers=allUsers.filter(x=>x.id!==id);await ghPush(allUsers);toast('Deleted','ok');renderAdmin()}
+async function tglUser(id){if(id===1)return;const x=allUsers.find(a=>a.id===id);if(x){x.active=!x.active;await ghPush(allUsers);toast(x.name+(x.active?' activated':' deactivated'),x.active?'ok':'inf');renderAdmin()}}
+async function rmPerm(id,p){if(id===1)return;const x=allUsers.find(a=>a.id===id);if(x&&x.perms){delete x.perms[p];await ghPush(allUsers);if(CU.id===id){CU=x;localStorage.setItem('vtp_s3',JSON.stringify(x));updNav()}toast('Removed','ok');renderAdmin()}}
+function addPermUI(id){
+  const x=allUsers.find(a=>a.id===id);if(!x)return;
+  const av=ALL_P.filter(p=>!x.perms||!x.perms[p]);
+  if(!av.length){toast('All permissions granted','inf');return}
+  let opts='';av.forEach(p=>{
+    opts+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
+      <input type="checkbox" id="ap_${p}" style="accent-color:#059669;width:16px;height:16px">
+      <span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span>
+      <select id="am_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit">
+        <option value="view">👁 View</option><option value="edit">✏️ Edit</option>
+      </select></div>`;
+  });
+  showMo(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:16px;font-weight:800">➕ Add Permission — ${x.name}</h3><button onclick="closeMo()" style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:none;cursor:pointer;font-size:14px;color:#94a3b8">✕</button></div>
+  <div style="display:grid;gap:6px;margin-bottom:16px">${opts}</div>
+  <button onclick="savePerm(${id})" style="width:100%;padding:12px;border:none;border-radius:10px;background:#059669;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">✅ Grant</button>`);
+}
+async function savePerm(id){
+  const x=allUsers.find(a=>a.id===id);if(!x)return;
+  if(!x.perms)x.perms={};
+  const av=ALL_P.filter(p=>!x.perms[p]);let n=0;
+  av.forEach(p=>{const c=document.getElementById('ap_'+p);if(c&&c.checked){x.perms[p]=document.getElementById('am_'+p).value;n++}});
+  if(!n){toast('Select at least one','err');return}
+  await ghPush(allUsers);if(CU.id===id){CU=x;localStorage.setItem('vtp_s3',JSON.stringify(x));updNav()}
+  closeMo();toast(n+' added!','ok');renderAdmin();
+}
+
+// ===== MODAL =====
+function showMo(h){document.getElementById('moBox').innerHTML=h;document.getElementById('moBg').classList.add('show')}
+function closeMo(){document.getElementById('moBg').classList.remove('show')}
+document.getElementById('moBg').addEventListener('click',function(e){if(e.target===this)closeMo()});
+
+// ===== TOAST =====
+function toast(m,t='inf'){const e=document.getElementById('toastEl');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),2500)}
+
+// ===== INIT =====
+async function bootApp(){
+  document.getElementById('tokenScreen').style.display='none';
+  // Load from GitHub then show splash → app
+  const fresh=await ghFetch(false);
+  if(fresh) allUsers=fresh; else allUsers=[...DEFAULT_USERS];
+  setTimeout(()=>{document.getElementById('splash').classList.add('hide');setTimeout(()=>{document.getElementById('splash').style.display='none';checkSess();},500);},1800);
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const saved=localStorage.getItem('vtp_ghtoken');
+  if(!saved){
+    document.getElementById('splash').style.display='none';
+    document.getElementById('tokenScreen').style.display='flex';
+  } else {
+    GH_TOKEN=saved;
+    bootApp();
+  }
+});
 </script>
 </body>
 </html>
