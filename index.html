@@ -409,8 +409,7 @@ nav::-webkit-scrollbar{display:none}
   <iframe id="fsif" allow="clipboard-read; clipboard-write" style="flex:1;border:none"></iframe>
 </div>
 <script>
-var PID='a8fadbe6-5e9c-48f9-94b5-fa1d1310652b';
-var PURL='https://getpantry.cloud/apiv1/pantry/'+PID+'/basket/vtp_users';
+var PURL='https://getpantry.cloud/apiv1/pantry/a8fadbe6-5e9c-48f9-94b5-fa1d1310652b/basket/vtp_users';
 var DASH=[
   {id:'account-dashboard',name:'Account Dashboard',ico:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Management Portal — Outstanding, Bills, BG, Deposits, Invoices, Stock',grad:'linear-gradient(135deg,#3b82f6,#06b6d4)'},
   {id:'leave-management',name:'Leave Management',ico:'📅',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Employee Leave Management — Apply, Track and Approve Leaves',grad:'linear-gradient(135deg,#22c55e,#10b981)'},
@@ -442,8 +441,10 @@ async function fetchU(){
 }
 async function pushU(us){
   setSyb('sy');
-  try{await fetch(PURL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({users:us})});allUsers=us;setSyb('ok');}
-  catch(e){setSyb('er');console.warn(e);}
+  try{
+    await fetch(PURL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({users:us})});
+    allUsers=us;setSyb('ok');
+  }catch(e){setSyb('er');console.warn(e);}
 }
 function setSyb(s){var b=q('syb');if(!b)return;if(s==='ok'){b.textContent='Synced';b.className='syb';}else if(s==='sy'){b.textContent='Syncing...';b.className='syb sy';}else{b.textContent='Sync Error';b.className='syb er';}}
 
