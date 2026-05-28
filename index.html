@@ -424,9 +424,11 @@ nav::-webkit-scrollbar{display:none}
   <iframe id="fsif" allow="clipboard-read; clipboard-write" style="flex:1;border:none"></iframe>
 </div>
 <script>
-var GIST_ID='21c47ef2a86125d4231fcfe4c0a91c9c';
-var GIST_FILE='vtp-users.json';
-var GIST_TOKEN=localStorage.getItem('vtp_ghtoken')||'';
+var GH_OWNER='systemhaibhai03-cloud';
+var GH_REPO='systemhaibhai03-cloud.github.io';
+var GH_FILE='users.json';
+var GH_TOKEN=localStorage.getItem('vtp_ghtoken')||'';
+var GH_API='https://api.github.com/repos/'+GH_OWNER+'/'+GH_REPO+'/contents/'+GH_FILE;
 var DASH=[
   {id:'account-dashboard',name:'Account Dashboard',ico:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Management Portal — Outstanding, Bills, BG, Deposits, Invoices, Stock',grad:'linear-gradient(135deg,#3b82f6,#06b6d4)'},
   {id:'leave-management',name:'Leave Management',ico:'📅',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Employee Leave Management — Apply, Track and Approve Leaves',grad:'linear-gradient(135deg,#22c55e,#10b981)'},
@@ -446,12 +448,12 @@ function cEdit(u,id){if(u.role==='admin')return true;var p=(u.allowedDashboards|
 
 async function fetchU(){
   try{
-    var r=await fetch('https://api.github.com/gists/'+GIST_ID,{
-      headers:{'Authorization':'token '+GIST_TOKEN,'Accept':'application/vnd.github.v3+json'}
+    var r=await fetch(GH_API,{
+      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
     });
     if(!r.ok){await pushU([DEFADMIN]);return[DEFADMIN];}
     var d=await r.json();
-    var raw=d.files[GIST_FILE].content;
+    var raw=atob(d.content.replace(/\n/g,''));
     var parsed=JSON.parse(raw);
     var us=parsed.users||[DEFADMIN];
     var ai=us.findIndex(function(u){return u.id==='admin-001';});
@@ -463,17 +465,25 @@ async function fetchU(){
 async function pushU(us){
   setSyb('sy');
   try{
-    var content=JSON.stringify({users:us},null,2);
-    var files={};files[GIST_FILE]={content:content};
-    var body=JSON.stringify({files:files});
-    var r=await fetch('https://api.github.com/gists/'+GIST_ID,{
-      method:'PATCH',
-      headers:{'Authorization':'token '+GIST_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-      body:body
+    // First get current SHA
+    var r1=await fetch(GH_API,{
+      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
     });
-    if(!r.ok){
-      var txt=await r.text();
-      console.error('Gist error:',r.status,txt);
+    var sha='';
+    if(r1.ok){var d1=await r1.json();sha=d1.sha;}
+    // Now update file
+    var newContent=JSON.stringify({users:us},null,2);
+    var encoded=btoa(unescape(encodeURIComponent(newContent)));
+    var body={message:'Update users',content:encoded};
+    if(sha) body.sha=sha;
+    var r2=await fetch(GH_API,{
+      method:'PUT',
+      headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify(body)
+    });
+    if(!r2.ok){
+      var txt=await r2.text();
+      console.error('Push error:',r2.status,txt);
       setSyb('er');
       return;
     }
@@ -730,14 +740,14 @@ window.addEventListener('load',async function(){
       var t=q('tokeninput').value.trim();
       if(!t||!t.startsWith('ghp_')){alert('Please enter a valid token starting with ghp_');return;}
       localStorage.setItem('vtp_ghtoken',t);
-      GIST_TOKEN=t;
+      GH_TOKEN=t;
       q('tokenscreen').style.display='none';
       bootApp();
     });
     q('tokeninput').addEventListener('keydown',function(e){if(e.key==='Enter')q('tokensavebtn').click();});
     return;
   }
-  GIST_TOKEN=savedToken;
+  GH_TOKEN=savedToken;
   bootApp();
 });
 
