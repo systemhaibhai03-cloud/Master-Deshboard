@@ -442,9 +442,22 @@ async function fetchU(){
 async function pushU(us){
   setSyb('sy');
   try{
-    await fetch(PURL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({users:us})});
-    allUsers=us;setSyb('ok');
-  }catch(e){setSyb('er');console.warn(e);}
+    var body=JSON.stringify({users:us});
+    var r=await fetch(PURL,{method:'POST',headers:{'Content-Type':'application/json'},body:body});
+    var txt=await r.text();
+    if(!r.ok){
+      console.error('Pantry error:',r.status,txt);
+      setSyb('er');
+      alert('Save failed: '+txt);
+      return;
+    }
+    allUsers=us;
+    setSyb('ok');
+  }catch(e){
+    setSyb('er');
+    console.error('Network error:',e);
+    alert('Network error: '+e.message);
+  }
 }
 function setSyb(s){var b=q('syb');if(!b)return;if(s==='ok'){b.textContent='Synced';b.className='syb';}else if(s==='sy'){b.textContent='Syncing...';b.className='syb sy';}else{b.textContent='Sync Error';b.className='syb er';}}
 
