@@ -233,7 +233,7 @@ nav::-webkit-scrollbar{display:none}
 .tb.eon{background:var(--t50);border-color:var(--t100);color:var(--t600)}
 .tb.eof{background:var(--g50);border-color:var(--g200);color:var(--g300)}
 .tb svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.qar{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:6px 12px 8px;border-bottom:1px solid var(--g100)}
+.qar{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:6px 12px;border-bottom:1px solid var(--g100)}
 .ql{font-size:11px;font-weight:600;cursor:pointer;padding:3px 6px;border-radius:5px;transition:var(--tr)}
 .ql.v{color:var(--a700);background:var(--a50)}.ql.v:hover{background:var(--a100)}
 .ql.e{color:var(--t600);background:var(--t50)}.ql.e:hover{background:var(--t100)}
@@ -465,13 +465,11 @@ async function fetchU(){
 async function pushU(us){
   setSyb('sy');
   try{
-    // First get current SHA
     var r1=await fetch(GH_API,{
       headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}
     });
     var sha='';
     if(r1.ok){var d1=await r1.json();sha=d1.sha;}
-    // Now update file
     var newContent=JSON.stringify({users:us},null,2);
     var encoded=btoa(unescape(encodeURIComponent(newContent)));
     var body={message:'Update users',content:encoded};
@@ -520,15 +518,12 @@ function loadDash(d){
   q('ific').textContent=d.ico;q('ifti').textContent=d.name;q('ifde').textContent=d.desc;q('extbtn').href=d.url;
   q('ifldr').style.display='flex';q('iflt').textContent='Loading '+d.name+'...';
   var ce=cEdit(curUser,d.id);
-  var iframe=q('dif'),ov=q('voo'),badge=q('vob');
-  // Both view and edit: full sandbox so tabs work
-  // Only difference: edit allows form submit
+  var iframe=q('dif'),badge=q('vob');
   if(ce){
     iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation');
   } else {
     iframe.setAttribute('sandbox','allow-scripts allow-same-origin allow-popups allow-top-navigation allow-forms');
   }
-  ov.classList.remove('on');
   badge.style.display=ce?'none':'inline-flex';
   iframe.onload=function(){q('ifldr').style.display='none';};
   iframe.src=d.url;q('ifw').classList.add('on');
@@ -626,52 +621,63 @@ function renderFP(){
   }).join('');
   var permSection=fs.role==='manager'?'<div class="fg"><label class="fl" style="margin-bottom:8px">Dashboard Permissions</label><div class="dpt"><div class="qar"><span style="font-size:11px;color:var(--g400);margin-right:auto">Quick:</span><span class="ql v avbtn">All View</span><span class="ql e aebtn">All Edit</span><span class="ql c clbtn">Clear</span></div><div class="dpth"><span>Dashboard</span><span>👁 View</span><span>✏ Edit</span></div>'+dpRows+'<div class="leg"><span>👁 View = See only</span><span>✏ Edit = Interact</span></div></div></div>':'<div class="an">Admin has full View+Edit access to all dashboards.</div>';
   panel.innerHTML='<div class="fph"><h3>'+(isE?'Edit User':'Add New User')+'</h3><button class="clb closebtn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'
-    +'<div class="fg"><label class="fl">Display Name</label><input class="fi" id="fdn" placeholder="e.g. Rajesh Kumar" value="'+fs.dn+'"/></div>'
-    +'<div class="fg"><label class="fl">Username</label><input class="fi" id="fun" placeholder="e.g. rajesh" value="'+fs.un+'"/></div>'
-    +'<div class="fg"><label class="fl">Password</label><input class="fi" id="fpw" placeholder="Enter password" value="'+fs.pw+'"/></div>'
+    +'<div class="fg"><label class="fl">Display Name</label><input class="fi fdn-input" id="fdn" placeholder="e.g. Rajesh Kumar" value="'+escAttr(fs.dn)+'"/></div>'
+    +'<div class="fg"><label class="fl">Username</label><input class="fi fun-input" id="fun" placeholder="e.g. rajesh" value="'+escAttr(fs.un)+'"/></div>'
+    +'<div class="fg"><label class="fl">Password</label><input class="fi fpw-input" id="fpw2" placeholder="Enter password" value="'+escAttr(fs.pw)+'"/></div>'
     +'<div class="fg"><label class="fl">Role</label><div class="rt"><button class="ro'+(fs.role==='manager'?' am':'')+' rmbtn"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Manager</button><button class="ro'+(fs.role==='admin'?' aa':'')+' rabtn"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>Admin</button></div></div>'
     +permSection
     +'<div class="fe" id="ferr" style="display:none;margin-top:10px"></div>'
     +'<button class="svb savebtn"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>'+(isE?'Update User':'Create User')+'</button>';
+
+  // Bind all events within the panel using panel.querySelector (no global getElementById confusion)
   panel.querySelector('.closebtn').addEventListener('click',resetF);
-  panel.querySelector('.rmbtn').addEventListener('click',function(){fs.role='manager';renderFP();});
-  panel.querySelector('.rabtn').addEventListener('click',function(){fs.role='admin';renderFP();});
-  panel.querySelectorAll('.tvbtn').forEach(function(b){b.addEventListener('click',function(){togV(this.getAttribute('data-id'));});});
-  panel.querySelectorAll('.tebtn').forEach(function(b){b.addEventListener('click',function(){togE(this.getAttribute('data-id'));});});
-  var avb=panel.querySelector('.avbtn');if(avb)avb.addEventListener('click',function(){fs.dp.forEach(function(p){p.view=true;});renderFP();});
-  var aeb=panel.querySelector('.aebtn');if(aeb)aeb.addEventListener('click',function(){fs.dp.forEach(function(p){p.view=true;p.edit=true;});renderFP();});
-  var clb=panel.querySelector('.clbtn');if(clb)clb.addEventListener('click',function(){fs.dp.forEach(function(p){p.view=false;p.edit=false;});renderFP();});
-  var fdn=panel.querySelector('#fdn');fdn.addEventListener('input',function(){fs.dn=this.value;});
-  var fun=panel.querySelector('#fun');fun.addEventListener('input',function(){fs.un=this.value;});
-  var fpw=panel.querySelector('#fpw');fpw.addEventListener('input',function(){fs.pw=this.value;});
-  panel.querySelector('.savebtn').addEventListener('click',saveUser);
+  panel.querySelector('.rmbtn').addEventListener('click',function(){fs.role='manager';syncFsFromPanel(panel);renderFP();});
+  panel.querySelector('.rabtn').addEventListener('click',function(){fs.role='admin';syncFsFromPanel(panel);renderFP();});
+  panel.querySelectorAll('.tvbtn').forEach(function(b){b.addEventListener('click',function(){syncFsFromPanel(panel);togV(this.getAttribute('data-id'));});});
+  panel.querySelectorAll('.tebtn').forEach(function(b){b.addEventListener('click',function(){syncFsFromPanel(panel);togE(this.getAttribute('data-id'));});});
+  var avb=panel.querySelector('.avbtn');if(avb)avb.addEventListener('click',function(){syncFsFromPanel(panel);fs.dp.forEach(function(p){p.view=true;});renderFP();});
+  var aeb=panel.querySelector('.aebtn');if(aeb)aeb.addEventListener('click',function(){syncFsFromPanel(panel);fs.dp.forEach(function(p){p.view=true;p.edit=true;});renderFP();});
+  var clb2=panel.querySelector('.clbtn');if(clb2)clb2.addEventListener('click',function(){syncFsFromPanel(panel);fs.dp.forEach(function(p){p.view=false;p.edit=false;});renderFP();});
+
+  // Live-sync text inputs into fs state
+  panel.querySelector('.fdn-input').addEventListener('input',function(){fs.dn=this.value;});
+  panel.querySelector('.fun-input').addEventListener('input',function(){fs.un=this.value;});
+  panel.querySelector('.fpw-input').addEventListener('input',function(){fs.pw=this.value;});
+
+  panel.querySelector('.savebtn').addEventListener('click',function(){saveUser(panel);});
   w.innerHTML='';w.appendChild(panel);
 }
+
+// Helper: sync text fields from current panel into fs before re-rendering
+function syncFsFromPanel(panel){
+  var dn=panel.querySelector('.fdn-input');
+  var un=panel.querySelector('.fun-input');
+  var pw=panel.querySelector('.fpw-input');
+  if(dn) fs.dn=dn.value;
+  if(un) fs.un=un.value;
+  if(pw) fs.pw=pw.value;
+}
+
+function escAttr(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
 function togV(id){var p=fs.dp.find(function(x){return x.id===id;});if(!p)return;p.view=!p.view;if(!p.view)p.edit=false;renderFP();}
 function togE(id){var p=fs.dp.find(function(x){return x.id===id;});if(!p||!p.view)return;p.edit=!p.edit;renderFP();}
 function startAdd(){fs={editing:null,adding:true,dn:'',un:'',pw:'',role:'manager',dp:newDP()};renderUL();}
 function startEdit(id){var u=allUsers.find(function(x){return x.id===id;});if(!u)return;fs={editing:u,adding:false,dn:u.displayName,un:u.username,pw:u.password,role:u.role,dp:DASH.map(function(d){if(u.role==='admin')return{id:d.id,view:true,edit:true};var p=(u.allowedDashboards||[]).find(function(x){return x.id===d.id;})||{view:false,edit:false};return{id:d.id,view:!!p.view,edit:!!p.edit};})};renderUL();}
 function resetF(){fs={editing:null,adding:false,dn:'',un:'',pw:'',role:'manager',dp:newDP()};renderUL();}
-async function saveUser(){
-  var dnEl=document.getElementById('fdn');
-  var unEl=document.getElementById('fun');
-  var pwEl=document.getElementById('fpw');
-  var ee=document.getElementById('ferr');
-  if(!dnEl||!unEl||!pwEl){alert('Form not found, try again');return;}
-  var dn=dnEl.value.trim();
-  var un=unEl.value.trim();
-  var pw=pwEl.value.trim();
-  if(!dn||!un||!pw){
-    if(ee){ee.textContent='All fields are required';ee.style.display='block';}
-    return;
-  }
+
+// FIX: saveUser now reads from fs state (kept in sync by input listeners + syncFsFromPanel)
+async function saveUser(panel){
+  var dn=(fs.dn||'').trim();
+  var un=(fs.un||'').trim();
+  var pw=(fs.pw||'').trim();
+  var ee=panel?panel.querySelector('#ferr'):null;
+  function showErr(msg){if(ee){ee.textContent=msg;ee.style.display='block';}}
+  if(!dn||!un||!pw){showErr('All fields are required.');return;}
   var dup=allUsers.find(function(u){
     return u.username.toLowerCase()===un.toLowerCase()&&u.id!==(fs.editing?fs.editing.id:null);
   });
-  if(dup){
-    if(ee){ee.textContent='Username already exists';ee.style.display='block';}
-    return;
-  }
+  if(dup){showErr('Username already exists.');return;}
   var dashes=fs.role==='admin'
     ?DASH.map(function(d){return{id:d.id,view:true,edit:true};})
     :JSON.parse(JSON.stringify(fs.dp));
@@ -698,6 +704,7 @@ async function saveUser(){
   await pushU(allUsers);
   resetF();
 }
+
 async function delUser(id){
   if(id==='admin-001'){alert('Cannot delete the default admin!');return;}
   if(confirm('Delete this user?')){allUsers=allUsers.filter(function(u){return u.id!==id;});await pushU(allUsers);if(fs.editing&&fs.editing.id===id)resetF();else renderUL();}
@@ -706,6 +713,38 @@ function renderSet(){
   q('dcount').textContent=DASH.length;
   q('setlinks').innerHTML=DASH.map(function(d){return '<div class="dlr"><div><div class="dln">'+d.ico+' '+d.name+'</div><div class="dlu">'+d.url+'</div></div><a class="dlo" href="'+d.url+'" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Open</a></div>';}).join('');
 }
+
+// FIX: Attach all persistent UI listeners once, not inside bootApp's else branch
+function attachPersistentListeners(){
+  q('lbtn').addEventListener('click',doLogin);
+  q('lu').addEventListener('keydown',function(e){if(e.key==='Enter')q('lp').focus();});
+  q('lp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+  q('eyeb').addEventListener('click',function(){
+    var i=q('lp'),ico=q('eyeico');
+    if(i.type==='password'){i.type='text';ico.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';}
+    else{i.type='password';ico.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';}
+  });
+  q('sbtog').addEventListener('click',function(){sbCol=!sbCol;q('sb').classList.toggle('col',sbCol);});
+  // FIX: Logout buttons always attached here, work regardless of auto-login path
+  q('lgout').addEventListener('click',doLogout);
+  q('dlgout').addEventListener('click',doLogout);
+  q('addbtn').addEventListener('click',startAdd);
+  q('usearch').addEventListener('input',renderUL);
+  q('mobmenu').addEventListener('click',openDr);
+  q('drov').addEventListener('click',closeDr);
+  q('denidbtn').addEventListener('click',function(){navigate('home');});
+  q('refbtn').addEventListener('click',function(){if(curDash){q('ifldr').style.display='flex';q('dif').src=curDash.url;}});
+  q('fsbtn').addEventListener('click',function(){
+    if(!curDash)return;
+    q('fsic').textContent=curDash.ico;q('fstx').textContent=curDash.name;q('fsext').href=curDash.url;
+    q('fsif').setAttribute('sandbox',cEdit(curUser,curDash.id)?'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation':'allow-scripts allow-same-origin allow-popups allow-top-navigation');
+    q('fsif').src=curDash.url;q('fsw').classList.add('on');
+  });
+  q('fscls').addEventListener('click',function(){q('fsw').classList.remove('on');q('fsif').src='';});
+  q('fsref').addEventListener('click',function(){if(curDash)q('fsif').src=curDash.url;});
+  q('voo').addEventListener('click',function(){var m=q('vom');m.classList.add('on');setTimeout(function(){m.classList.remove('on');},2500);});
+}
+
 async function doLogin(){
   var u=q('lu').value.trim(),p=q('lp').value,rem=q('rem').checked;
   if(!u||!p){q('lerrmsg').textContent='Please enter username and password.';q('lerr').style.display='flex';return;}
@@ -716,22 +755,30 @@ async function doLogin(){
   else{q('lerrmsg').textContent='Invalid username or password.';q('lerr').style.display='flex';btn.disabled=false;btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Sign In';}
 }
 function doLogout(){
-  clearSes();curUser=null;
+  clearSes();curUser=null;curDash=null;
   q('login').classList.add('on');q('app').classList.remove('on');
   q('lu').value='';q('lp').value='';q('lerr').style.display='none';q('rem').checked=false;q('ls').style.display='none';
+  // Reset iframe to avoid stale content
+  q('dif').src='about:blank';q('fsif').src='about:blank';
+  q('ifw').classList.remove('on');
 }
-function resetToken(){
-  if(confirm('Reset GitHub token? You will need to enter it again.')){
-    localStorage.removeItem('vtp_ghtoken');
-    location.reload();
-  }
+function startApp(){
+  q('ls').style.display='none';
+  q('login').classList.remove('on');
+  q('app').classList.add('on');
+  q('sbav').textContent=ini(curUser.displayName);
+  q('sbname').textContent=curUser.displayName;
+  q('sbrole').textContent=curUser.role;
+  q('drav').textContent=ini(curUser.displayName);
+  q('drname').textContent=curUser.displayName;
+  q('drrole').textContent=curUser.role;
+  q('mobav').textContent=ini(curUser.displayName);
+  renderHome();renderSet();navigate('home');
 }
-function startApp(){q('ls').style.display='none';q('login').classList.remove('on');q('app').classList.add('on');q('sbav').textContent=ini(curUser.displayName);q('sbname').textContent=curUser.displayName;q('sbrole').textContent=curUser.role;q('drav').textContent=ini(curUser.displayName);q('drname').textContent=curUser.displayName;q('drrole').textContent=curUser.role;q('mobav').textContent=ini(curUser.displayName);renderHome();renderSet();navigate('home');}
 function openDr(){q('drawer').classList.add('on');q('drov').classList.add('on');}
 function closeDr(){q('drawer').classList.remove('on');q('drov').classList.remove('on');}
 
 window.addEventListener('load',async function(){
-  // Check token first
   var savedToken=localStorage.getItem('vtp_ghtoken');
   if(!savedToken){
     q('ls').style.display='none';
@@ -752,29 +799,19 @@ window.addEventListener('load',async function(){
 });
 
 async function bootApp(){
+  // FIX: Attach all listeners upfront — before checking session — so logout always works
+  attachPersistentListeners();
+
   q('ls').style.display='flex';
   q('ltxt').textContent='Loading users from cloud...';
   allUsers=await fetchU();
   var uid=getUID();
-  if(uid){var found=allUsers.find(function(u){return u.id===uid;});if(found){curUser=found;startApp();return;}}
-  q('ls').style.display='none';q('login').classList.add('on');
-  q('lbtn').addEventListener('click',doLogin);
-  q('lu').addEventListener('keydown',function(e){if(e.key==='Enter')q('lp').focus();});
-  q('lp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-  q('eyeb').addEventListener('click',function(){var i=q('lp'),ico=q('eyeico');if(i.type==='password'){i.type='text';ico.innerHTML='<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';}else{i.type='password';ico.innerHTML='<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';}});
-  q('sbtog').addEventListener('click',function(){sbCol=!sbCol;q('sb').classList.toggle('col',sbCol);});
-  q('lgout').addEventListener('click',doLogout);
-  q('dlgout').addEventListener('click',doLogout);
-  q('addbtn').addEventListener('click',startAdd);
-  q('usearch').addEventListener('input',renderUL);
-  q('mobmenu').addEventListener('click',openDr);
-  q('drov').addEventListener('click',closeDr);
-  q('denidbtn').addEventListener('click',function(){navigate('home');});
-  q('refbtn').addEventListener('click',function(){if(curDash){q('ifldr').style.display='flex';q('dif').src=curDash.url;}});
-  q('fsbtn').addEventListener('click',function(){if(!curDash)return;q('fsic').textContent=curDash.ico;q('fstx').textContent=curDash.name;q('fsext').href=curDash.url;q('fsif').setAttribute('sandbox',cEdit(curUser,curDash.id)?'allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation':'allow-scripts allow-same-origin allow-popups allow-top-navigation');q('fsif').src=curDash.url;q('fsw').classList.add('on');});
-  q('fscls').addEventListener('click',function(){q('fsw').classList.remove('on');q('fsif').src='';});
-  q('fsref').addEventListener('click',function(){if(curDash)q('fsif').src=curDash.url;});
-  q('voo').addEventListener('click',function(){var m=q('vom');m.classList.add('on');setTimeout(function(){m.classList.remove('on');},2500);});
+  if(uid){
+    var found=allUsers.find(function(u){return u.id===uid;});
+    if(found){curUser=found;startApp();return;}
+  }
+  q('ls').style.display='none';
+  q('login').classList.add('on');
 }
 </script>
 </body>
