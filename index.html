@@ -604,13 +604,22 @@ function startAdd(){fs={editing:null,adding:true,dn:'',un:'',pw:'',role:'manager
 function startEdit(id){var u=allUsers.find(function(x){return x.id===id;});if(!u)return;fs={editing:u,adding:false,dn:u.displayName,un:u.username,pw:u.password,role:u.role,dp:DASH.map(function(d){if(u.role==='admin')return{id:d.id,view:true,edit:true};var p=(u.allowedDashboards||[]).find(function(x){return x.id===d.id;})||{view:false,edit:false};return{id:d.id,view:!!p.view,edit:!!p.edit};})};renderUL();}
 function resetF(){fs={editing:null,adding:false,dn:'',un:'',pw:'',role:'manager',dp:newDP()};renderUL();}
 async function saveUser(){
-  var ee=q('ferr');
-  if(!fs.dn.trim()||!fs.un.trim()||!fs.pw.trim()){ee.textContent='All fields are required';ee.style.display='block';return;}
-  var dup=allUsers.find(function(u){return u.username.toLowerCase()===fs.un.toLowerCase()&&u.id!==(fs.editing&&fs.editing.id);});
+  // Read directly from DOM - most reliable
+  var dnEl=document.getElementById('fdn');
+  var unEl=document.getElementById('fun');
+  var pwEl=document.getElementById('fpw');
+  var ee=document.getElementById('ferr');
+  if(!dnEl||!unEl||!pwEl){alert('Form error - please try again');return;}
+  var dn=dnEl.value.trim();
+  var un=unEl.value.trim();
+  var pw=pwEl.value.trim();
+  fs.dn=dn; fs.un=un; fs.pw=pw;
+  if(!dn||!un||!pw){ee.textContent='All fields are required';ee.style.display='block';return;}
+  var dup=allUsers.find(function(u){return u.username.toLowerCase()===un.toLowerCase()&&u.id!==(fs.editing&&fs.editing.id);});
   if(dup){ee.textContent='Username already exists';ee.style.display='block';return;}
   var dashes=fs.role==='admin'?DASH.map(function(d){return{id:d.id,view:true,edit:true};}):fs.dp;
-  if(fs.editing){var i=allUsers.findIndex(function(u){return u.id===fs.editing.id;});if(i>-1)allUsers[i]=Object.assign({},fs.editing,{username:fs.un,password:fs.pw,displayName:fs.dn,role:fs.role,allowedDashboards:dashes});}
-  else allUsers.push({id:'u'+Date.now(),username:fs.un,password:fs.pw,displayName:fs.dn,role:fs.role,allowedDashboards:dashes,createdAt:new Date().toISOString()});
+  if(fs.editing){var i=allUsers.findIndex(function(u){return u.id===fs.editing.id;});if(i>-1)allUsers[i]=Object.assign({},fs.editing,{username:un,password:pw,displayName:dn,role:fs.role,allowedDashboards:dashes});}
+  else allUsers.push({id:'u'+Date.now(),username:un,password:pw,displayName:dn,role:fs.role,allowedDashboards:dashes,createdAt:new Date().toISOString()});
   await pushU(allUsers);resetF();
 }
 async function delUser(id){
