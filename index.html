@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#2563eb">
 <title>Vishal Technopower — Master Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -68,18 +69,15 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 @media(min-width:1024px){.sidebar{transform:translateX(0)!important}}
 .sb-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:490}
 .sb-ov.show{display:block}
-
 .sb-head{padding:18px 20px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:12px}
 .sb-logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sb-logo svg{width:18px;height:18px}
 .sb-brand{font-size:13px;font-weight:800;color:#1e293b;line-height:1.2}
 .sb-brand small{font-size:9px;color:#94a3b8;font-weight:600;display:block;letter-spacing:1px;text-transform:uppercase}
-
 .sb-user{padding:16px 20px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;gap:10px}
 .sb-av{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
 .sb-info h4{font-size:13px;font-weight:700;color:#1e293b}
 .sb-info p{font-size:10px;color:#94a3b8}
-
 .sb-nav{flex:1;padding:8px 0}
 .sb-lbl{padding:10px 20px 4px;font-size:9px;font-weight:800;color:#cbd5e1;text-transform:uppercase;letter-spacing:1.5px}
 .nav-i{padding:9px 20px;display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;font-weight:500;color:#64748b;transition:all .2s;border-left:3px solid transparent}
@@ -88,7 +86,6 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 .nav-i .ni{width:28px;height:28px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .nav-i.act .ni{background:#dbeafe}
 .nav-i .nb{margin-left:auto;padding:2px 8px;border-radius:8px;font-size:9px;font-weight:700;background:#fef3c7;color:#d97706}
-
 .sb-foot{padding:14px 20px;border-top:1px solid #f1f5f9}
 .sb-foot a{font-size:11px;color:#94a3b8;cursor:pointer;display:flex;align-items:center;gap:6px;padding:4px 0;text-decoration:none;transition:color .2s}
 .sb-foot a:hover{color:#dc2626}
@@ -96,7 +93,6 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 /* Main area */
 .main-area{margin-left:0;min-height:100vh}
 @media(min-width:1024px){.main-area{margin-left:260px}}
-
 .topbar{background:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:400}
 .tb-left{display:flex;align-items:center;gap:10px}
 .tb-menu{width:36px;height:36px;border-radius:10px;background:#f1f5f9;border:none;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer}
@@ -105,7 +101,6 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 .tb-left p{font-size:10px;color:#94a3b8}
 .tb-av{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;cursor:pointer;transition:transform .2s}
 .tb-av:hover{transform:scale(1.08)}
-
 .content{padding:20px}
 @media(min-width:1024px){.content{padding:24px}}
 
@@ -130,7 +125,6 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 .dv-edit-badge{padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700}
 .dv-frame-wrap{position:relative;flex:1;overflow:hidden}
 .dv-frame{border:none;width:100%;height:100%}
-/* View-only overlay — blocks ALL clicks, allows scroll */
 .dv-overlay{position:absolute;inset:0;z-index:10;display:none;cursor:default}
 .dv-overlay.on{display:block}
 .dv-overlay-tag{position:absolute;bottom:16px;right:16px;background:rgba(37,99,235,.92);color:#fff;padding:8px 18px;border-radius:10px;font-size:12px;font-weight:800;letter-spacing:.5px;box-shadow:0 4px 16px rgba(37,99,235,.3);display:flex;align-items:center;gap:6px;z-index:11;user-select:none;pointer-events:none}
@@ -151,17 +145,88 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 .utbl th{background:#f8fafc;padding:10px 12px;text-align:left;font-size:10px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #e2e8f0}
 .utbl td{padding:10px 12px;font-size:12px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
 .utbl tr:hover td{background:#f8fafc}
-
 .pchip{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:8px;font-size:9px;font-weight:700;margin:1px;background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
 .pchip.edit{background:#fef3c7;color:#d97706;border-color:#fcd34d}
 .pchip .rx{cursor:pointer;color:#dc2626;margin-left:2px;font-size:10px}
-
 .tgl{position:relative;width:36px;height:20px;cursor:pointer}
 .tgl input{opacity:0;width:0;height:0}
 .tgl span{position:absolute;inset:0;background:#cbd5e1;border-radius:20px;transition:.25s}
 .tgl span::before{content:'';position:absolute;width:16px;height:16px;left:2px;bottom:2px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 .tgl input:checked+span{background:#059669}
 .tgl input:checked+span::before{transform:translateX(16px)}
+
+/* ===== QUERY SYSTEM ADD-ON ===== */
+.query-fab{position:fixed;bottom:28px;right:28px;z-index:8500;display:none}
+.query-fab-btn{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#4f46e5);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 6px 24px rgba(124,58,237,.35);transition:transform .2s,box-shadow .2s;position:relative}
+.query-fab-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 10px 32px rgba(124,58,237,.45)}
+.query-fab-btn:active{transform:scale(.95)}
+.query-fab-badge{position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border-radius:10px;font-size:9px;font-weight:800;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid #fff;animation:badgePop .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes badgePop{from{transform:scale(0)}to{transform:scale(1)}}
+.query-panel{position:fixed;right:0;bottom:0;top:0;width:100%;max-width:420px;background:#fff;z-index:8600;transform:translateX(110%);transition:transform .35s cubic-bezier(.32,1,.5,1);display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,.12)}
+.query-panel.open{transform:translateX(0)}
+.qp-head{padding:18px 20px;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
+.qp-head h3{font-size:15px;font-weight:800}
+.qp-head p{font-size:10px;opacity:.6;margin-top:2px}
+.qp-close{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.qp-tabs{display:flex;border-bottom:2px solid #f1f5f9;flex-shrink:0;background:#fff}
+.qp-tab{flex:1;padding:12px;font-size:11px;font-weight:700;color:#94a3b8;border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:inherit;transition:all .2s}
+.qp-tab.act{color:#7c3aed;border-bottom-color:#7c3aed}
+.qp-body{flex:1;overflow-y:auto;padding:14px}
+.q-card{background:#f8fafc;border-radius:14px;padding:14px;margin-bottom:10px;border:1px solid #e2e8f0;transition:all .2s;cursor:pointer}
+.q-card:hover{border-color:#c4b5fd;background:#faf5ff}
+.q-card.resolved{opacity:.6}
+.q-card-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.q-av{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
+.q-meta{flex:1;min-width:0}
+.q-meta h4{font-size:12px;font-weight:700;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.q-meta p{font-size:9px;color:#94a3b8}
+.q-status{padding:3px 8px;border-radius:8px;font-size:9px;font-weight:700}
+.q-status.open{background:#fef3c7;color:#d97706}
+.q-status.resolved{background:#dcfce7;color:#16a34a}
+.q-msg{font-size:12px;color:#475569;line-height:1.5;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.q-reply-preview{font-size:10px;color:#7c3aed;font-weight:600;background:#f5f3ff;padding:5px 8px;border-radius:7px;border-left:2px solid #7c3aed}
+.qd-panel{position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:16px}
+.qd-panel.show{display:flex}
+.qd-box{background:#fff;border-radius:20px;width:100%;max-width:500px;max-height:88vh;overflow-y:auto;animation:moPop .3s both}
+.qd-head{padding:20px;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:start}
+.qd-body{padding:20px}
+.qd-bubble{padding:12px 14px;border-radius:12px;margin-bottom:10px;font-size:12px;line-height:1.5}
+.qd-bubble.user{background:#eff6ff;border:1px solid #bfdbfe;border-bottom-left-radius:3px}
+.qd-bubble.admin{background:#f5f3ff;border:1px solid #ddd6fe;border-bottom-right-radius:3px;margin-left:20px}
+.qd-reply-box{padding:14px;border-top:1px solid #f1f5f9}
+.qd-reply-box textarea{width:100%;padding:10px 12px;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-family:inherit;resize:none;outline:none;min-height:60px;transition:border .2s;color:#1e293b}
+.qd-reply-box textarea:focus{border-color:#7c3aed}
+.qd-btns{display:flex;gap:8px;margin-top:8px}
+.qd-btn-send{flex:1;padding:9px;border:none;border-radius:9px;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.qd-btn-resolve{padding:9px 14px;border:1.5px solid #16a34a;border-radius:9px;background:#f0fdf4;color:#16a34a;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.q-cat{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.q-cat-btn{padding:4px 10px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;font-size:10px;font-weight:700;color:#64748b;cursor:pointer;font-family:inherit;transition:all .15s}
+.q-cat-btn.sel{background:#7c3aed;border-color:#7c3aed;color:#fff}
+
+/* ===== PWA ADD-ON ===== */
+.pwa-banner{position:fixed;top:0;left:0;right:0;z-index:9100;background:linear-gradient(135deg,#1e293b,#334155);padding:12px 18px;display:none;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.pwa-banner.show{display:flex}
+.pwa-banner-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#7c3aed);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pwa-banner-txt{flex:1;min-width:0}
+.pwa-banner-txt h4{font-size:12px;font-weight:800;color:#fff}
+.pwa-banner-txt p{font-size:10px;color:#94a3b8;margin-top:1px}
+.pwa-install-btn{padding:7px 14px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#4f46e5);border:none;color:#fff;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap;font-family:inherit}
+.pwa-banner-close{width:26px;height:26px;border-radius:7px;background:rgba(255,255,255,.08);border:none;color:#94a3b8;cursor:pointer;font-size:14px;flex-shrink:0}
+.pwa-guide-panel{position:fixed;inset:0;z-index:9200;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:20px}
+.pwa-guide-panel.show{display:flex}
+.pwa-guide-box{background:#fff;border-radius:24px;width:100%;max-width:380px;overflow:hidden;animation:moPop .3s both}
+.pgb-head{padding:24px 24px 18px;text-align:center;background:linear-gradient(135deg,#1e293b,#334155)}
+.pgb-head h3{font-size:16px;font-weight:800;color:#fff;margin-bottom:4px}
+.pgb-head p{font-size:11px;color:#94a3b8}
+.pgb-tabs{display:flex;background:#f8fafc;border-bottom:1px solid #e2e8f0}
+.pgb-tab{flex:1;padding:10px;font-size:10px;font-weight:700;border:none;background:none;cursor:pointer;color:#94a3b8;border-bottom:2px solid transparent;font-family:inherit;transition:all .2s}
+.pgb-tab.act{color:#2563eb;border-bottom-color:#2563eb;background:#fff}
+.pgb-body{padding:20px}
+.pgb-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:14px}
+.pgb-step-num{width:24px;height:24px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pgb-step-txt h5{font-size:12px;font-weight:700;color:#1e293b;margin-bottom:2px}
+.pgb-step-txt p{font-size:11px;color:#64748b;line-height:1.4}
+.pgb-close-btn{width:100%;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,#1e293b,#334155);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:4px}
 
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#ddd;border-radius:5px}
 .fade-in{animation:fadeIn .4s both}
@@ -178,7 +243,7 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
   <div class="sp-bar"><div class="sp-bar-fill"></div></div>
 </div>
 
-<!-- GITHUB TOKEN SETUP (one-time) -->
+<!-- GITHUB TOKEN SETUP -->
 <div id="tokenScreen" style="position:fixed;inset:0;background:linear-gradient(135deg,#e0e7ff,#f0f9ff);display:none;align-items:center;justify-content:center;z-index:99998;padding:20px">
   <div style="background:#fff;border-radius:20px;padding:36px;width:100%;max-width:420px;box-shadow:0 20px 40px rgba(0,0,0,.12)">
     <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#4f46e5);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
@@ -200,8 +265,7 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 <div id="loginScreen">
   <div class="login-wrap">
     <div class="login-left">
-      <div class="ll-orb"></div>
-      <div class="ll-orb"></div>
+      <div class="ll-orb"></div><div class="ll-orb"></div>
       <div class="ll-logo"><svg viewBox="0 0 64 64" fill="none"><path d="M20 32l8 8 16-16" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="ll-title">Vishal Technopower</div>
       <div class="ll-sub">Master Control Panel</div>
@@ -214,19 +278,10 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
     </div>
     <div class="login-right">
       <div class="login-card">
-        <div class="lc-head">
-          <h1>Sign In</h1>
-          <p>Access your dashboards</p>
-        </div>
+        <div class="lc-head"><h1>Sign In</h1><p>Access your dashboards</p></div>
         <div id="loginErr" class="lc-err"></div>
-        <div class="lc-group">
-          <label>Username</label>
-          <input id="inUser" type="text" class="lc-input" placeholder="Enter username" autocomplete="off">
-        </div>
-        <div class="lc-group">
-          <label>Password</label>
-          <input id="inPass" type="password" class="lc-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
-        </div>
+        <div class="lc-group"><label>Username</label><input id="inUser" type="text" class="lc-input" placeholder="Enter username" autocomplete="off"></div>
+        <div class="lc-group"><label>Password</label><input id="inPass" type="password" class="lc-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"></div>
         <button class="lc-btn" onclick="doLogin()">Sign In →</button>
         <div class="lc-foot">Default: <b>admin</b> / <b>admin123</b></div>
       </div>
@@ -262,8 +317,9 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
       <div class="nav-i" onclick="goAdmin()" data-nav="admin" data-perm="admin_panel"><div class="ni">⚙️</div>Admin Panel<span class="nb">Admin</span></div>
     </div>
     <div class="sb-foot">
+      <a onclick="showPwaGuide()" style="color:#7c3aed;font-weight:700">📲 Desktop Shortcut</a>
       <a onclick="doLogout()">🚪 Sign Out</a>
-      <a onclick="resetToken()" style="margin-top:2px;color:#cbd5e1;font-size:10px">🔑 Reset GitHub Token</a>
+      <a onclick="resetToken()" style="color:#cbd5e1;font-size:10px">🔑 Reset GitHub Token</a>
     </div>
   </div>
 
@@ -290,22 +346,15 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
     <span class="dv-edit-badge" id="dvBadge"></span>
     <a class="dv-newtab" id="dvNewTab" href="#" target="_blank">↗ New Tab</a>
   </div>
-
-  <!-- View-only search + filter toolbar -->
   <div id="voToolbar" style="display:none;align-items:center;gap:8px;padding:7px 12px;background:#fffbeb;border-bottom:1px solid #fde68a;flex-shrink:0">
     <span style="font-size:12px;font-weight:800;color:#92400e;white-space:nowrap">🔍 Search:</span>
-    <input id="voSearch" placeholder="Type to search in dashboard..." oninput="doVoSearch(this.value)"
-      style="flex:1;padding:6px 10px;border:1.5px solid #fcd34d;border-radius:8px;font-size:12px;font-family:inherit;outline:none;color:#1e293b;background:#fff">
-    <select id="voFilter" onchange="doVoFilter(this.value)"
-      style="padding:6px 10px;border:1.5px solid #fcd34d;border-radius:8px;font-size:11px;font-weight:700;background:#fff;color:#92400e;font-family:inherit;outline:none;cursor:pointer">
+    <input id="voSearch" placeholder="Type to search in dashboard..." oninput="doVoSearch(this.value)" style="flex:1;padding:6px 10px;border:1.5px solid #fcd34d;border-radius:8px;font-size:12px;font-family:inherit;outline:none;color:#1e293b;background:#fff">
+    <select id="voFilter" onchange="doVoFilter(this.value)" style="padding:6px 10px;border:1.5px solid #fcd34d;border-radius:8px;font-size:11px;font-weight:700;background:#fff;color:#92400e;font-family:inherit;outline:none;cursor:pointer">
       <option value="">All Sections</option>
     </select>
     <button id="voClear" onclick="clearVoSearch()" style="display:none;padding:5px 10px;border-radius:7px;border:none;background:#fef3c7;color:#92400e;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">✕ Clear</button>
   </div>
-
-  <!-- Quick section tabs (view-only) -->
   <div id="voTabs" style="display:none;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#f8fafc;border-bottom:1px solid #e2e8f0;flex-shrink:0"></div>
-
   <div class="dv-frame-wrap">
     <div class="dv-overlay" id="dvOverlay">
       <div class="dv-overlay-tag">🔒 VIEW ONLY — Editing Blocked</div>
@@ -320,17 +369,113 @@ body{font-family:'Inter',sans-serif;background:#f4f6fa;color:#1e293b;overflow-x:
 <!-- TOAST -->
 <div class="toast" id="toastEl"></div>
 
+<!-- ===== ADD-ON: PWA INSTALL BANNER ===== -->
+<div class="pwa-banner" id="pwaBanner">
+  <div class="pwa-banner-icon">⚡</div>
+  <div class="pwa-banner-txt">
+    <h4>Install as Desktop App</h4>
+    <p>Bar bar link dhundne ki zaroorat nahi — ek click se khulega</p>
+  </div>
+  <button class="pwa-install-btn" onclick="pwaTriggerInstall()">📲 Install</button>
+  <button class="pwa-banner-close" onclick="pwaDismiss()">✕</button>
+</div>
+
+<!-- ===== ADD-ON: PWA GUIDE PANEL ===== -->
+<div class="pwa-guide-panel" id="pwaGuide">
+  <div class="pwa-guide-box">
+    <div class="pgb-head">
+      <div style="font-size:36px;margin-bottom:10px">🖥️</div>
+      <h3>Desktop Shortcut Setup</h3>
+      <p>Apne browser ke hisab se steps follow karo</p>
+    </div>
+    <div class="pgb-tabs">
+      <button class="pgb-tab act" onclick="pgbTab('chrome')">Chrome</button>
+      <button class="pgb-tab" onclick="pgbTab('edge')">Edge</button>
+      <button class="pgb-tab" onclick="pgbTab('firefox')">Firefox</button>
+      <button class="pgb-tab" onclick="pgbTab('mobile')">Mobile</button>
+    </div>
+    <div class="pgb-body">
+      <div id="pgb-chrome">
+        <div class="pgb-step"><div class="pgb-step-num">1</div><div class="pgb-step-txt"><h5>Address Bar dekho</h5><p>Browser ke top-right mein <b>⊕ Install</b> icon dikhega</p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">2</div><div class="pgb-step-txt"><h5>Install par click karo</h5><p>Ya phir: <b>⋮ Menu → Cast, Save & Share → Install Page as App</b></p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">3</div><div class="pgb-step-txt"><h5>Desktop icon aa jayega</h5><p>"Vishal Technopower" naam se desktop shortcut ban jayega</p></div></div>
+      </div>
+      <div id="pgb-edge" style="display:none">
+        <div class="pgb-step"><div class="pgb-step-num">1</div><div class="pgb-step-txt"><h5>Settings menu kholo</h5><p>Top-right mein <b>⋯ (3 dots)</b> par click karo</p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">2</div><div class="pgb-step-txt"><h5>Apps option dhundo</h5><p><b>Apps → Install this site as an app</b> par click karo</p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">3</div><div class="pgb-step-txt"><h5>Taskbar mein pin karo</h5><p>Install hone ke baad taskbar ya desktop mein pin kar sakte ho</p></div></div>
+      </div>
+      <div id="pgb-firefox" style="display:none">
+        <div class="pgb-step"><div class="pgb-step-num">1</div><div class="pgb-step-txt"><h5>Bookmarks mein save karo</h5><p>Firefox mein PWA nahi hota, isliye <b>Ctrl+D</b> se bookmark karo</p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">2</div><div class="pgb-step-txt"><h5>Desktop shortcut banao</h5><p>Bookmark ko desktop par <b>drag and drop</b> karo shortcut ke liye</p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">3</div><div class="pgb-step-txt"><h5>Ya Chrome use karo</h5><p>Best experience ke liye Chrome ya Edge mein open karo</p></div></div>
+      </div>
+      <div id="pgb-mobile" style="display:none">
+        <div class="pgb-step"><div class="pgb-step-num">1</div><div class="pgb-step-txt"><h5>Browser menu kholo</h5><p>Chrome: <b>Menu (3 dots)</b> | Safari: <b>Share button</b></p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">2</div><div class="pgb-step-txt"><h5>Home Screen option</h5><p><b>"Add to Home Screen"</b> tap karo</p></div></div>
+        <div class="pgb-step"><div class="pgb-step-num">3</div><div class="pgb-step-txt"><h5>App jaisi feel milegi</h5><p>Home screen par icon aa jayega, full screen mein khulega</p></div></div>
+      </div>
+      <button class="pgb-close-btn" onclick="document.getElementById('pwaGuide').classList.remove('show')">Samajh Gaya!</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADD-ON: QUERY FAB ===== -->
+<div class="query-fab" id="queryFab">
+  <button class="query-fab-btn" onclick="openQueryPanel()" title="Query / Help">
+    💬
+    <span class="query-fab-badge" id="qFabBadge" style="display:none">0</span>
+  </button>
+</div>
+
+<!-- ===== ADD-ON: QUERY SLIDE PANEL ===== -->
+<div class="query-panel" id="queryPanel">
+  <div class="qp-head">
+    <div>
+      <h3 id="qpHeadTitle">💬 Queries & Help</h3>
+      <p id="qpHeadSub">Admin ko query bhejo</p>
+    </div>
+    <button class="qp-close" onclick="closeQueryPanel()">✕</button>
+  </div>
+  <div class="qp-tabs" id="qpTabs">
+    <button class="qp-tab act" onclick="qpSwitchTab('my')" id="qtMy">Meri Queries</button>
+    <button class="qp-tab" onclick="qpSwitchTab('all')" id="qtAll" style="display:none">Sabki Queries</button>
+    <button class="qp-tab" onclick="qpSwitchTab('new')" id="qtNew">+ Nai Query</button>
+  </div>
+  <div class="qp-body" id="qpBody"></div>
+</div>
+
+<!-- ===== ADD-ON: QUERY DETAIL ===== -->
+<div class="qd-panel" id="qdPanel">
+  <div class="qd-box">
+    <div class="qd-head">
+      <div>
+        <h3 id="qdTitle" style="font-size:14px;font-weight:800;color:#1e293b"></h3>
+        <div id="qdMeta" style="font-size:10px;color:#94a3b8;margin-top:3px"></div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <span id="qdStatusBadge" class="q-status open"></span>
+        <button onclick="document.getElementById('qdPanel').classList.remove('show')" style="width:28px;height:28px;border-radius:7px;background:#f1f5f9;border:none;cursor:pointer;font-size:12px;color:#64748b">✕</button>
+      </div>
+    </div>
+    <div class="qd-body" id="qdBody"></div>
+    <div class="qd-reply-box" id="qdReplyBox">
+      <textarea id="qdReplyTxt" placeholder="Reply likhein..." rows="2"></textarea>
+      <div class="qd-btns">
+        <button class="qd-btn-send" onclick="sendQueryReply()">📤 Reply Bhejo</button>
+        <button class="qd-btn-resolve" id="qdResolveBtn" onclick="resolveQuery()">✅ Resolve</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-// ===== CONFIG =====
+// ===== ORIGINAL CONFIG =====
 const DASH={
-  account_dashboard:{name:'Account Dashboard',icon:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Outstanding, Bills, BG, Deposits, Invoices, Stock, LD/SD Aging, Revenue',clr:'c1',
-    tabs:['Dashboard','Outstanding','Bill Details','BG Report','Deposits','Invoices','Stock Sheet','LD Aging','Pending Bills','SD Aging','Revenue','Pantry Sync']},
-  leave_management:{name:'Leave Management',icon:'📋',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Apply Leave, HOD Approval, Manager Approval, History',clr:'c2',
-    tabs:['Apply Leave','My Leaves','Pending Approvals','Leave History']},
-  expense_management:{name:'Expense Management',icon:'💰',url:'https://script.google.com/a/macros/vishaltechnopower.com/s/AKfycbw_nWSnFVvG2wdCMLpyOzVUR_npJ3PiPKDQpGDZpPFNSUgAW_XoNWwY4jzAJwowBlJElw/exec',desc:'Submit Expenses, Approvals, Reports, Payments',clr:'c3',
-    tabs:['Submit Expense','My Expenses','Approvals','Reports']},
-  vendor_payment:{name:'Vendor Payment',icon:'🏢',url:'https://vishaltechnopowers.is-a.dev/venderdatabase/',desc:'Vendor Database, Payment Entries, Bank Details',clr:'c4',
-    tabs:['Vendors','Payments','Bank Details']}
+  account_dashboard:{name:'Account Dashboard',icon:'📊',url:'https://vishaltechnopowers.is-a.dev/vishal-dashboard/',desc:'Outstanding, Bills, BG, Deposits, Invoices, Stock, LD/SD Aging, Revenue',clr:'c1',tabs:['Dashboard','Outstanding','Bill Details','BG Report','Deposits','Invoices','Stock Sheet','LD Aging','Pending Bills','SD Aging','Revenue','Pantry Sync']},
+  leave_management:{name:'Leave Management',icon:'📋',url:'https://script.google.com/macros/s/AKfycbwR_NLgSaw1FjwarAAP1BghvIV3WpJwWjdSxVH3mKzLu8mpFUl7613Wtdjhws2y6sH-/exec',desc:'Apply Leave, HOD Approval, Manager Approval, History',clr:'c2',tabs:['Apply Leave','My Leaves','Pending Approvals','Leave History']},
+  expense_management:{name:'Expense Management',icon:'💰',url:'https://script.google.com/a/macros/vishaltechnopower.com/s/AKfycbw_nWSnFVvG2wdCMLpyOzVUR_npJ3PiPKDQpGDZpPFNSUgAW_XoNWwY4jzAJwowBlJElw/exec',desc:'Submit Expenses, Approvals, Reports, Payments',clr:'c3',tabs:['Submit Expense','My Expenses','Approvals','Reports']},
+  vendor_payment:{name:'Vendor Payment',icon:'🏢',url:'https://vishaltechnopowers.is-a.dev/venderdatabase/',desc:'Vendor Database, Payment Entries, Bank Details',clr:'c4',tabs:['Vendors','Payments','Bank Details']}
 };
 const DKEYS=['account_dashboard','leave_management','expense_management','vendor_payment'];
 const ALL_P=['account_dashboard','leave_management','expense_management','vendor_payment','admin_panel'];
@@ -344,8 +489,12 @@ const DEFAULT_USERS=[
 
 let CU=null;
 let allUsers=[];
+let allQueries=[];
 let autoSyncTimer=null;
 let lastEtag='';
+let currentQueryId=null;
+let selectedCat='General';
+const Q_CATS=['General','Technical','Leave','Payment','Other'];
 
 // ===== GITHUB CONFIG =====
 const GH_OWNER='systemhaibhai03-cloud';
@@ -354,7 +503,7 @@ const GH_FILE='vtp_users_v2.json';
 const GH_API=`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_FILE}`;
 let GH_TOKEN=localStorage.getItem('vtp_ghtoken')||'';
 
-// ===== GITHUB SYNC =====
+// ===== GITHUB SYNC (queries bhi save hoti hain) =====
 async function ghFetch(useEtag=true){
   try{
     const headers={'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'};
@@ -362,31 +511,37 @@ async function ghFetch(useEtag=true){
     const r=await fetch(GH_API,{headers});
     if(r.status===304) return null;
     if(!r.ok){
-      if(r.status===404){await ghPush(DEFAULT_USERS);return[...DEFAULT_USERS];}
+      if(r.status===404){await ghPushAll(DEFAULT_USERS,[]);return[...DEFAULT_USERS];}
       return null;
     }
     const etag=r.headers.get('ETag');if(etag) lastEtag=etag;
     const d=await r.json();
-    return JSON.parse(atob(d.content.replace(/\n/g,''))).users||[...DEFAULT_USERS];
+    const parsed=JSON.parse(atob(d.content.replace(/\n/g,'')));
+    allQueries=parsed.queries||[];
+    updateQueryBadge();
+    return parsed.users||[...DEFAULT_USERS];
   }catch(e){console.warn('[GH] fetch error',e);return null;}
 }
-async function ghPush(users){
+async function ghPush(users){return ghPushAll(users,allQueries);}
+async function ghPushAll(users,queries){
   setSyncState('syncing');
   try{
     const r1=await fetch(GH_API,{headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json'}});
     let sha='';if(r1.ok){const d1=await r1.json();sha=d1.sha;}
-    const body={message:'Update users',content:btoa(unescape(encodeURIComponent(JSON.stringify({users},null,2))))};
+    const payload={users,queries};
+    const body={message:'Update data',content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2))))};
     if(sha) body.sha=sha;
     const r2=await fetch(GH_API,{method:'PUT',headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
     if(!r2.ok){setSyncState('err');return false;}
-    allUsers=users;setSyncState('ok');return true;
+    allUsers=users;allQueries=queries;setSyncState('ok');updateQueryBadge();return true;
   }catch(e){setSyncState('err');return false;}
 }
+async function ghPushQueriesOnly(){return ghPushAll(allUsers,allQueries);}
+
 function setSyncState(s){
   const dot=document.getElementById('syncDot'),txt=document.getElementById('syncTxt');
   if(!dot)return;
   dot.style.background=s==='syncing'?'#f59e0b':s==='err'?'#ef4444':'#10b981';
-  dot.style.animation=s==='syncing'?'spPop .8s infinite alternate':'none';
   txt.textContent=s==='syncing'?'Syncing...':s==='err'?'Sync Error':'Synced';
 }
 
@@ -398,23 +553,22 @@ async function autoSyncTick(){
   if(JSON.stringify(allUsers)===JSON.stringify(fresh)) return;
   allUsers=fresh;
   const me=allUsers.find(u=>u.id===CU.id);
-  if(!me){showSyncBanner('⚠️ Your account was removed. Logging out...','#dc2626');setTimeout(doLogout,2500);return;}
+  if(!me){showSyncBanner('Account removed. Logging out...','#dc2626');setTimeout(doLogout,2500);return;}
   CU=me;localStorage.setItem('vtp_s3',JSON.stringify(me));
-  updNav();
+  updNav();updateQueryBadge();
   const ini=me.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
   document.getElementById('sbAv').textContent=ini;
   document.getElementById('sbNm').textContent=me.name;
   document.getElementById('sbRl').textContent=me.role;
   if(!document.getElementById('dashView').classList.contains('show')) renderHome();
-  showSyncBanner('🔄 Synced from another device','#2563eb');
+  showSyncBanner('Synced from another device','#2563eb');
 }
 function startAutoSync(){if(autoSyncTimer)clearInterval(autoSyncTimer);autoSyncTimer=setInterval(autoSyncTick,30000);}
 function stopAutoSync(){if(autoSyncTimer){clearInterval(autoSyncTimer);autoSyncTimer=null;}}
 function showSyncBanner(msg,bg){
   const b=document.getElementById('syncBanner');
   b.style.cssText=`position:fixed;bottom:24px;right:24px;padding:10px 18px;border-radius:12px;font-size:13px;font-weight:700;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:99990;display:flex;align-items:center;gap:8px;font-family:inherit;background:${bg}`;
-  b.textContent=msg;
-  setTimeout(()=>{b.style.display='none';},3500);
+  b.textContent=msg;setTimeout(()=>{b.style.display='none';},3500);
 }
 
 // ===== TOKEN =====
@@ -426,7 +580,7 @@ function saveToken(){
   bootApp();
 }
 function resetToken(){
-  if(!confirm('Reset GitHub token? You will need to enter it again.'))return;
+  if(!confirm('Reset GitHub token?'))return;
   localStorage.removeItem('vtp_ghtoken');location.reload();
 }
 
@@ -435,7 +589,14 @@ function getUsers(){return allUsers;}
 function nxtId(){return allUsers.length?Math.max(...allUsers.map(x=>x.id))+1:1}
 function hasPerm(key){return CU&&CU.perms&&CU.perms[key]}
 function canEdit(key){return CU&&CU.perms&&CU.perms[key]==='edit'}
-function permKeys(){return CU?Object.keys(CU.perms||[]):[]}
+function isAdminUser(){return CU&&CU.perms&&CU.perms['admin_panel']}
+function fmtTime(ts){
+  const d=new Date(ts),now=new Date();
+  const diff=Math.floor((now-d)/60000);
+  if(diff<1)return 'Abhi';if(diff<60)return diff+'m pehle';
+  if(diff<1440)return Math.floor(diff/60)+'h pehle';
+  return d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+}
 
 // ===== AUTH =====
 async function doLogin(){
@@ -455,6 +616,8 @@ function doLogout(){
   if(!confirm('Sign out?'))return;
   stopAutoSync();CU=null;localStorage.removeItem('vtp_s3');
   document.getElementById('mainApp').style.display='none';
+  document.getElementById('queryFab').style.display='none';
+  document.getElementById('queryPanel').classList.remove('open');
   document.getElementById('loginScreen').classList.add('show');
   document.getElementById('inUser').value='';document.getElementById('inPass').value='';
 }
@@ -476,6 +639,17 @@ function showApp(){
   document.getElementById('topAv').textContent=ini;
   document.getElementById('topDt').textContent=new Date().toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
   updNav();goHome();setSyncState('ok');
+  // ADD-ON: show FAB + admin tab
+  document.getElementById('queryFab').style.display='flex';
+  if(isAdminUser()){
+    document.getElementById('qtAll').style.display='block';
+    document.getElementById('qpHeadSub').textContent='Sabki queries manage karo';
+  } else {
+    document.getElementById('qtAll').style.display='none';
+    document.getElementById('qpHeadSub').textContent='Admin ko query bhejo';
+  }
+  updateQueryBadge();
+  initPWA();
 }
 function updNav(){
   document.querySelectorAll('.nav-i[data-perm]').forEach(n=>{
@@ -519,30 +693,21 @@ function renderHome(){
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:20px">${cards}</div>
   ${hasPerm('admin_panel')?`
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" class="fade-in" >
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px" class="fade-in">
     <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
-      <div style="font-size:22px;font-weight:800;color:#2563eb">${users.length}</div>
-      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">USERS</div>
-    </div>
+      <div style="font-size:22px;font-weight:800;color:#2563eb">${users.length}</div><div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">USERS</div></div>
     <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
-      <div style="font-size:22px;font-weight:800;color:#059669">${users.filter(u=>u.active).length}</div>
-      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">ACTIVE</div>
-    </div>
+      <div style="font-size:22px;font-weight:800;color:#059669">${users.filter(u=>u.active).length}</div><div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">ACTIVE</div></div>
     <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
-      <div style="font-size:22px;font-weight:800;color:#dc2626">${users.filter(u=>!u.active).length}</div>
-      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">INACTIVE</div>
-    </div>
+      <div style="font-size:22px;font-weight:800;color:#dc2626">${users.filter(u=>!u.active).length}</div><div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">INACTIVE</div></div>
     <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #e2e8f0">
-      <div style="font-size:22px;font-weight:800;color:#7c3aed">4</div>
-      <div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">DASHBOARDS</div>
-    </div>
+      <div style="font-size:22px;font-weight:800;color:#7c3aed">${allQueries.filter(q=>q.status==='open').length}</div><div style="font-size:10px;color:#94a3b8;font-weight:600;margin-top:2px">OPEN QUERIES</div></div>
   </div>`:''}`
 }
 
-// ===== OPEN DASHBOARD (FULL SCREEN) =====
+// ===== OPEN DASHBOARD =====
 let _scrollTimer;
 const _overlay=()=>document.getElementById('dvOverlay');
-
 function openDash(key){
   if(!hasPerm(key))return;
   const d=DASH[key];if(!d)return;
@@ -554,101 +719,56 @@ function openDash(key){
   const frame=document.getElementById('dvFrame');
   const toolbar=document.getElementById('voToolbar');
   const tabsEl=document.getElementById('voTabs');
-
   if(isEdit){
-    badge.textContent='✏️ Edit Mode';
-    badge.style.cssText='padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:#f0fdf4;color:#059669;border:1px solid #bbf7d0';
-    overlay.classList.remove('on');
-    toolbar.style.display='none';tabsEl.style.display='none';
-    // Full sandbox — allows all tabs/navigation inside iframe
+    badge.textContent='✏️ Edit Mode';badge.style.cssText='padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:#f0fdf4;color:#059669;border:1px solid #bbf7d0';
+    overlay.classList.remove('on');toolbar.style.display='none';tabsEl.style.display='none';
     frame.setAttribute('sandbox','allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation allow-storage-access-by-user-activation');
   } else {
-    badge.textContent='🔒 View Only';
-    badge.style.cssText='padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:#fef2f2;color:#dc2626;border:1px solid #fecaca';
+    badge.textContent='🔒 View Only';badge.style.cssText='padding:4px 10px;border-radius:8px;font-size:10px;font-weight:700;background:#fef2f2;color:#dc2626;border:1px solid #fecaca';
     overlay.classList.add('on');
-    // Allow full rendering + internal navigation so all tabs/data loads
     frame.setAttribute('sandbox','allow-downloads allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation allow-top-navigation-by-user-activation allow-storage-access-by-user-activation');
-    // Show search toolbar + tabs
-    toolbar.style.display='flex';
-    buildVoTabs(d);
-    tabsEl.style.display='flex';
-    clearVoSearch();
+    toolbar.style.display='flex';buildVoTabs(d);tabsEl.style.display='flex';clearVoSearch();
   }
   frame.src=d.url;
   document.getElementById('dashView').classList.add('show');
   setActiveNav(key);
   document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('show');
 }
-
-// Build quick-nav tab buttons for view-only
 function buildVoTabs(d){
-  const tabsEl=document.getElementById('voTabs');
-  const filter=document.getElementById('voFilter');
-  const tabList=d.tabs||[];
+  const tabsEl=document.getElementById('voTabs'),filter=document.getElementById('voFilter'),tabList=d.tabs||[];
   filter.innerHTML='<option value="">All Sections</option>';
   tabList.forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;filter.appendChild(o);});
   tabsEl.innerHTML='<span style="font-size:9px;font-weight:800;color:#64748b;white-space:nowrap;align-self:center;letter-spacing:.5px">JUMP TO:</span>';
   tabList.forEach((t,i)=>{
-    const btn=document.createElement('button');
-    btn.textContent=t;
+    const btn=document.createElement('button');btn.textContent=t;
     btn.style.cssText=`padding:4px 12px;border-radius:20px;border:1.5px solid ${i===0?'#2563eb':'#e2e8f0'};background:${i===0?'#2563eb':'#fff'};font-size:11px;font-weight:700;color:${i===0?'#fff':'#64748b'};cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap`;
-    btn.onclick=()=>{
-      tabsEl.querySelectorAll('button').forEach(b=>{b.style.background='#fff';b.style.borderColor='#e2e8f0';b.style.color='#64748b';});
-      btn.style.background='#2563eb';btn.style.borderColor='#2563eb';btn.style.color='#fff';
-      tryNavTab(t);
-    };
+    btn.onclick=()=>{tabsEl.querySelectorAll('button').forEach(b=>{b.style.background='#fff';b.style.borderColor='#e2e8f0';b.style.color='#64748b';});btn.style.background='#2563eb';btn.style.borderColor='#2563eb';btn.style.color='#fff';tryNavTab(t);};
     tabsEl.appendChild(btn);
   });
 }
-
-// Try to navigate tab inside iframe
 function tryNavTab(tabName){
   const frame=document.getElementById('dvFrame');
   try{frame.contentWindow.postMessage({type:'VTP_NAV_TAB',tab:tabName},'*');}catch(e){}
-  try{
-    const doc=frame.contentDocument||frame.contentWindow.document;
-    const items=doc.querySelectorAll('.nav-i, [data-nav], nav a, .sidebar a, .tab-btn, li a');
-    for(const el of items){
-      if(el.textContent.trim().toLowerCase().includes(tabName.toLowerCase())){el.click();break;}
-    }
-  }catch(e){}
+  try{const doc=frame.contentDocument||frame.contentWindow.document;const items=doc.querySelectorAll('.nav-i,[data-nav],nav a,.sidebar a,.tab-btn,li a');for(const el of items){if(el.textContent.trim().toLowerCase().includes(tabName.toLowerCase())){el.click();break;}}}catch(e){}
 }
-
-// View-only search
-function doVoSearch(v){
-  document.getElementById('voClear').style.display=v?'block':'none';
-  if(v) showSearchHint(v); else hideSearchHint();
-}
+function doVoSearch(v){document.getElementById('voClear').style.display=v?'block':'none';if(v)showSearchHint(v);else hideSearchHint();}
 function doVoFilter(v){
   if(!v)return;
-  document.querySelectorAll('#voTabs button').forEach(b=>{
-    const active=b.textContent===v;
-    b.style.background=active?'#2563eb':'#fff';
-    b.style.borderColor=active?'#2563eb':'#e2e8f0';
-    b.style.color=active?'#fff':'#64748b';
-  });
+  document.querySelectorAll('#voTabs button').forEach(b=>{const active=b.textContent===v;b.style.background=active?'#2563eb':'#fff';b.style.borderColor=active?'#2563eb':'#e2e8f0';b.style.color=active?'#fff':'#64748b';});
   tryNavTab(v);
 }
-function clearVoSearch(){
-  document.getElementById('voSearch').value='';
-  document.getElementById('voClear').style.display='none';
-  document.getElementById('voFilter').value='';
-  hideSearchHint();
-}
+function clearVoSearch(){document.getElementById('voSearch').value='';document.getElementById('voClear').style.display='none';document.getElementById('voFilter').value='';hideSearchHint();}
 let _hint=null;
 function showSearchHint(q){
   if(!_hint){_hint=document.createElement('div');_hint.style.cssText='padding:6px 14px;background:#fffbeb;border-top:1px solid #fde68a;font-size:11px;color:#92400e;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0';document.getElementById('voToolbar').after(_hint);}
-  _hint.innerHTML=`<span>🔍 Searching "<b>${q}</b>" — open in new tab for full search</span><a href="${document.getElementById('dvNewTab').href}?q=${encodeURIComponent(q)}" target="_blank" style="padding:4px 10px;background:#d97706;color:#fff;border-radius:6px;font-size:10px;font-weight:700;text-decoration:none;white-space:nowrap">Open & Search ↗</a>`;
+  _hint.innerHTML=`<span>Searching "<b>${q}</b>" — full search ke liye new tab mein kholo</span><a href="${document.getElementById('dvNewTab').href}?q=${encodeURIComponent(q)}" target="_blank" style="padding:4px 10px;background:#d97706;color:#fff;border-radius:6px;font-size:10px;font-weight:700;text-decoration:none;white-space:nowrap">Open ↗</a>`;
 }
 function hideSearchHint(){if(_hint)_hint.innerHTML='';}
-
-// Overlay scroll forwarding
 document.addEventListener('DOMContentLoaded',function(){
   const ov=_overlay();if(!ov)return;
   ov.addEventListener('wheel',function(){ov.style.pointerEvents='none';clearTimeout(_scrollTimer);_scrollTimer=setTimeout(function(){ov.style.pointerEvents='';},80);},{passive:true});
   ov.addEventListener('touchmove',function(){ov.style.pointerEvents='none';clearTimeout(_scrollTimer);_scrollTimer=setTimeout(function(){ov.style.pointerEvents='';},200);},{passive:true});
 });
-
 function closeDash(){
   document.getElementById('dashView').classList.remove('show');
   document.getElementById('dvFrame').src='';
@@ -697,8 +817,8 @@ function renderAdmin(){
     <h3 style="font-size:16px;font-weight:800">👥 User Management <small style="font-size:10px;color:#94a3b8;font-weight:500">● GitHub Synced</small></h3>
     <button onclick="addUserUI()" style="padding:8px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">➕ Add User</button>
   </div>
-  <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;margin-bottom:20px" class="fade-in" >
-    <div style="overflow-x:auto"><table class="utbl"><thead><tr><th>User</th><th>Role</th><th>Permissions (View/Edit)</th><th>Active</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <div style="background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden;margin-bottom:20px" class="fade-in">
+    <div style="overflow-x:auto"><table class="utbl"><thead><tr><th>User</th><th>Role</th><th>Permissions</th><th>Active</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>
   </div>
   <div style="background:#fffbeb;border:1px solid #fcd34d;border-radius:14px;padding:18px" class="fade-in">
     <h4 style="font-size:13px;font-weight:800;color:#92400e;margin-bottom:10px">🔑 Default Credentials</h4>
@@ -712,14 +832,7 @@ function renderAdmin(){
 
 // ===== CRUD =====
 function addUserUI(){
-  let chks='';ALL_P.forEach(p=>{
-    chks+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
-      <input type="checkbox" id="np_${p}" style="accent-color:#2563eb;width:16px;height:16px">
-      <span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span>
-      <select id="nm_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit">
-        <option value="view">👁 View</option><option value="edit">✏️ Edit</option>
-      </select></div>`;
-  });
+  let chks='';ALL_P.forEach(p=>{chks+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0"><input type="checkbox" id="np_${p}" style="accent-color:#2563eb;width:16px;height:16px"><span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span><select id="nm_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit"><option value="view">👁 View</option><option value="edit">✏️ Edit</option></select></div>`;});
   showMo(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:16px;font-weight:800">➕ Add User</h3><button onclick="closeMo()" style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:none;cursor:pointer;font-size:14px;color:#94a3b8">✕</button></div>
   <div style="display:grid;gap:14px">
     <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Full Name</label><input id="nu_nm" class="lc-input" placeholder="e.g. Rahul Sharma"></div>
@@ -728,7 +841,7 @@ function addUserUI(){
       <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Password</label><input id="nu_pw" class="lc-input" placeholder="e.g. pass123"></div>
     </div>
     <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Role</label><select id="nu_rl" class="lc-input" style="background:#fff"><option>Employee</option><option>Project Manager</option><option>Accounts</option><option>HOD</option><option>Admin</option></select></div>
-    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase">Dashboard Access (View / Edit)</label><div style="display:grid;gap:6px">${chks}</div></div>
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase">Dashboard Access</label><div style="display:grid;gap:6px">${chks}</div></div>
     <button onclick="saveNewUser()" class="lc-btn">✅ Create User</button>
   </div>`);
 }
@@ -738,20 +851,11 @@ async function saveNewUser(){
   if(allUsers.find(u=>u.username.toLowerCase()===un.toLowerCase())){toast('Username exists','err');return}
   const perms={};ALL_P.forEach(p=>{if(document.getElementById('np_'+p).checked)perms[p]=document.getElementById('nm_'+p).value});
   allUsers.push({id:nxtId(),username:un,password:pw,name:nm,role:rl,perms,active:true});
-  const ok=await ghPush(allUsers);
-  closeMo();toast(nm+(ok?' created!':' created (sync pending)'),'ok');renderAdmin();
+  const ok=await ghPush(allUsers);closeMo();toast(nm+(ok?' created!':' created (sync pending)'),'ok');renderAdmin();
 }
 function editUser(id){
   const u=allUsers.find(x=>x.id===id);if(!u)return;
-  let chks='';ALL_P.forEach(p=>{
-    const has=u.perms&&u.perms[p];const mode=has||'view';
-    chks+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
-      <input type="checkbox" id="ep_${p}" ${has?'checked':''} style="accent-color:#2563eb;width:16px;height:16px">
-      <span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span>
-      <select id="em_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit">
-        <option value="view" ${mode==='view'?'selected':''}>👁 View</option><option value="edit" ${mode==='edit'?'selected':''}>✏️ Edit</option>
-      </select></div>`;
-  });
+  let chks='';ALL_P.forEach(p=>{const has=u.perms&&u.perms[p];const mode=has||'view';chks+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0"><input type="checkbox" id="ep_${p}" ${has?'checked':''} style="accent-color:#2563eb;width:16px;height:16px"><span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span><select id="em_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit"><option value="view" ${mode==='view'?'selected':''}>👁 View</option><option value="edit" ${mode==='edit'?'selected':''}>✏️ Edit</option></select></div>`;});
   showMo(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:16px;font-weight:800">✏️ Edit — ${u.name}</h3><button onclick="closeMo()" style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:none;cursor:pointer;font-size:14px;color:#94a3b8">✕</button></div>
   <div style="display:grid;gap:14px">
     <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Full Name</label><input id="eu_nm" value="${u.name}" class="lc-input"></div>
@@ -760,7 +864,7 @@ function editUser(id){
       <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Password</label><input id="eu_pw" value="${u.password}" class="lc-input"></div>
     </div>
     <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase">Role</label><select id="eu_rl" class="lc-input" style="background:#fff"><option ${u.role==='Employee'?'selected':''}>Employee</option><option ${u.role==='Project Manager'?'selected':''}>Project Manager</option><option ${u.role==='Accounts'?'selected':''}>Accounts</option><option ${u.role==='HOD'?'selected':''}>HOD</option><option ${u.role==='Admin'?'selected':''}>Admin</option></select></div>
-    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase">Dashboard Access (View / Edit)</label><div style="display:grid;gap:6px">${chks}</div></div>
+    <div><label style="display:block;font-size:10px;font-weight:700;color:#64748b;margin-bottom:6px;text-transform:uppercase">Dashboard Access</label><div style="display:grid;gap:6px">${chks}</div></div>
     <button onclick="saveEdit(${u.id})" class="lc-btn">💾 Save Changes</button>
   </div>`);
 }
@@ -781,21 +885,13 @@ function addPermUI(id){
   const x=allUsers.find(a=>a.id===id);if(!x)return;
   const av=ALL_P.filter(p=>!x.perms||!x.perms[p]);
   if(!av.length){toast('All permissions granted','inf');return}
-  let opts='';av.forEach(p=>{
-    opts+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0">
-      <input type="checkbox" id="ap_${p}" style="accent-color:#059669;width:16px;height:16px">
-      <span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span>
-      <select id="am_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit">
-        <option value="view">👁 View</option><option value="edit">✏️ Edit</option>
-      </select></div>`;
-  });
+  let opts='';av.forEach(p=>{opts+=`<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0"><input type="checkbox" id="ap_${p}" style="accent-color:#059669;width:16px;height:16px"><span style="flex:1;font-size:12px;font-weight:600">${P_LBL[p]}</span><select id="am_${p}" style="padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;font-size:10px;font-weight:700;background:#fff;font-family:inherit"><option value="view">👁 View</option><option value="edit">✏️ Edit</option></select></div>`;});
   showMo(`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px"><h3 style="font-size:16px;font-weight:800">➕ Add Permission — ${x.name}</h3><button onclick="closeMo()" style="width:32px;height:32px;border-radius:8px;background:#f1f5f9;border:none;cursor:pointer;font-size:14px;color:#94a3b8">✕</button></div>
   <div style="display:grid;gap:6px;margin-bottom:16px">${opts}</div>
   <button onclick="savePerm(${id})" style="width:100%;padding:12px;border:none;border-radius:10px;background:#059669;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">✅ Grant</button>`);
 }
 async function savePerm(id){
-  const x=allUsers.find(a=>a.id===id);if(!x)return;
-  if(!x.perms)x.perms={};
+  const x=allUsers.find(a=>a.id===id);if(!x)return;if(!x.perms)x.perms={};
   const av=ALL_P.filter(p=>!x.perms[p]);let n=0;
   av.forEach(p=>{const c=document.getElementById('ap_'+p);if(c&&c.checked){x.perms[p]=document.getElementById('am_'+p).value;n++}});
   if(!n){toast('Select at least one','err');return}
@@ -811,24 +907,169 @@ document.getElementById('moBg').addEventListener('click',function(e){if(e.target
 // ===== TOAST =====
 function toast(m,t='inf'){const e=document.getElementById('toastEl');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),2500)}
 
+// ===== ADD-ON: QUERY SYSTEM =====
+function updateQueryBadge(){
+  if(!CU)return;
+  let count=0;
+  if(isAdminUser()){
+    count=allQueries.filter(q=>q.status==='open').length;
+  } else {
+    count=allQueries.filter(q=>q.userId===CU.id&&q.status==='open'&&q.replies&&q.replies.length>0&&q.replies[q.replies.length-1].from==='admin').length;
+  }
+  const badge=document.getElementById('qFabBadge');if(!badge)return;
+  if(count>0){badge.style.display='flex';badge.textContent=count;}else{badge.style.display='none';}
+}
+function openQueryPanel(){
+  document.getElementById('queryPanel').classList.add('open');
+  if(isAdminUser())qpSwitchTab('all');else qpSwitchTab('my');
+}
+function closeQueryPanel(){document.getElementById('queryPanel').classList.remove('open');}
+function qpSwitchTab(tab){
+  ['my','all','new'].forEach(t=>{
+    const id='qt'+t.charAt(0).toUpperCase()+t.slice(1);
+    const el=document.getElementById(id);if(el)el.classList.toggle('act',t===tab);
+  });
+  const body=document.getElementById('qpBody');
+  if(tab==='new')renderNewQueryForm(body);
+  else if(tab==='all')renderAllQueries(body);
+  else renderMyQueries(body);
+}
+function renderMyQueries(body){
+  const myQ=allQueries.filter(q=>q.userId===CU.id).sort((a,b)=>b.ts-a.ts);
+  if(!myQ.length){body.innerHTML=`<div style="text-align:center;padding:40px 20px"><div style="font-size:40px;margin-bottom:10px">💭</div><h4 style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Koi query nahi</h4><p style="font-size:11px;color:#94a3b8">Nai Query tab se bhejo</p></div>`;return;}
+  body.innerHTML=myQ.map(q=>qCardHTML(q,false)).join('');
+  body.querySelectorAll('.q-card').forEach(c=>c.onclick=()=>openQueryDetail(c.dataset.id));
+}
+function renderAllQueries(body){
+  const sorted=[...allQueries].sort((a,b)=>{if(a.status==='open'&&b.status!=='open')return -1;if(b.status==='open'&&a.status!=='open')return 1;return b.ts-a.ts;});
+  if(!sorted.length){body.innerHTML=`<div style="text-align:center;padding:40px 20px"><div style="font-size:40px;margin-bottom:10px">✅</div><h4 style="font-size:13px;font-weight:700;color:#1e293b;margin-bottom:4px">Koi query nahi</h4><p style="font-size:11px;color:#94a3b8">Abhi tak kisi ne query nahi bheji</p></div>`;return;}
+  body.innerHTML=sorted.map(q=>qCardHTML(q,true)).join('');
+  body.querySelectorAll('.q-card').forEach(c=>c.onclick=()=>openQueryDetail(c.dataset.id));
+}
+function qCardHTML(q,showUser=false){
+  const lastReply=q.replies&&q.replies.length?q.replies[q.replies.length-1]:null;
+  const userInfo=showUser?`<span style="font-size:9px;color:#7c3aed;font-weight:700;background:#f5f3ff;padding:2px 6px;border-radius:5px;margin-left:4px">${q.userName}</span>`:'';
+  return `<div class="q-card ${q.status}" data-id="${q.id}">
+    <div class="q-card-head">
+      <div class="q-av">${(q.userName||'U').slice(0,2).toUpperCase()}</div>
+      <div class="q-meta"><h4>${q.subject}${userInfo}</h4><p>${q.category} · ${fmtTime(q.ts)}</p></div>
+      <span class="q-status ${q.status}">${q.status==='open'?'🟡 Open':'✅ Done'}</span>
+    </div>
+    <div class="q-msg">${q.message}</div>
+    ${lastReply?`<div class="q-reply-preview">💬 ${lastReply.from==='admin'?'Admin: ':'You: '}${lastReply.text.slice(0,60)}${lastReply.text.length>60?'...':''}</div>`:''}
+  </div>`;
+}
+function renderNewQueryForm(body){
+  const catBtns=Q_CATS.map((c,i)=>`<button class="q-cat-btn ${i===0?'sel':''}" onclick="selectQCat(this,'${c}')">${c}</button>`).join('');
+  body.innerHTML=`
+  <div style="margin-bottom:12px">
+    <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px">Category</label>
+    <div class="q-cat">${catBtns}</div>
+  </div>
+  <div style="margin-bottom:10px">
+    <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px">Subject</label>
+    <input id="qNewSubject" placeholder="Short subject likhein..." style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-family:inherit;outline:none;color:#1e293b;transition:border .2s" onfocus="this.style.borderColor='#7c3aed'" onblur="this.style.borderColor='#e2e8f0'">
+  </div>
+  <div>
+    <label style="font-size:10px;font-weight:700;color:#64748b;display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px">Message</label>
+    <textarea id="qNewMsg" placeholder="Apni query detail mein likhein..." style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:10px;font-size:12px;font-family:inherit;resize:none;outline:none;min-height:100px;color:#1e293b;line-height:1.5;transition:border .2s" onfocus="this.style.borderColor='#7c3aed'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
+  </div>
+  <button onclick="submitNewQuery()" style="width:100%;padding:11px;border:none;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-size:13px;font-weight:700;cursor:pointer;margin-top:10px;font-family:inherit">📤 Query Bhejo</button>`;
+}
+function selectQCat(el,cat){
+  selectedCat=cat;
+  document.querySelectorAll('.q-cat-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+async function submitNewQuery(){
+  const subj=(document.getElementById('qNewSubject')||{value:''}).value.trim();
+  const msg=(document.getElementById('qNewMsg')||{value:''}).value.trim();
+  if(!subj||!msg){toast('Subject aur message dono bharo','err');return}
+  const q={id:Date.now()+'',userId:CU.id,userName:CU.name,userRole:CU.role,subject:subj,category:selectedCat,message:msg,status:'open',ts:Date.now(),replies:[]};
+  allQueries.push(q);
+  const ok=await ghPushQueriesOnly();
+  toast(ok?'Query bheji gayi! Admin reply karega.':'Query bheji (sync pending)','ok');
+  qpSwitchTab('my');
+}
+function openQueryDetail(id){
+  const q=allQueries.find(x=>x.id===id);if(!q)return;
+  currentQueryId=id;
+  document.getElementById('qdTitle').textContent=q.subject;
+  document.getElementById('qdMeta').textContent=q.userName+' · '+q.category+' · '+fmtTime(q.ts);
+  const sb=document.getElementById('qdStatusBadge');
+  sb.textContent=q.status==='open'?'🟡 Open':'✅ Resolved';sb.className='q-status '+q.status;
+  let html=`<div class="qd-bubble user"><b style="font-size:10px;color:#2563eb">${q.userName}</b><br>${q.message}</div>`;
+  (q.replies||[]).forEach(r=>{
+    const isA=r.from==='admin';
+    html+=`<div class="qd-bubble ${isA?'admin':'user'}"><b style="font-size:10px;color:${isA?'#7c3aed':'#2563eb'}">${isA?'👤 Admin':'👤 '+q.userName}</b><span style="font-size:9px;color:#94a3b8;margin-left:6px">${fmtTime(r.ts)}</span><br>${r.text}</div>`;
+  });
+  document.getElementById('qdBody').innerHTML=html;
+  const replyBox=document.getElementById('qdReplyBox');
+  const resolveBtn=document.getElementById('qdResolveBtn');
+  if(q.status==='resolved'){replyBox.style.display='none';}
+  else{replyBox.style.display='block';document.getElementById('qdReplyTxt').value='';resolveBtn.style.display=isAdminUser()?'block':'none';}
+  document.getElementById('qdPanel').classList.add('show');
+}
+async function sendQueryReply(){
+  const txt=document.getElementById('qdReplyTxt').value.trim();
+  if(!txt){toast('Reply likhein','err');return;}
+  const q=allQueries.find(x=>x.id===currentQueryId);if(!q)return;
+  if(!q.replies)q.replies=[];
+  q.replies.push({from:isAdminUser()?'admin':'user',text:txt,ts:Date.now(),name:CU.name});
+  const ok=await ghPushQueriesOnly();
+  toast(ok?'Reply bheji!':'Reply (sync pending)','ok');
+  openQueryDetail(currentQueryId);
+  const activeTab=document.getElementById('qtAll').classList.contains('act')?'all':'my';
+  if(activeTab==='all')renderAllQueries(document.getElementById('qpBody'));
+  else renderMyQueries(document.getElementById('qpBody'));
+  updateQueryBadge();
+}
+async function resolveQuery(){
+  if(!isAdminUser())return;
+  const q=allQueries.find(x=>x.id===currentQueryId);
+  if(!q||!confirm('Is query ko Resolved mark karein?'))return;
+  q.status='resolved';
+  await ghPushQueriesOnly();
+  toast('Resolved!','ok');
+  document.getElementById('qdPanel').classList.remove('show');
+  renderAllQueries(document.getElementById('qpBody'));
+  updateQueryBadge();
+}
+
+// ===== ADD-ON: PWA =====
+let deferredPrompt=null;
+function initPWA(){
+  window.addEventListener('beforeinstallprompt',(e)=>{
+    e.preventDefault();deferredPrompt=e;
+    if(!localStorage.getItem('vtp_pwa_dismissed')){
+      setTimeout(()=>{document.getElementById('pwaBanner').classList.add('show');},2000);
+    }
+  });
+  window.addEventListener('appinstalled',()=>{document.getElementById('pwaBanner').classList.remove('show');toast('App install ho gayi!','ok');});
+}
+function showPwaGuide(){document.getElementById('pwaGuide').classList.add('show');document.getElementById('sb').classList.remove('open');document.getElementById('sbOv').classList.remove('show');}
+function pwaTriggerInstall(){
+  document.getElementById('pwaBanner').classList.remove('show');
+  if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')toast('Installing...','ok');deferredPrompt=null;});}
+  else{document.getElementById('pwaGuide').classList.add('show');}
+}
+function pwaDismiss(){localStorage.setItem('vtp_pwa_dismissed','1');document.getElementById('pwaBanner').classList.remove('show');}
+function pgbTab(name){
+  ['chrome','edge','firefox','mobile'].forEach(t=>{const el=document.getElementById('pgb-'+t);if(el)el.style.display=t===name?'block':'none';});
+  document.querySelectorAll('.pgb-tab').forEach(b=>b.classList.toggle('act',b.textContent.toLowerCase()===name||(name==='mobile'&&b.textContent==='Mobile')));
+}
+
 // ===== INIT =====
 async function bootApp(){
   document.getElementById('tokenScreen').style.display='none';
-  // Load from GitHub then show splash → app
   const fresh=await ghFetch(false);
   if(fresh) allUsers=fresh; else allUsers=[...DEFAULT_USERS];
   setTimeout(()=>{document.getElementById('splash').classList.add('hide');setTimeout(()=>{document.getElementById('splash').style.display='none';checkSess();},500);},1800);
 }
-
 window.addEventListener('DOMContentLoaded',()=>{
   const saved=localStorage.getItem('vtp_ghtoken');
-  if(!saved){
-    document.getElementById('splash').style.display='none';
-    document.getElementById('tokenScreen').style.display='flex';
-  } else {
-    GH_TOKEN=saved;
-    bootApp();
-  }
+  if(!saved){document.getElementById('splash').style.display='none';document.getElementById('tokenScreen').style.display='flex';}
+  else{GH_TOKEN=saved;bootApp();}
 });
 </script>
 </body>
